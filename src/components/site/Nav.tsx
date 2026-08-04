@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
+import SiteLogo from "@/components/site/SiteLogo";
+import ThemeToggle from "@/components/site/ThemeToggle";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,19 +27,26 @@ export default function Nav() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500 photo-dark",
         scrolled
-          ? "border-b border-white/10 bg-night/85 backdrop-blur-md"
-          : "bg-transparent",
+          ? "border-b border-line bg-night/85 backdrop-blur-md"
+          : "bg-night/55 backdrop-blur-md",
       )}
     >
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 md:px-8">
-        <Link href="/" className="group flex items-baseline gap-1.5">
-          <span className="font-display text-xl tracking-tight text-snow transition-colors group-hover:text-saffron">
-            Sherpa Treks
-          </span>
-          <span className="text-[10px] font-semibold uppercase tracking-eyebrow text-saffron">
-            Nepal
+      <div className="mx-auto flex h-26 max-w-7xl items-center justify-between px-5 md:px-8">
+        <Link
+          href="/"
+          aria-label="Sherpa Treks Nepal — home"
+          className="group flex items-center gap-2.5"
+        >
+          <SiteLogo variant="dark" className="h-24 w-24" />
+          <span className="flex items-baseline gap-1.5">
+            <span className="font-display text-xl tracking-tight text-snow transition-colors group-hover:text-saffron">
+              Sherpa Treks
+            </span>
+            <span className="text-[10px] font-semibold uppercase tracking-eyebrow text-saffron">
+              Nepal
+            </span>
           </span>
         </Link>
 
@@ -63,6 +72,7 @@ export default function Nav() {
               />
             </Link>
           ))}
+          <ThemeToggle />
           <a
             href={site.contact.whatsapp}
             target="_blank"
@@ -102,7 +112,7 @@ export default function Nav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25 }}
-            className="border-b border-white/10 bg-night/95 backdrop-blur-md md:hidden"
+            className="border-b border-line bg-night/95 backdrop-blur-md md:hidden"
             aria-label="Mobile"
           >
             <div className="flex flex-col gap-1 px-5 py-4">
@@ -119,14 +129,17 @@ export default function Nav() {
                   {item.label}
                 </Link>
               ))}
-              <a
-                href={site.contact.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 rounded-full bg-saffron px-5 py-3 text-center font-medium text-night"
-              >
-                WhatsApp us
-              </a>
+              <div className="mt-2 flex items-center gap-3 px-3">
+                <ThemeToggle />
+                <a
+                  href={site.contact.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 rounded-full bg-saffron px-5 py-3 text-center font-medium text-night"
+                >
+                  WhatsApp us
+                </a>
+              </div>
             </div>
           </motion.nav>
         )}

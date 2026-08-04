@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/ui/Reveal";
-import SectionHeading from "@/components/ui/SectionHeading";
 import TrekFinder from "@/components/treks/TrekFinder";
 import { treks } from "@/data/treks";
+import { formatAltitude } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Treks",
@@ -11,16 +11,59 @@ export const metadata: Metadata = {
 };
 
 export default function TreksPage() {
+  const regions = new Set(
+    treks.flatMap((t) => t.region.split(",").map((r) => r.trim())),
+  );
+  const maxAlt = Math.max(...treks.map((t) => t.maxAltitudeM));
+  const stats = [
+    { value: String(treks.length), label: "expeditions" },
+    { value: String(regions.size), label: "regions" },
+    { value: formatAltitude(maxAlt), label: "highest point" },
+  ];
+
   return (
-    <div className="mx-auto max-w-7xl px-5 pt-32 pb-24 md:px-8 md:pt-40 md:pb-32">
-      <Reveal className="mb-14">
-        <SectionHeading
-          eyebrow="All treks"
-          title="Choose your level of wild."
-          description="From week-long valley walks to three-week expeditions behind the Himalayan rain shadow. Filter by region, difficulty and time — every route is walked by our own crew."
+    <>
+      <section className="photo-dark relative overflow-hidden border-b border-line">
+        <img
+          src="/images/hero.jpg"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover"
         />
-      </Reveal>
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-night via-night/75 to-night"
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-7xl px-5 pt-36 pb-16 md:px-8 md:pt-44 md:pb-20">
+          <Reveal>
+            <p className="mb-6 flex items-center gap-3 text-xs font-medium uppercase tracking-eyebrow text-saffron">
+              <span className="h-px w-10 bg-saffron" aria-hidden />
+              All {treks.length} treks
+            </p>
+            <h1 className="max-w-4xl font-display text-5xl leading-[0.98] font-light tracking-tight text-balance md:text-7xl lg:text-8xl">
+              Choose your level of{" "}
+              <em className="text-gradient not-italic">wild.</em>
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-snow/80 md:text-lg">
+              Eight expeditions, told the way they feel on the trail. Scroll
+              through them — or filter by region, difficulty and time.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-x-12 gap-y-6">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <span className="font-display text-3xl font-light text-saffron md:text-4xl">
+                    {stat.value}
+                  </span>
+                  <span className="ml-3 text-xs uppercase tracking-[0.18em] text-mist">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
       <TrekFinder treks={treks} />
-    </div>
+    </>
   );
 }

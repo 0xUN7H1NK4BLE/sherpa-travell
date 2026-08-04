@@ -13,6 +13,7 @@ export const site = {
   },
   nav: [
     { href: "/treks", label: "Treks" },
+    { href: "/gallery", label: "Gallery" },
     { href: "/map", label: "Map" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },

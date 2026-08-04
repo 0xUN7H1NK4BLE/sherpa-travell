@@ -5,7 +5,7 @@ import { site, waLink } from "@/data/site";
 import { treks } from "@/data/treks";
 
 const inputStyles =
-  "w-full rounded-lg border border-white/15 bg-night px-4 py-3 text-sm text-snow placeholder:text-mist/60 transition-colors focus:border-saffron focus:outline-none";
+  "w-full rounded-lg border border-line bg-night px-4 py-3 text-sm text-snow placeholder:text-mist/60 transition-colors focus:border-saffron focus:outline-none";
 
 export default function InquiryForm({
   initialTrek,
@@ -68,7 +68,7 @@ export default function InquiryForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-5 rounded-2xl border border-white/10 bg-night-raised p-6 md:p-8"
+      className="space-y-5 rounded-2xl border border-line bg-night-raised p-6 md:p-8"
     >
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="space-y-2">

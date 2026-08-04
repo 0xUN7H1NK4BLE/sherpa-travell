@@ -4,9 +4,9 @@ import { site, waLink } from "@/data/site";
 
 export default function CTASection() {
   return (
-    <section className="relative overflow-hidden border-t border-white/10">
+    <section className="photo-dark relative overflow-hidden border-t border-line">
       <img
-        src="/images/scenes/stars.svg"
+        src="/images/scenes/stars.jpg"
         alt=""
         aria-hidden
         className="absolute inset-0 h-full w-full object-cover"

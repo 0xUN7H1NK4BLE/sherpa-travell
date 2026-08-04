@@ -26,7 +26,7 @@ const values = [
 
 export default function WhyUs() {
   return (
-    <section className="border-y border-white/10 bg-night-raised">
+    <section className="border-y border-line bg-night-raised">
       <div className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
         <Reveal>
           <SectionHeading
@@ -35,7 +35,7 @@ export default function WhyUs() {
             className="mb-14"
           />
         </Reveal>
-        <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {values.map((value, i) => (
             <Reveal key={value.number} delay={i * 0.08} className="h-full">
               <div className="flex h-full flex-col gap-4 bg-night p-7">

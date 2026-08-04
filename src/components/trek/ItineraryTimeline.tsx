@@ -16,7 +16,7 @@ export default function ItineraryTimeline({
   itinerary: ItineraryDay[];
 }) {
   return (
-    <ol className="relative ml-3 space-y-10 border-l border-white/10">
+    <ol className="relative ml-3 space-y-10 border-l border-line">
       {itinerary.map((day, i) => {
         const kind = kindStyles[day.kind];
         return (

@@ -51,7 +51,7 @@ export default function StatsBand() {
   ];
 
   return (
-    <section className="border-y border-white/10 bg-night-raised">
+    <section className="border-y border-line bg-night-raised">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px lg:grid-cols-4">
         {stats.map((stat) => (
           <div

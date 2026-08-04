@@ -1,9 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
-import TrekCard from "./TrekCard";
+import TrekStage from "./TrekStage";
 import { difficulties, regions, type Difficulty, type Trek } from "@/data/treks";
 import { waLink } from "@/data/site";
 import { cn } from "@/lib/utils";
@@ -31,10 +30,10 @@ function Chip({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "rounded-full border px-4 py-1.5 text-xs font-medium tracking-wide transition-colors duration-200",
+        "rounded-full border px-3.5 py-1.5 text-[11px] font-medium tracking-wide whitespace-nowrap transition-colors duration-200",
         active
           ? "border-saffron bg-saffron text-night"
-          : "border-white/15 text-mist hover:border-white/40 hover:text-snow",
+          : "border-line text-mist hover:border-line-strong hover:text-snow",
       )}
     >
       {children}
@@ -42,10 +41,43 @@ function Chip({
   );
 }
 
+function FilterGroup({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex items-center gap-2.5">
+      <span className="hidden text-[10px] uppercase tracking-[0.18em] text-mist/70 xl:inline">
+        {label}
+      </span>
+      <div className="flex flex-wrap gap-1.5">{children}</div>
+    </div>
+  );
+}
+
 export default function TrekFinder({ treks }: { treks: Trek[] }) {
   const [activeRegions, setActiveRegions] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<Difficulty | null>(null);
   const [duration, setDuration] = useState("any");
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastY.current;
+      if (Math.abs(delta) > 4) {
+        setHidden(delta > 0 && y > 120);
+        lastY.current = y;
+      }
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const hasFilters =
     activeRegions.length > 0 || difficulty !== null || duration !== "any";
@@ -81,28 +113,15 @@ export default function TrekFinder({ treks }: { treks: Trek[] }) {
   };
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
-      <aside className="space-y-8 lg:sticky lg:top-24 lg:self-start">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xs font-semibold uppercase tracking-eyebrow text-saffron">
-            Find your trek
-          </h2>
-          {hasFilters && (
-            <button
-              type="button"
-              onClick={reset}
-              className="text-xs text-mist underline underline-offset-4 transition-colors hover:text-snow"
-            >
-              Reset
-            </button>
-          )}
-        </div>
-
-        <div className="space-y-3">
-          <h3 className="text-[11px] uppercase tracking-[0.18em] text-mist">
-            Region
-          </h3>
-          <div className="flex flex-wrap gap-2">
+    <div>
+      <div
+        className={cn(
+          "sticky top-26 z-40 border-y border-line bg-night/85 backdrop-blur-md transition-transform duration-300",
+          hidden && "-translate-y-[calc(100%+1px)]",
+        )}
+      >
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-3.5 md:px-8">
+          <FilterGroup label="Region">
             {regions.map((region) => (
               <Chip
                 key={region}
@@ -112,14 +131,8 @@ export default function TrekFinder({ treks }: { treks: Trek[] }) {
                 {region}
               </Chip>
             ))}
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <h3 className="text-[11px] uppercase tracking-[0.18em] text-mist">
-            Difficulty
-          </h3>
-          <div className="flex flex-wrap gap-2">
+          </FilterGroup>
+          <FilterGroup label="Difficulty">
             {difficulties.map((d) => (
               <Chip
                 key={d}
@@ -129,14 +142,8 @@ export default function TrekFinder({ treks }: { treks: Trek[] }) {
                 {d}
               </Chip>
             ))}
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <h3 className="text-[11px] uppercase tracking-[0.18em] text-mist">
-            Duration
-          </h3>
-          <div className="flex flex-wrap gap-2">
+          </FilterGroup>
+          <FilterGroup label="Duration">
             {durationFilters.map((f) => (
               <Chip
                 key={f.id}
@@ -146,17 +153,32 @@ export default function TrekFinder({ treks }: { treks: Trek[] }) {
                 {f.label}
               </Chip>
             ))}
+          </FilterGroup>
+
+          <div className="ml-auto flex items-center gap-4">
+            <span
+              className="text-[11px] text-mist"
+              role="status"
+              aria-live="polite"
+            >
+              {filtered.length} of {treks.length}
+            </span>
+            {hasFilters && (
+              <button
+                type="button"
+                onClick={reset}
+                className="text-[11px] text-saffron underline underline-offset-4 transition-colors hover:text-snow"
+              >
+                Reset
+              </button>
+            )}
           </div>
         </div>
+      </div>
 
-        <p className="text-xs text-mist" role="status" aria-live="polite">
-          {filtered.length} of {treks.length} treks
-        </p>
-      </aside>
-
-      <div>
-        {filtered.length === 0 ? (
-          <div className="flex h-full min-h-[320px] flex-col items-center justify-center gap-5 rounded-2xl border border-dashed border-white/15 p-10 text-center">
+      {filtered.length === 0 ? (
+        <div className="mx-auto max-w-7xl px-5 py-24 md:px-8">
+          <div className="flex min-h-[320px] flex-col items-center justify-center gap-5 rounded-2xl border border-dashed border-line p-10 text-center">
             <p className="font-display text-3xl font-light">
               No trek matches that combination.
             </p>
@@ -173,25 +195,19 @@ export default function TrekFinder({ treks }: { treks: Trek[] }) {
               Ask for a custom route
             </Button>
           </div>
-        ) : (
-          <motion.div layout className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            <AnimatePresence mode="popLayout">
-              {filtered.map((trek) => (
-                <motion.div
-                  key={trek.slug}
-                  layout
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <TrekCard trek={trek} />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="snap-y snap-proximity">
+          {filtered.map((trek) => (
+            <TrekStage
+              key={trek.slug}
+              trek={trek}
+              index={treks.indexOf(trek)}
+              total={filtered.length}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

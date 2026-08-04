@@ -31,9 +31,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${fraunces.variable} ${archivo.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t="dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`,
+          }}
+        />
+      </head>
       <body className="flex min-h-full flex-col bg-night font-sans text-snow">
+        <div className="aurora-bg" aria-hidden />
         <div className="grain-overlay" aria-hidden />
         <Nav />
         <main className="flex-1">{children}</main>

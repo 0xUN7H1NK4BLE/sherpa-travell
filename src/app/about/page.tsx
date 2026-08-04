@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden">
+      <section className="photo-dark relative overflow-hidden">
         <img
-          src="/images/about.svg"
+          src="/images/about.jpg"
           alt=""
           aria-hidden
           className="absolute inset-0 h-full w-full object-cover opacity-40"
@@ -63,7 +63,7 @@ export default function AboutPage() {
         </Reveal>
 
         <Reveal delay={0.12}>
-          <div className="rounded-2xl border border-white/10 bg-night-raised p-7">
+          <div className="rounded-2xl border border-line bg-night-raised p-7">
             <p className="text-xs font-semibold uppercase tracking-eyebrow text-saffron">
               Your guide
             </p>
@@ -71,7 +71,7 @@ export default function AboutPage() {
               {site.contact.name}
             </p>
             <p className="mt-1 text-sm text-mist">{site.contact.role}</p>
-            <dl className="mt-6 space-y-3 border-t border-white/10 pt-6 text-sm">
+            <dl className="mt-6 space-y-3 border-t border-line pt-6 text-sm">
               <div className="flex justify-between gap-4">
                 <dt className="text-mist">Based in</dt>
                 <dd>{site.contact.address}</dd>
@@ -105,7 +105,7 @@ export default function AboutPage() {
         </Reveal>
       </section>
 
-      <section className="border-t border-white/10 bg-night-raised">
+      <section className="border-t border-line bg-night-raised">
         <div className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
           <Reveal>
             <SectionHeading

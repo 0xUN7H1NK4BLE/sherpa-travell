@@ -11,7 +11,7 @@ export default function StatsBar({ trek }: { trek: Trek }) {
   ];
 
   return (
-    <div className="border-y border-white/10 bg-night-raised">
+    <div className="border-y border-line bg-night-raised">
       <dl className="mx-auto grid max-w-7xl grid-cols-2 gap-px sm:grid-cols-3 lg:grid-cols-5">
         {stats.map((stat) => (
           <div key={stat.label} className="px-6 py-7 md:px-8">

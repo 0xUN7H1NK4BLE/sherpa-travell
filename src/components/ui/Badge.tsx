@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 type Variant = "default" | "saffron" | "ice";
 
 const variantStyles: Record<Variant, string> = {
-  default: "border-white/15 text-mist",
+  default: "border-line text-mist",
   saffron: "border-saffron/40 text-saffron",
   ice: "border-ice/40 text-ice",
 };

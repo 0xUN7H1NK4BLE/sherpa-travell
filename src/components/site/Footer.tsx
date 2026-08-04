@@ -1,20 +1,24 @@
 import Link from "next/link";
 import { site } from "@/data/site";
 import { treks } from "@/data/treks";
+import SiteLogo from "@/components/site/SiteLogo";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-night-raised">
+    <footer className="border-t border-line bg-night-raised">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-[1.4fr_1fr_1fr_1.2fr] md:px-8">
         <div className="space-y-4">
-          <p className="flex items-baseline gap-1.5">
-            <span className="font-display text-2xl tracking-tight">
-              Sherpa Treks
+          <div className="flex items-center gap-2.5">
+            <SiteLogo className="h-24 w-24" />
+            <span className="flex items-baseline gap-1.5">
+              <span className="font-display text-2xl tracking-tight">
+                Sherpa Treks
+              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-eyebrow text-saffron">
+                Nepal
+              </span>
             </span>
-            <span className="text-[10px] font-semibold uppercase tracking-eyebrow text-saffron">
-              Nepal
-            </span>
-          </p>
+          </div>
           <p className="max-w-xs text-sm leading-relaxed text-mist">
             Sherpa-guided treks and expeditions into Nepal&apos;s wildest
             corners — from Everest to the hidden valleys of Dolpo and Limi.
@@ -86,7 +90,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/5">
+      <div className="border-t border-line/60">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-mist/70 md:flex-row md:px-8">
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.

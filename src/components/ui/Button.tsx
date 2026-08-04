@@ -6,9 +6,9 @@ type Size = "md" | "lg";
 
 const variantStyles: Record<Variant, string> = {
   solid:
-    "bg-saffron text-night hover:bg-snow focus-visible:outline-saffron",
+    "bg-saffron text-night hover:bg-snow focus-visible:outline-saffron before:via-white/45 hover:shadow-[0_18px_40px_-16px_rgba(245,158,11,0.55)]",
   ghost:
-    "border border-white/25 text-snow hover:border-saffron hover:text-saffron focus-visible:outline-saffron",
+    "border border-line-strong text-snow hover:border-saffron hover:text-saffron focus-visible:outline-saffron before:via-white/10",
 };
 
 const sizeStyles: Record<Size, string> = {
@@ -34,7 +34,7 @@ export default function Button({
   className,
 }: ButtonProps) {
   const styles = cn(
-    "inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-wide transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4",
+    "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full font-medium tracking-wide transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 hover:-translate-y-0.5 active:translate-y-0 before:pointer-events-none before:absolute before:inset-0 before:translate-x-[-150%] before:skew-x-12 before:bg-gradient-to-r before:from-transparent before:to-transparent before:transition-transform before:duration-700 hover:before:translate-x-[150%]",
     variantStyles[variant],
     sizeStyles[size],
     className,

@@ -19,7 +19,7 @@ export default function MapExplorer({ treks }: { treks: Trek[] }) {
               "rounded-xl border p-4 transition-colors duration-200",
               active === trek.slug
                 ? "border-saffron/60 bg-night-overlay"
-                : "border-white/10 bg-night-raised hover:border-white/25",
+                : "border-line bg-night-raised hover:border-line-strong",
             )}
           >
             <button
@@ -48,7 +48,7 @@ export default function MapExplorer({ treks }: { treks: Trek[] }) {
           </div>
         ))}
       </aside>
-      <div className="order-1 h-[52vh] lg:order-2 lg:h-[72vh] lg:sticky lg:top-24">
+      <div className="order-1 h-[52vh] lg:order-2 lg:h-[72vh] lg:sticky lg:top-26">
         <MapLoader treks={treks} activeSlug={active} onSelect={setActive} />
       </div>
     </div>

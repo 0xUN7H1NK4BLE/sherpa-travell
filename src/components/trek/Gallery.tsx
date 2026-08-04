@@ -11,7 +11,7 @@ export default function Gallery({
     <div className="grid gap-4 sm:grid-cols-3">
       {images.map((src, i) => (
         <Reveal key={src} delay={i * 0.08}>
-          <div className="overflow-hidden rounded-2xl border border-white/10">
+          <div className="overflow-hidden rounded-2xl border border-line">
             <img
               src={src}
               alt={`${name} — photo ${i + 1}`}

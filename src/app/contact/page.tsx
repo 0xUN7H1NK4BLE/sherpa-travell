@@ -57,7 +57,7 @@ export default async function ContactPage({
           {channels.map((channel) => (
             <div
               key={channel.label}
-              className="rounded-2xl border border-white/10 bg-night-raised p-6"
+              className="rounded-2xl border border-line bg-night-raised p-6"
             >
               <p className="text-xs font-semibold uppercase tracking-eyebrow text-saffron">
                 {channel.label}

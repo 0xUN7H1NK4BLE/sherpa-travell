@@ -71,8 +71,8 @@ export default function ElevationProfile({
         >
           <defs>
             <linearGradient id="elev-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="#f59e0b" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
             </linearGradient>
           </defs>
 
@@ -83,7 +83,7 @@ export default function ElevationProfile({
                 x2={W - PR}
                 y1={y(t)}
                 y2={y(t)}
-                stroke="rgba(255,255,255,0.08)"
+                stroke="var(--line)"
                 strokeDasharray="3 5"
               />
               <text
@@ -102,7 +102,7 @@ export default function ElevationProfile({
           <path
             d={line}
             fill="none"
-            stroke="#f59e0b"
+            stroke="var(--accent)"
             strokeWidth="2"
             strokeLinejoin="round"
             strokeLinecap="round"
@@ -123,13 +123,13 @@ export default function ElevationProfile({
             ) : null,
           )}
 
-          <circle cx={peak.x} cy={peak.y} r="4.5" fill="#f59e0b" />
+          <circle cx={peak.x} cy={peak.y} r="4.5" fill="var(--accent)" />
           <circle
             cx={peak.x}
             cy={peak.y}
             r="4.5"
             fill="none"
-            stroke="#f59e0b"
+            stroke="var(--accent)"
             strokeOpacity="0.4"
             strokeWidth="6"
           />
@@ -151,18 +151,18 @@ export default function ElevationProfile({
                 x2={hovered.x}
                 y1={PT}
                 y2={H - PB}
-                stroke="#7dd3fc"
+                stroke="var(--accent-ice)"
                 strokeOpacity="0.5"
                 strokeDasharray="4 4"
               />
-              <circle cx={hovered.x} cy={hovered.y} r="5" fill="#7dd3fc" />
+              <circle cx={hovered.x} cy={hovered.y} r="5" fill="var(--accent-ice)" />
             </g>
           )}
         </svg>
 
         {hovered && (
           <div
-            className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-lg border border-white/10 bg-night-raised px-3 py-2 text-center shadow-xl"
+            className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-lg border border-line bg-night-raised px-3 py-2 text-center shadow-xl"
             style={{
               left: `${(hovered.x / W) * 100}%`,
               top: `${(hovered.y / H) * 100 - 4}%`,
