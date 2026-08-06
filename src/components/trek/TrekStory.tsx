@@ -224,6 +224,7 @@ export default function TrekStory({ trek }: { trek: Trek }) {
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => setMapVisible(entry.isIntersecting),
+      { rootMargin: "-30% 0px -30% 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();
