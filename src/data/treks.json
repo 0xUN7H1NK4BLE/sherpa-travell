@@ -1538,49 +1538,5 @@
       "restricted",
       "cultural"
     ]
-  },
-  {
-    "slug": "test-trek-e2e",
-    "name": "Test Trek E2E",
-    "region": "E2E Test Region",
-    "durationDays": 6,
-    "maxAltitudeM": 4200,
-    "difficulty": "Moderate",
-    "bestSeason": [
-      "Mar",
-      "Oct"
-    ],
-    "groupSize": "2–10",
-    "summary": "EDITED: summary updated via E2E edit test.",
-    "highlights": [
-      "E2E highlight one",
-      "E2E highlight two"
-    ],
-    "itinerary": [
-      {
-        "day": 1,
-        "title": "Arrive E2E Base",
-        "description": "",
-        "altitudeM": 2800,
-        "kind": "trek"
-      }
-    ],
-    "coordinates": [
-      27.9878,
-      86.925
-    ],
-    "path": [
-      [
-        27.9878,
-        86.925
-      ],
-      [
-        27.9,
-        86.95
-      ]
-    ],
-    "image": "/api/blob?pathname=uploads%2F1786011981555-e2e-hero-m648z3LHyMzJlf3ZSBZc93bsxS0vBP.png",
-    "gallery": [],
-    "tags": []
   }
 ]
