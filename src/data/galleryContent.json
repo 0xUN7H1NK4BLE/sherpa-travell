@@ -1,0 +1,61 @@
+{
+  "scenes": [
+    {
+      "id": "images-scenes-flags-jpg",
+      "src": "/images/scenes/flags.jpg",
+      "title": "Prayer flags",
+      "subtitle": "From the trail archive",
+      "alt": "Prayer flags",
+      "credit": "Wikimedia Commons · CC BY-SA"
+    },
+    {
+      "id": "images-scenes-glacier-jpg",
+      "src": "/images/scenes/glacier.jpg",
+      "title": "Khumbu glacier",
+      "subtitle": "From the trail archive",
+      "alt": "Khumbu glacier",
+      "credit": "Wikimedia Commons · CC BY-SA"
+    },
+    {
+      "id": "images-scenes-lake-jpg",
+      "src": "/images/scenes/lake.jpg",
+      "title": "Gokyo lakes",
+      "subtitle": "From the trail archive",
+      "alt": "Gokyo lakes",
+      "credit": "Wikimedia Commons · CC BY-SA"
+    },
+    {
+      "id": "images-scenes-monastery-jpg",
+      "src": "/images/scenes/monastery.jpg",
+      "title": "Tengboche monastery",
+      "subtitle": "From the trail archive",
+      "alt": "Tengboche monastery",
+      "credit": "Wikimedia Commons · CC BY-SA"
+    },
+    {
+      "id": "images-scenes-stars-jpg",
+      "src": "/images/scenes/stars.jpg",
+      "title": "Milky way over the Himalaya",
+      "subtitle": "From the trail archive",
+      "alt": "Milky way over the Himalaya",
+      "credit": "Wikimedia Commons · CC BY-SA"
+    },
+    {
+      "id": "images-scenes-trail-jpg",
+      "src": "/images/scenes/trail.jpg",
+      "title": "On the trail",
+      "subtitle": "From the trail archive",
+      "alt": "On the trail",
+      "credit": "Wikimedia Commons · CC BY-SA"
+    },
+    {
+      "id": "images-scenes-valley-jpg",
+      "src": "/images/scenes/valley.jpg",
+      "title": "Kyanjin valley",
+      "subtitle": "From the trail archive",
+      "alt": "Kyanjin valley",
+      "credit": "Wikimedia Commons · CC BY-SA"
+    }
+  ],
+  "videos": []
+}

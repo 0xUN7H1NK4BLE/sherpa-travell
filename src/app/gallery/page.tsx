@@ -4,6 +4,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import GalleryWall from "@/components/gallery/GalleryWall";
 import { buildGallery } from "@/data/gallery";
 import { treks } from "@/data/treks";
+import { readGalleryLocal } from "@/lib/galleryStore";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function GalleryPage() {
-  const items = buildGallery();
+  const content = readGalleryLocal();
+  const items = buildGallery(content);
 
   return (
     <>

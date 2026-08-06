@@ -24,19 +24,22 @@ There is a password-protected admin panel at **`/admin`** (login: `/admin/login`
 - Default credentials are `admin` / `sherpatravell1212!@` — override with the
   `ADMIN_USERNAME` and `ADMIN_PASSWORD` env vars.
 - It supports **add, edit, delete** for treks and **image upload**.
+- The **Gallery** section manages standalone scenes (photos) and films (videos),
+  each with a title, caption and upload.
 - Pages are protected by a proxy (Next 16 `src/proxy.ts`) plus per-API auth.
 
 ### How it works (no database)
 
-| What        | Where it lives                                        |
-| ----------- | ----------------------------------------------------- |
-| Trek data   | `src/data/treks.json` — committed to Git              |
-| Images      | [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) (object storage) |
+| What            | Where it lives                                            |
+| --------------- | --------------------------------------------------------- |
+| Trek data       | `src/data/treks.json` — committed to Git                  |
+| Gallery content | `src/data/galleryContent.json` — committed to Git         |
+| Images / films  | [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) (object storage) |
 
-Writes go through the GitHub Contents API: the API reads the current
-`src/data/treks.json` from your repo, applies the change, and commits it back.
-Pushing to the repo triggers a Vercel auto-redeploy, so the public site picks up
-the edit. This means **no SQL/NoSQL database is used**.
+Writes go through the GitHub Contents API: the API reads the current JSON file
+from your repo, applies the change, and commits it back. Pushing to the repo
+triggers a Vercel auto-redeploy, so the public site picks up the edit. This
+means **no SQL/NoSQL database is used**.
 
 ### Env vars
 

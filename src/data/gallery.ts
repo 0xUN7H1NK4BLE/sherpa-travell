@@ -8,6 +8,7 @@
 import { treks } from "@/data/treks";
 import { trekPhotos } from "@/data/trekPhotos";
 import { dayPlaces, trekLabels, type PlaceKind } from "@/data/dayViews";
+import type { GalleryContent } from "@/data/galleryContent";
 
 export type MediaType = "image" | "video";
 
@@ -36,19 +37,7 @@ export interface GalleryVideo {
   alt: string;
 }
 
-export const galleryVideos: GalleryVideo[] = [];
-
 const CREDIT = "Wikimedia Commons · CC BY-SA";
-
-const SCENES: [string, string][] = [
-  ["/images/scenes/flags.jpg", "Prayer flags"],
-  ["/images/scenes/glacier.jpg", "Khumbu glacier"],
-  ["/images/scenes/lake.jpg", "Gokyo lakes"],
-  ["/images/scenes/monastery.jpg", "Tengboche monastery"],
-  ["/images/scenes/stars.jpg", "Milky way over the Himalaya"],
-  ["/images/scenes/trail.jpg", "On the trail"],
-  ["/images/scenes/valley.jpg", "Kyanjin valley"],
-];
 
 const KIND_LABEL: Record<PlaceKind, string> = {
   city: "City",
@@ -73,7 +62,7 @@ function kindOfPlace(name?: string): string | undefined {
   return undefined;
 }
 
-export function buildGallery(): GalleryItem[] {
+export function buildGallery(content: GalleryContent): GalleryItem[] {
   const seen = new Set<string>();
   const items: GalleryItem[] = [];
 
@@ -98,16 +87,16 @@ export function buildGallery(): GalleryItem[] {
     });
   }
 
-  for (const [src, subject] of SCENES) {
+  for (const s of content.scenes) {
     push({
-      id: `scene-${src}`,
+      id: s.id,
       type: "image",
-      src,
-      title: subject,
-      subtitle: "From the trail archive",
+      src: s.src,
+      title: s.title,
+      subtitle: s.subtitle,
       badge: "Scene",
-      alt: subject,
-      credit: CREDIT,
+      alt: s.alt,
+      credit: s.credit || CREDIT,
     });
   }
 
@@ -132,7 +121,7 @@ export function buildGallery(): GalleryItem[] {
     });
   }
 
-  for (const v of galleryVideos) {
+  for (const v of content.videos) {
     push({
       id: v.id,
       type: "video",
@@ -144,7 +133,7 @@ export function buildGallery(): GalleryItem[] {
       trekSlug: v.trekSlug,
       trekName: v.trekName,
       alt: v.alt,
-      credit: "Sherpa Treks Nepal",
+      credit: v.credit || "Sherpa Treks Nepal",
     });
   }
 

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import TrekForm from "@/components/admin/TrekForm";
+import GalleryAdmin from "@/components/admin/GalleryAdmin";
 import type { Trek } from "@/data/treks";
 
 type Mode = { kind: "list" } | { kind: "new" } | { kind: "edit"; trek: Trek };
@@ -159,6 +160,8 @@ export default function AdminPage() {
             )}
           </div>
         )}
+
+        {treks && <GalleryAdmin treks={treks} />}
       </div>
     </section>
   );
