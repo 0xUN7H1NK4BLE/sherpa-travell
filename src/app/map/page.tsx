@@ -17,7 +17,7 @@ export default function MapPage() {
         <SectionHeading
           eyebrow="The map"
           title="One country, eight worlds."
-          description="Hover the list or tap a marker — each point is a region we guide in. The terrain layer shows exactly why these treks are special."
+          description="Tap a place on the map or pick a trek in the list — each point is a region we guide in. The terrain layer shows exactly why these treks are special."
         />
       </Reveal>
       <MapExplorer treks={treks} />

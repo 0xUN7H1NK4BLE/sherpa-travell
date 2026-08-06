@@ -11,7 +11,7 @@ export default function MapExplorer({ treks }: { treks: Trek[] }) {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
-      <aside className="order-2 space-y-2.5 lg:order-1 lg:max-h-[72vh] lg:overflow-y-auto lg:pr-2">
+      <aside className="order-2 max-h-[42vh] space-y-2.5 overflow-y-auto overscroll-contain lg:order-1 lg:max-h-[72vh] lg:pr-2">
         {treks.map((trek) => (
           <div
             key={trek.slug}
