@@ -55,6 +55,14 @@
       "subtitle": "From the trail archive",
       "alt": "Kyanjin valley",
       "credit": "Wikimedia Commons · CC BY-SA"
+    },
+    {
+      "id": "live-test-scene",
+      "src": "/images/scenes/stars.jpg",
+      "title": "Live Test",
+      "subtitle": "verification",
+      "alt": "test",
+      "credit": "test"
     }
   ],
   "videos": []
