@@ -1,10 +1,11 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sherpa Travell
+
+A [Next.js](https://nextjs.org) trek & expedition site for Sherpa Treks Nepal.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
 # or
 yarn dev
@@ -14,23 +15,50 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Admin backend
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+There is a password-protected admin panel at **`/admin`** (login: `/admin/login`).
+
+- Default credentials are `admin` / `sherpatravell1212!@` — override with the
+  `ADMIN_USERNAME` and `ADMIN_PASSWORD` env vars.
+- It supports **add, edit, delete** for treks and **image upload**.
+- Pages are protected by a proxy (Next 16 `src/proxy.ts`) plus per-API auth.
+
+### How it works (no database)
+
+| What        | Where it lives                                        |
+| ----------- | ----------------------------------------------------- |
+| Trek data   | `src/data/treks.json` — committed to Git              |
+| Images      | [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) (object storage) |
+
+Writes go through the GitHub Contents API: the API reads the current
+`src/data/treks.json` from your repo, applies the change, and commits it back.
+Pushing to the repo triggers a Vercel auto-redeploy, so the public site picks up
+the edit. This means **no SQL/NoSQL database is used**.
+
+### Env vars
+
+Copy `.env.example` to `.env.local` and fill in:
+
+- `GITHUB_REPO` / `GITHUB_TOKEN` / `GITHUB_BRANCH` — for committing trek data
+  (GitHub token needs `Contents` write scope).
+- `BLOB_READ_WRITE_TOKEN` — for image uploads (Vercel injects this
+  automatically in the dashboard).
+- `ADMIN_SESSION_SECRET` — random value to sign session cookies.
+
+### Deploy on Vercel
+
+1. Push this repo to GitHub.
+2. Import it at [vercel.com/new](https://vercel.com/new).
+3. Add the env vars in Project → Settings → Environment Variables.
+4. Create a Blob store in Storage → Blob and connect it.
+5. Deploy. Open `https://<your-app>.vercel.app/admin` to manage treks.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs) — learn about Next.js features.
+- [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) — image storage.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

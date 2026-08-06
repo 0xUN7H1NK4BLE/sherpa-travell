@@ -1,0 +1,1542 @@
+[
+  {
+    "slug": "everest-base-camp",
+    "name": "Everest Base Camp",
+    "region": "Sagarmatha National Park",
+    "durationDays": 12,
+    "maxAltitudeM": 5545,
+    "difficulty": "Challenging",
+    "bestSeason": [
+      "Mar–May",
+      "Oct–Nov"
+    ],
+    "groupSize": "2–10",
+    "summary": "The classic walk into the heart of the Khumbu — through Sherpa villages and rhododendron forest, beneath the walls of Ama Dablam, to stand at the foot of the highest mountain on Earth.",
+    "highlights": [
+      "Stand at Everest Base Camp beneath the Khumbu Icefall",
+      "Sunrise over Everest from Kala Patthar (5,545m)",
+      "Tengboche Monastery, spiritual center of the Khumbu",
+      "Namche Bazaar — bakeries, markets and mountain museums",
+      "Sagarmatha National Park, a UNESCO World Heritage Site"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Fly to Lukla, trek to Phakding",
+        "description": "A thrilling mountain flight onto Lukla's short runway, then an easy walk down the Dudh Koshi valley to Phakding.",
+        "altitudeM": 2610,
+        "kind": "travel"
+      },
+      {
+        "day": 2,
+        "title": "Phakding to Namche Bazaar",
+        "description": "Cross swaying suspension bridges draped in prayer flags, then climb the long forested hill to the Sherpa capital.",
+        "altitudeM": 3440,
+        "kind": "trek"
+      },
+      {
+        "day": 3,
+        "title": "Acclimatization in Namche",
+        "description": "Hike to the Everest View Hotel for your first sight of Everest, Lhotse and Ama Dablam, then rest and explore town.",
+        "altitudeM": 3440,
+        "kind": "acclimatization"
+      },
+      {
+        "day": 4,
+        "title": "Namche to Tengboche",
+        "description": "Contouring ridgelines with huge views, a descent through rhododendron forest, and a final climb to Tengboche's famous monastery.",
+        "altitudeM": 3860,
+        "kind": "trek"
+      },
+      {
+        "day": 5,
+        "title": "Tengboche to Dingboche",
+        "description": "Leave the treeline behind as the valley opens into stark glacial terrain beneath Island Peak.",
+        "altitudeM": 4410,
+        "kind": "trek"
+      },
+      {
+        "day": 6,
+        "title": "Acclimatization in Dingboche",
+        "description": "Optional climb of Nangkartshang Hill for views of Makalu, the world's fifth highest mountain.",
+        "altitudeM": 4410,
+        "kind": "acclimatization"
+      },
+      {
+        "day": 7,
+        "title": "Dingboche to Lobuche",
+        "description": "Climb the terminal moraine past the moving memorials to fallen climbers at Thukla Pass.",
+        "altitudeM": 4940,
+        "kind": "trek"
+      },
+      {
+        "day": 8,
+        "title": "Everest Base Camp",
+        "description": "Walk the Khumbu glacier to Base Camp itself — prayer flags, ice towers, and the notorious icefall above.",
+        "altitudeM": 5364,
+        "kind": "summit"
+      },
+      {
+        "day": 9,
+        "title": "Kala Patthar, descend to Pheriche",
+        "description": "A pre-dawn climb of Kala Patthar (5,545m) for the finest close view of Everest, then a long drop to thicker air.",
+        "altitudeM": 4371,
+        "kind": "summit"
+      },
+      {
+        "day": 10,
+        "title": "Pheriche to Namche",
+        "description": "Retrace the valley with new eyes — the mountains always look different on the way down.",
+        "altitudeM": 3440,
+        "kind": "trek"
+      },
+      {
+        "day": 11,
+        "title": "Namche to Lukla",
+        "description": "One last crossing of the high bridges and a farewell dinner with your crew.",
+        "altitudeM": 2840,
+        "kind": "trek"
+      },
+      {
+        "day": 12,
+        "title": "Fly to Kathmandu",
+        "description": "Morning flight out of the mountains and a hot shower that will feel better than any in your life.",
+        "altitudeM": 1400,
+        "kind": "travel"
+      }
+    ],
+    "coordinates": [
+      27.925,
+      86.705
+    ],
+    "path": [
+      [
+        27.7432,
+        86.7125
+      ],
+      [
+        27.8045,
+        86.7102
+      ],
+      [
+        27.8045,
+        86.7102
+      ],
+      [
+        27.8365,
+        86.7638
+      ],
+      [
+        27.8953,
+        86.8278
+      ],
+      [
+        27.8953,
+        86.8278
+      ],
+      [
+        27.9524,
+        86.8122
+      ],
+      [
+        27.9854,
+        86.8604
+      ],
+      [
+        27.8946,
+        86.8204
+      ],
+      [
+        27.8045,
+        86.7102
+      ],
+      [
+        27.6873,
+        86.7314
+      ],
+      [
+        27.7172,
+        85.324
+      ]
+    ],
+    "image": "/images/treks/everest-base-camp.jpg",
+    "gallery": [
+      "/images/scenes/flags.jpg",
+      "/images/scenes/glacier.jpg",
+      "/images/scenes/trail.jpg"
+    ],
+    "tags": [
+      "classic"
+    ]
+  },
+  {
+    "slug": "manaslu-circuit",
+    "name": "Manaslu Circuit",
+    "region": "Manaslu Conservation Area",
+    "durationDays": 13,
+    "maxAltitudeM": 5106,
+    "difficulty": "Challenging",
+    "bestSeason": [
+      "Mar–May",
+      "Sep–Nov"
+    ],
+    "groupSize": "2–8",
+    "summary": "The great circuit around the world's eighth highest mountain — a restricted-area trail through Tibetan-influenced villages, culminating in the long, unforgettable crossing of the Larkya La.",
+    "highlights": [
+      "Cross the Larkya La pass (5,106m) at dawn",
+      "Tibetan Buddhist culture in Samagaon and Samdo",
+      "Pungyen Gompa beneath Manaslu's south face",
+      "A fraction of the crowds of the Annapurna or Everest trails"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Drive to Machha Khola",
+        "kind": "travel",
+        "altitudeM": 930,
+        "description": "A long, scenic drive from Kathmandu along the Budhi Gandaki river to the trailhead."
+      },
+      {
+        "day": 2,
+        "title": "Machha Khola to Jagat",
+        "kind": "trek",
+        "altitudeM": 1340,
+        "description": "Enter the restricted Manaslu Conservation Area, following the gorge past waterfalls and hot springs."
+      },
+      {
+        "day": 3,
+        "title": "Jagat to Deng",
+        "kind": "trek",
+        "altitudeM": 1860,
+        "description": "The valley narrows and the culture shifts — mani walls and prayer wheels mark the way."
+      },
+      {
+        "day": 4,
+        "title": "Deng to Namrung",
+        "kind": "trek",
+        "altitudeM": 2630,
+        "description": "Climb through fir forest as the first views of Manaslu appear up the valley."
+      },
+      {
+        "day": 5,
+        "title": "Namrung to Samagaon",
+        "kind": "trek",
+        "altitudeM": 3530,
+        "description": "Pass Lho's ribbon monastery and walk straight into the amphitheater of Manaslu's east face."
+      },
+      {
+        "day": 6,
+        "title": "Acclimatization in Samagaon",
+        "kind": "acclimatization",
+        "altitudeM": 3530,
+        "description": "Hike toward Pungyen Gompa or Manaslu Base Camp, then rest in one of the Khumbu's most beautiful villages."
+      },
+      {
+        "day": 7,
+        "title": "Samagaon to Samdo",
+        "kind": "trek",
+        "altitudeM": 3860,
+        "description": "A short walk to the last village before the pass, a Tibetan refugee settlement of yak herders."
+      },
+      {
+        "day": 8,
+        "title": "Acclimatization in Samdo",
+        "kind": "acclimatization",
+        "altitudeM": 3860,
+        "description": "Day hike toward the Tibetan border for big views and better acclimatization."
+      },
+      {
+        "day": 9,
+        "title": "Samdo to Dharamsala",
+        "kind": "trek",
+        "altitudeM": 4460,
+        "description": "Climb to the stone shelters of Larkya Phedi beneath the glacier. Early night — tomorrow is the big one."
+      },
+      {
+        "day": 10,
+        "title": "Cross the Larkya La to Bimthang",
+        "kind": "summit",
+        "altitudeM": 3720,
+        "description": "Start before dawn for the long climb to the prayer-flagged pass (5,106m), with Himlung, Cheo and Annapurna II spread before you — then descend to green Bimthang."
+      },
+      {
+        "day": 11,
+        "title": "Bimthang to Tilije",
+        "kind": "trek",
+        "altitudeM": 2300,
+        "description": "Drop through rhododendron and pine back into the world of trees and warmth."
+      },
+      {
+        "day": 12,
+        "title": "Tilije to Dharapani, drive to Besisahar",
+        "kind": "trek",
+        "altitudeM": 760,
+        "description": "Join the Annapurna Circuit trail briefly, then jeep down the Marsyangdi valley."
+      },
+      {
+        "day": 13,
+        "title": "Drive to Kathmandu",
+        "kind": "travel",
+        "altitudeM": 1400,
+        "description": "Return to the capital with legs that have circled an eight-thousander."
+      }
+    ],
+    "coordinates": [
+      28.55,
+      84.56
+    ],
+    "path": [
+      [
+        28.3003,
+        84.7957
+      ],
+      [
+        28.382,
+        84.805
+      ],
+      [
+        28.42,
+        84.831
+      ],
+      [
+        28.47,
+        84.86
+      ],
+      [
+        28.594,
+        84.962
+      ],
+      [
+        28.594,
+        84.962
+      ],
+      [
+        28.625,
+        84.968
+      ],
+      [
+        28.625,
+        84.968
+      ],
+      [
+        28.645,
+        85.005
+      ],
+      [
+        28.55,
+        85.02
+      ],
+      [
+        28.51,
+        84.9
+      ],
+      [
+        28.235,
+        84.38
+      ],
+      [
+        27.7172,
+        85.324
+      ]
+    ],
+    "image": "/images/treks/manaslu-circuit.jpg",
+    "gallery": [
+      "/images/scenes/monastery.jpg",
+      "/images/scenes/trail.jpg",
+      "/images/scenes/stars.jpg"
+    ],
+    "tags": [
+      "restricted",
+      "cultural",
+      "classic"
+    ]
+  },
+  {
+    "slug": "kanchenjunga-base-camp",
+    "name": "Kanchenjunga Base Camps",
+    "region": "Kanchenjunga Conservation Area",
+    "durationDays": 19,
+    "maxAltitudeM": 5143,
+    "difficulty": "Strenuous",
+    "bestSeason": [
+      "Mar–May",
+      "Oct–Nov"
+    ],
+    "groupSize": "2–8",
+    "summary": "Nepal's great eastern odyssey — a long, quiet journey to both base camps of the world's third highest mountain, through Limbu villages, cardamom fields and high yak pasture that sees a handful of trekkers a year.",
+    "highlights": [
+      "Both North (Pangpema) and South (Oktang) base camps in one journey",
+      "Kanchenjunga (8,586m) — five treasures of the great snow",
+      "The remote Sele La crossing between the two valleys",
+      "Limbu and Rai culture in Nepal's far east",
+      "Genuinely empty trails — true expedition atmosphere"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Fly to Bhadrapur, drive to Ilam",
+        "kind": "travel",
+        "altitudeM": 1200,
+        "description": "Fly to the Terai and drive up into the tea gardens of Ilam."
+      },
+      {
+        "day": 2,
+        "title": "Drive to Taplejung and Sekathum",
+        "kind": "travel",
+        "altitudeM": 1650,
+        "description": "A rough, spectacular mountain road carries you deep into Kanchenjunga country."
+      },
+      {
+        "day": 3,
+        "title": "Sekathum to Amjilosa",
+        "kind": "trek",
+        "altitudeM": 2308,
+        "description": "Enter the Ghunsa Khola gorge — a dramatic day of waterfalls, cliffs and suspension bridges."
+      },
+      {
+        "day": 4,
+        "title": "Amjilosa to Gyabla",
+        "kind": "trek",
+        "altitudeM": 2730,
+        "description": "Climb out of the gorge into dense bamboo and rhododendron forest."
+      },
+      {
+        "day": 5,
+        "title": "Gyabla to Ghunsa",
+        "kind": "trek",
+        "altitudeM": 3595,
+        "description": "Arrive in the great Tibetan-style village of Ghunsa, gateway to the upper valley."
+      },
+      {
+        "day": 6,
+        "title": "Acclimatization in Ghunsa",
+        "kind": "acclimatization",
+        "altitudeM": 3595,
+        "description": "Rest, explore the village monastery, and hike the ridge above town."
+      },
+      {
+        "day": 7,
+        "title": "Ghunsa to Khambachen",
+        "kind": "trek",
+        "altitudeM": 4050,
+        "description": "Walk the flood-scoured valley beneath the massive north face of Jannu."
+      },
+      {
+        "day": 8,
+        "title": "Acclimatization in Khambachen",
+        "kind": "acclimatization",
+        "altitudeM": 4050,
+        "description": "Climb toward the Jannu viewpoint (4,400m) — one of the finest mountain vistas in Nepal."
+      },
+      {
+        "day": 9,
+        "title": "Khambachen to Lhonak",
+        "kind": "trek",
+        "altitudeM": 4780,
+        "description": "Cross the wide, empty Lhonak plain, grazing ground of blue sheep and snow leopards."
+      },
+      {
+        "day": 10,
+        "title": "Pangpema — North Base Camp",
+        "kind": "summit",
+        "altitudeM": 4780,
+        "description": "Reach Pangpema (5,143m) and stand before the towering north face of Kanchenjunga, then return to Lhonak."
+      },
+      {
+        "day": 11,
+        "title": "Lhonak to Ghunsa",
+        "kind": "trek",
+        "altitudeM": 3595,
+        "description": "Descend the whole upper valley back to the comforts of Ghunsa."
+      },
+      {
+        "day": 12,
+        "title": "Ghunsa to Sele Le camp",
+        "kind": "trek",
+        "altitudeM": 4240,
+        "description": "Climb steeply out of the valley to the high camp before the pass crossings."
+      },
+      {
+        "day": 13,
+        "title": "Cross the Sele La passes to Tseram",
+        "kind": "summit",
+        "altitudeM": 3870,
+        "description": "A huge day over prayer-flagged cols (up to 4,480m) with Kanchenjunga, Jannu and Makalu on the horizon."
+      },
+      {
+        "day": 14,
+        "title": "Oktang — South Base Camp",
+        "kind": "summit",
+        "altitudeM": 3870,
+        "description": "Walk up the Yalung glacier to Oktang (4,740m) beneath the sheer south face, then return to Tseram."
+      },
+      {
+        "day": 15,
+        "title": "Tseram to Tortong",
+        "kind": "trek",
+        "altitudeM": 2995,
+        "description": "Descend through rhododendron forest into the Simbua Khola valley."
+      },
+      {
+        "day": 16,
+        "title": "Tortong to Yamphudin",
+        "kind": "trek",
+        "altitudeM": 2080,
+        "description": "Over the Lasiya Bhanjyang and down to the first permanent village in days."
+      },
+      {
+        "day": 17,
+        "title": "Yamphudin to Khebang",
+        "kind": "trek",
+        "altitudeM": 1910,
+        "description": "Gentle walking through Limbu farmland and cardamom groves."
+      },
+      {
+        "day": 18,
+        "title": "Drive to Bhadrapur",
+        "kind": "travel",
+        "altitudeM": 91,
+        "description": "The long road back to the lowlands — cold drinks and warm air."
+      },
+      {
+        "day": 19,
+        "title": "Fly to Kathmandu",
+        "kind": "travel",
+        "altitudeM": 1400,
+        "description": "Fly back to the capital along the Himalayan wall you just walked beneath."
+      }
+    ],
+    "coordinates": [
+      27.7,
+      87.93
+    ],
+    "path": [
+      [
+        26.909,
+        87.926
+      ],
+      [
+        27.556,
+        87.857
+      ],
+      [
+        27.626,
+        87.898
+      ],
+      [
+        27.688,
+        87.912
+      ],
+      [
+        27.725,
+        87.937
+      ],
+      [
+        27.725,
+        87.937
+      ],
+      [
+        27.758,
+        87.949
+      ],
+      [
+        27.758,
+        87.949
+      ],
+      [
+        27.835,
+        88.006
+      ],
+      [
+        27.87,
+        88.033
+      ],
+      [
+        27.725,
+        87.937
+      ],
+      [
+        27.72,
+        87.9
+      ],
+      [
+        27.665,
+        87.888
+      ],
+      [
+        27.626,
+        87.948
+      ],
+      [
+        27.59,
+        87.86
+      ],
+      [
+        27.556,
+        87.832
+      ],
+      [
+        27.5,
+        87.79
+      ],
+      [
+        26.542,
+        88.096
+      ],
+      [
+        27.7172,
+        85.324
+      ]
+    ],
+    "image": "/images/treks/kanchenjunga-base-camp.jpg",
+    "gallery": [
+      "/images/scenes/valley.jpg",
+      "/images/scenes/stars.jpg",
+      "/images/scenes/glacier.jpg"
+    ],
+    "tags": [
+      "remote",
+      "restricted"
+    ]
+  },
+  {
+    "slug": "langtang-valley",
+    "name": "Langtang Valley",
+    "region": "Langtang National Park",
+    "durationDays": 8,
+    "maxAltitudeM": 4984,
+    "difficulty": "Moderate",
+    "bestSeason": [
+      "Mar–May",
+      "Oct–Dec"
+    ],
+    "groupSize": "2–10",
+    "summary": "The valley of glaciers — a week-long walk from subtropical forest to a wide alpine bowl ringed by 7,000m peaks, home to Tamang villages, yak cheese factories and some of Nepal's warmest teahouses.",
+    "highlights": [
+      "Summit Tserko Ri (4,984m) for a 360° Himalayan panorama",
+      "Kyanjin Gompa and its famous yak cheese factory",
+      "Tamang heritage along the old trade route to Tibet",
+      "Nepal's first Himalayan national park"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Drive to Syabrubesi",
+        "kind": "travel",
+        "altitudeM": 1550,
+        "description": "Wind up the Trishuli valley to the trailhead at the Langtang river."
+      },
+      {
+        "day": 2,
+        "title": "Syabrubesi to Lama Hotel",
+        "kind": "trek",
+        "altitudeM": 2470,
+        "description": "Climb through oak and bamboo forest — keep an eye out for red pandas and langur monkeys."
+      },
+      {
+        "day": 3,
+        "title": "Lama Hotel to Langtang village",
+        "kind": "trek",
+        "altitudeM": 3430,
+        "description": "The forest opens into the glacial valley; pass mani walls and water-driven prayer wheels."
+      },
+      {
+        "day": 4,
+        "title": "Langtang to Kyanjin Gompa",
+        "kind": "trek",
+        "altitudeM": 3870,
+        "description": "A short, spectacular morning beneath Langtang Lirung to the valley's highest village."
+      },
+      {
+        "day": 5,
+        "title": "Summit Tserko Ri",
+        "kind": "summit",
+        "altitudeM": 3870,
+        "description": "A dawn ascent of Tserko Ri (4,984m) — Langtang Lirung, Dorje Lakpa and Shishapangma in Tibet fill the horizon."
+      },
+      {
+        "day": 6,
+        "title": "Kyanjin to Lama Hotel",
+        "kind": "trek",
+        "altitudeM": 2470,
+        "description": "A long, easy descent back into the forest."
+      },
+      {
+        "day": 7,
+        "title": "Lama Hotel to Syabrubesi",
+        "kind": "trek",
+        "altitudeM": 1550,
+        "description": "Final walk down the valley and a farewell evening with your crew."
+      },
+      {
+        "day": 8,
+        "title": "Drive to Kathmandu",
+        "kind": "travel",
+        "altitudeM": 1400,
+        "description": "Return to the capital by jeep."
+      }
+    ],
+    "coordinates": [
+      28.21,
+      85.52
+    ],
+    "path": [
+      [
+        28.162,
+        85.34
+      ],
+      [
+        28.198,
+        85.395
+      ],
+      [
+        28.213,
+        85.528
+      ],
+      [
+        28.223,
+        85.573
+      ],
+      [
+        28.223,
+        85.573
+      ],
+      [
+        28.198,
+        85.395
+      ],
+      [
+        28.162,
+        85.34
+      ],
+      [
+        27.7172,
+        85.324
+      ]
+    ],
+    "image": "/images/treks/langtang-valley.jpg",
+    "gallery": [
+      "/images/scenes/valley.jpg",
+      "/images/scenes/flags.jpg",
+      "/images/scenes/trail.jpg"
+    ],
+    "tags": [
+      "classic",
+      "cultural"
+    ]
+  },
+  {
+    "slug": "gosaikunda-lake",
+    "name": "Gosaikunda & the Laurebina La",
+    "region": "Gosaikunda, Langtang National Park",
+    "durationDays": 7,
+    "maxAltitudeM": 4610,
+    "difficulty": "Moderate",
+    "bestSeason": [
+      "Mar–May",
+      "Sep–Nov"
+    ],
+    "groupSize": "2–10",
+    "summary": "A short, steep pilgrimage to the sacred alpine lakes of Gosaikunda — where Shiva is said to have struck his trident into the rock — then over the Laurebina La into the ridge villages of Helambu.",
+    "highlights": [
+      "The sacred blue lakes of Gosaikunda (4,380m)",
+      "Cross the Laurebina La (4,610m) with views from Manaslu to Langtang",
+      "Janai Purnima festival in August — thousands of pilgrims at the lake",
+      "Sunrises over the Helambu ridgeline"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Drive to Dhunche",
+        "kind": "travel",
+        "altitudeM": 2030,
+        "description": "Leave Kathmandu after breakfast and climb to the park headquarters town of Dhunche."
+      },
+      {
+        "day": 2,
+        "title": "Dhunche to Sing Gompa",
+        "kind": "trek",
+        "altitudeM": 3330,
+        "description": "A steep, beautiful climb through oak and rhododendron to the little monastery and cheese factory."
+      },
+      {
+        "day": 3,
+        "title": "Sing Gompa to Gosaikunda",
+        "kind": "trek",
+        "altitudeM": 4380,
+        "description": "Break above the treeline onto a ridge of stone and sky; the first sacred lakes appear at Saraswati Kunda."
+      },
+      {
+        "day": 4,
+        "title": "Cross the Laurebina La to Ghopte",
+        "kind": "summit",
+        "altitudeM": 3530,
+        "description": "Dawn around the lakes, then over the pass (4,610m) and a long, knee-testing descent to Ghopte."
+      },
+      {
+        "day": 5,
+        "title": "Ghopte to Kutumsang",
+        "kind": "trek",
+        "altitudeM": 2470,
+        "description": "Ridge walking through cloud forest with windows onto the whole Langtang range."
+      },
+      {
+        "day": 6,
+        "title": "Kutumsang to Chisapani",
+        "kind": "trek",
+        "altitudeM": 2215,
+        "description": "Through Sherpa and Tamang villages to Chisapani — 'cold water' — with its famous sunset view."
+      },
+      {
+        "day": 7,
+        "title": "Chisapani to Sundarijal, drive to Kathmandu",
+        "kind": "travel",
+        "altitudeM": 1400,
+        "description": "A gentle morning through Shivapuri National Park, then a short drive back to the city."
+      }
+    ],
+    "coordinates": [
+      28.08,
+      85.42
+    ],
+    "path": [
+      [
+        28.12,
+        85.29
+      ],
+      [
+        28.147,
+        85.32
+      ],
+      [
+        28.083,
+        85.417
+      ],
+      [
+        28.1,
+        85.478
+      ],
+      [
+        27.99,
+        85.51
+      ],
+      [
+        27.81,
+        85.43
+      ],
+      [
+        27.7172,
+        85.324
+      ]
+    ],
+    "image": "/images/treks/gosaikunda-lake.jpg",
+    "gallery": [
+      "/images/scenes/lake.jpg",
+      "/images/scenes/flags.jpg",
+      "/images/scenes/stars.jpg"
+    ],
+    "tags": [
+      "lakes",
+      "cultural"
+    ]
+  },
+  {
+    "slug": "upper-dolpo",
+    "name": "Upper Dolpo",
+    "region": "Upper Dolpo, Shey Phoksundo",
+    "durationDays": 21,
+    "maxAltitudeM": 5360,
+    "difficulty": "Strenuous",
+    "bestSeason": [
+      "May–Oct"
+    ],
+    "groupSize": "2–8",
+    "summary": "The hidden land behind the Dhaulagiri wall — a three-week camping expedition across 5,000m passes to turquoise Phoksundo Lake, the ancient monastery of Shey, and villages where pre-Buddhist Bon culture still lives. Nepal as it was a century ago.",
+    "highlights": [
+      "Phoksundo Lake — impossible turquoise beneath a 2,000m wall",
+      "Shey Gompa and the pilgrimage circuit of Crystal Mountain",
+      "Cross the Kang La (5,360m) and Jeng La (5,110m)",
+      "Bon and Tibetan Buddhist culture in Saldang and Dho Tarap",
+      "True wilderness camping — no teahouses, no crowds"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Fly to Nepalgunj",
+        "kind": "travel",
+        "altitudeM": 150,
+        "description": "Fly southwest to the steamy Terai city, staging point for Dolpo."
+      },
+      {
+        "day": 2,
+        "title": "Fly to Juphal, trek to Dunai",
+        "kind": "travel",
+        "altitudeM": 2140,
+        "description": "One of Nepal's great mountain flights, then walk down to the district capital on the Thuli Bheri."
+      },
+      {
+        "day": 3,
+        "title": "Dunai to Chhepka",
+        "kind": "trek",
+        "altitudeM": 2687,
+        "description": "Follow the Suli Gad through walnut groves and riverside forest."
+      },
+      {
+        "day": 4,
+        "title": "Chhepka to Chunuwar",
+        "kind": "trek",
+        "altitudeM": 3000,
+        "description": "Pass the Amchi traditional medicine hospital where Himalayan healers still train."
+      },
+      {
+        "day": 5,
+        "title": "Chunuwar to Phoksundo Lake",
+        "kind": "trek",
+        "altitudeM": 3611,
+        "description": "Climb the ridge beside Nepal's highest waterfall, then the lake appears — a color you won't believe is real."
+      },
+      {
+        "day": 6,
+        "title": "Rest at Phoksundo",
+        "kind": "acclimatization",
+        "altitudeM": 3611,
+        "description": "Explore Ringmo village and the lakeside Bon monastery of Tshowa."
+      },
+      {
+        "day": 7,
+        "title": "Phoksundo to Sallaghari",
+        "kind": "trek",
+        "altitudeM": 3630,
+        "description": "Walk the legendary cliff trail cut into the rock above the lake's western shore."
+      },
+      {
+        "day": 8,
+        "title": "Sallaghari to Kang La base camp",
+        "kind": "trek",
+        "altitudeM": 4500,
+        "description": "Climb into the high glacial valley beneath the pass."
+      },
+      {
+        "day": 9,
+        "title": "Cross the Kang La to Shey Gompa",
+        "kind": "summit",
+        "altitudeM": 4343,
+        "description": "Over the Kang La (5,360m) with Dhaulagiri and the Tibetan plateau behind you, down to the 'Crystal Monastery'."
+      },
+      {
+        "day": 10,
+        "title": "Rest at Shey Gompa",
+        "kind": "acclimatization",
+        "altitudeM": 4343,
+        "description": "Join pilgrims circling Crystal Mountain — the holiest peak in Dolpo."
+      },
+      {
+        "day": 11,
+        "title": "Shey to Saldang",
+        "kind": "trek",
+        "altitudeM": 3770,
+        "description": "Cross the Saldang La to Dolpo's largest village, strung along a ridge above golden barley fields."
+      },
+      {
+        "day": 12,
+        "title": "Explore Saldang",
+        "kind": "acclimatization",
+        "altitudeM": 3770,
+        "description": "Visit Yangjer Gompa, the richest monastery in the region, and take tea with village families."
+      },
+      {
+        "day": 13,
+        "title": "Saldang to Namgung",
+        "kind": "trek",
+        "altitudeM": 4360,
+        "description": "Walk the high trail past hermitage caves to the tiny settlement of Namgung."
+      },
+      {
+        "day": 14,
+        "title": "Cross the Jeng La to Dho Tarap",
+        "kind": "summit",
+        "altitudeM": 4080,
+        "description": "Your second 5,000m pass (5,110m), descending into the fabled Tarap valley."
+      },
+      {
+        "day": 15,
+        "title": "Rest in Dho Tarap",
+        "kind": "acclimatization",
+        "altitudeM": 4080,
+        "description": "A full day among the chortens, monasteries and barley fields of one of Earth's highest permanent settlements."
+      },
+      {
+        "day": 16,
+        "title": "Dho Tarap to Tarap Khola gorge",
+        "kind": "trek",
+        "altitudeM": 3600,
+        "description": "Descend into one of the Himalaya's most dramatic gorges, camp on a ledge above the river."
+      },
+      {
+        "day": 17,
+        "title": "Gorge to Khanigaon",
+        "kind": "trek",
+        "altitudeM": 2950,
+        "description": "Canyon walls give way to forest as you lose altitude fast."
+      },
+      {
+        "day": 18,
+        "title": "Khanigaon to Tarakot",
+        "kind": "trek",
+        "altitudeM": 2537,
+        "description": "Reach the old fortress town that once taxed the salt caravans from Tibet."
+      },
+      {
+        "day": 19,
+        "title": "Tarakot to Dunai",
+        "kind": "trek",
+        "altitudeM": 2140,
+        "description": "Follow the Thuli Bheri back to Dunai's airstrip-side lodges."
+      },
+      {
+        "day": 20,
+        "title": "Dunai to Juphal",
+        "kind": "trek",
+        "altitudeM": 2475,
+        "description": "A short climb to the airstrip and a final camp above the clouds."
+      },
+      {
+        "day": 21,
+        "title": "Fly to Kathmandu via Nepalgunj",
+        "kind": "travel",
+        "altitudeM": 1400,
+        "description": "Two flights and a world away — back to Kathmandu."
+      }
+    ],
+    "coordinates": [
+      29.3,
+      82.95
+    ],
+    "path": [
+      [
+        28.053,
+        81.62
+      ],
+      [
+        29.24,
+        82.12
+      ],
+      [
+        29.293,
+        82.174
+      ],
+      [
+        29.235,
+        82.183
+      ],
+      [
+        29.183,
+        82.97
+      ],
+      [
+        29.183,
+        82.97
+      ],
+      [
+        29.207,
+        82.938
+      ],
+      [
+        29.3,
+        83
+      ],
+      [
+        29.393,
+        83.134
+      ],
+      [
+        29.393,
+        83.134
+      ],
+      [
+        29.5,
+        83.16
+      ],
+      [
+        29.5,
+        83.16
+      ],
+      [
+        29.46,
+        83.08
+      ],
+      [
+        29.29,
+        83.05
+      ],
+      [
+        29.29,
+        83.05
+      ],
+      [
+        29.22,
+        83.02
+      ],
+      [
+        29.12,
+        82.95
+      ],
+      [
+        29.05,
+        82.82
+      ],
+      [
+        29.24,
+        82.12
+      ],
+      [
+        29.345,
+        82.361
+      ],
+      [
+        27.7172,
+        85.324
+      ]
+    ],
+    "image": "/images/treks/upper-dolpo.jpg",
+    "gallery": [
+      "/images/scenes/lake.jpg",
+      "/images/scenes/monastery.jpg",
+      "/images/scenes/stars.jpg"
+    ],
+    "tags": [
+      "remote",
+      "restricted",
+      "cultural"
+    ]
+  },
+  {
+    "slug": "lower-dolpo",
+    "name": "Lower Dolpo",
+    "region": "Lower Dolpo, Shey Phoksundo",
+    "durationDays": 15,
+    "maxAltitudeM": 5190,
+    "difficulty": "Challenging",
+    "bestSeason": [
+      "May–Oct"
+    ],
+    "groupSize": "2–8",
+    "summary": "The compact Dolpo expedition — two weeks across the Numa La and Baga La to the mythic Tarap valley and the shores of Phoksundo, in the rain-shadow behind Dhaulagiri where monsoon never arrives.",
+    "highlights": [
+      "Cross the Numa La (5,190m) and Baga La (5,070m)",
+      "Phoksundo Lake and Nepal's highest waterfall",
+      "Dho Tarap — one of the highest permanent settlements on Earth",
+      "Rain-shadow trekking: good weather when the rest of Nepal is in monsoon"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Fly to Nepalgunj",
+        "kind": "travel",
+        "altitudeM": 150,
+        "description": "Fly to the Terai and prepare for the mountains."
+      },
+      {
+        "day": 2,
+        "title": "Fly to Juphal, trek to Dunai",
+        "kind": "travel",
+        "altitudeM": 2140,
+        "description": "The spectacular short flight to Juphal, then down to the Thuli Bheri river."
+      },
+      {
+        "day": 3,
+        "title": "Dunai to Tarakot",
+        "kind": "trek",
+        "altitudeM": 2537,
+        "description": "Walk upstream to the medieval fortress village of Tarakot."
+      },
+      {
+        "day": 4,
+        "title": "Tarakot to Laini",
+        "kind": "trek",
+        "altitudeM": 3160,
+        "description": "Enter the Tarap gorge, camping by the river beneath towering cliffs."
+      },
+      {
+        "day": 5,
+        "title": "Laini to Nawarpani",
+        "kind": "trek",
+        "altitudeM": 3545,
+        "description": "A tougher day of ascents on trails cut into the rock."
+      },
+      {
+        "day": 6,
+        "title": "Nawarpani to Dho Tarap",
+        "kind": "trek",
+        "altitudeM": 4080,
+        "description": "The gorge opens suddenly into the wide, golden Tarap valley."
+      },
+      {
+        "day": 7,
+        "title": "Acclimatization in Dho Tarap",
+        "kind": "acclimatization",
+        "altitudeM": 4080,
+        "description": "Rest among the monasteries and mani walls; visit Bon and Buddhist gompas."
+      },
+      {
+        "day": 8,
+        "title": "Dho Tarap to Numa La base camp",
+        "kind": "trek",
+        "altitudeM": 4440,
+        "description": "A short climb to the meadow camp beneath tomorrow's pass."
+      },
+      {
+        "day": 9,
+        "title": "Cross the Numa La to Pelung Tang",
+        "kind": "summit",
+        "altitudeM": 4465,
+        "description": "Over the Numa La (5,190m) — Dhaulagiri's white wall fills the southern sky."
+      },
+      {
+        "day": 10,
+        "title": "Cross the Baga La to Dajok Tang",
+        "kind": "summit",
+        "altitudeM": 4080,
+        "description": "A second 5,000m pass (5,070m) with views into the Phoksundo basin."
+      },
+      {
+        "day": 11,
+        "title": "Dajok Tang to Phoksundo Lake",
+        "kind": "trek",
+        "altitudeM": 3611,
+        "description": "Descend through pine forest to the turquoise shore and Ringmo village."
+      },
+      {
+        "day": 12,
+        "title": "Rest at Phoksundo",
+        "kind": "acclimatization",
+        "altitudeM": 3611,
+        "description": "A day beside the lake — walk the shoreline, visit the gompa, breathe."
+      },
+      {
+        "day": 13,
+        "title": "Phoksundo to Chhepka",
+        "kind": "trek",
+        "altitudeM": 2687,
+        "description": "Down past the great waterfall into the forests of the Suli Gad."
+      },
+      {
+        "day": 14,
+        "title": "Chhepka to Juphal",
+        "kind": "trek",
+        "altitudeM": 2475,
+        "description": "Final walk to the airstrip and celebration with the crew."
+      },
+      {
+        "day": 15,
+        "title": "Fly to Kathmandu via Nepalgunj",
+        "kind": "travel",
+        "altitudeM": 1400,
+        "description": "Return to the capital."
+      }
+    ],
+    "coordinates": [
+      29.22,
+      83.05
+    ],
+    "path": [
+      [
+        28.053,
+        81.62
+      ],
+      [
+        29.24,
+        82.12
+      ],
+      [
+        29.05,
+        82.82
+      ],
+      [
+        29.08,
+        82.88
+      ],
+      [
+        29.1,
+        82.95
+      ],
+      [
+        29.29,
+        83.05
+      ],
+      [
+        29.29,
+        83.05
+      ],
+      [
+        29.36,
+        83.13
+      ],
+      [
+        29.39,
+        83.18
+      ],
+      [
+        29.32,
+        83.16
+      ],
+      [
+        29.183,
+        82.97
+      ],
+      [
+        29.183,
+        82.97
+      ],
+      [
+        29.293,
+        82.174
+      ],
+      [
+        29.345,
+        82.361
+      ],
+      [
+        27.7172,
+        85.324
+      ]
+    ],
+    "image": "/images/treks/lower-dolpo.jpg",
+    "gallery": [
+      "/images/scenes/lake.jpg",
+      "/images/scenes/valley.jpg",
+      "/images/scenes/trail.jpg"
+    ],
+    "tags": [
+      "remote",
+      "restricted",
+      "lakes"
+    ]
+  },
+  {
+    "slug": "limi-valley",
+    "name": "Limi Valley",
+    "region": "Limi Valley, Humla",
+    "durationDays": 17,
+    "maxAltitudeM": 4940,
+    "difficulty": "Strenuous",
+    "bestSeason": [
+      "May–Oct"
+    ],
+    "groupSize": "2–8",
+    "summary": "The far northwest — a loop from Simikot to the Tibetan border and through Limi's thousand-year-old villages, where snow leopards outnumber trekkers and the Rinchenling monastery has stood since the 11th century.",
+    "highlights": [
+      "Halji's Rinchenling Gompa — among Nepal's oldest monasteries",
+      "Follow the Karnali, Nepal's longest river, to its source at Tibet",
+      "Cross the Nara La (4,620m) and Nyalu La (4,940m)",
+      "Kermi's natural hot springs",
+      "Snow leopard, blue sheep and wolf country"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Fly to Nepalgunj",
+        "kind": "travel",
+        "altitudeM": 150,
+        "description": "Fly to the western Terai."
+      },
+      {
+        "day": 2,
+        "title": "Fly to Simikot, trek to Dharapuri",
+        "kind": "travel",
+        "altitudeM": 2300,
+        "description": "Land on Humla's ridge-top airstrip and begin walking through pine forest."
+      },
+      {
+        "day": 3,
+        "title": "Dharapuri to Kermi",
+        "kind": "trek",
+        "altitudeM": 2870,
+        "description": "Follow the Karnali gorge to Kermi — soak in the hot springs beside the river."
+      },
+      {
+        "day": 4,
+        "title": "Kermi to Yalbang",
+        "kind": "trek",
+        "altitudeM": 3020,
+        "description": "Pass barley fields to Yalbang's great Namkha Khyung Dzong monastery."
+      },
+      {
+        "day": 5,
+        "title": "Yalbang to Tumkot",
+        "kind": "trek",
+        "altitudeM": 3380,
+        "description": "The trail climbs above the river into drier, Tibetan-feeling country."
+      },
+      {
+        "day": 6,
+        "title": "Tumkot to Yari",
+        "kind": "trek",
+        "altitudeM": 3700,
+        "description": "A short climb to the last village before the pass, beneath the Himalaya's western ramparts."
+      },
+      {
+        "day": 7,
+        "title": "Cross the Nara La to Hilsa",
+        "kind": "summit",
+        "altitudeM": 3720,
+        "description": "Over the Nara La (4,620m) and down to Hilsa on the Tibetan border, the Karnali roaring through a cleft in the rock."
+      },
+      {
+        "day": 8,
+        "title": "Hilsa to Manepeme",
+        "kind": "trek",
+        "altitudeM": 3990,
+        "description": "Turn east into the Limi valley along the ancient salt-trade route."
+      },
+      {
+        "day": 9,
+        "title": "Manepeme to Til",
+        "kind": "trek",
+        "altitudeM": 4000,
+        "description": "Reach Til, Limi's first village — stone houses, barley fields and glacier views."
+      },
+      {
+        "day": 10,
+        "title": "Til to Halji",
+        "kind": "trek",
+        "altitudeM": 3670,
+        "description": "Walk to Halji and the 11th-century Rinchenling Gompa, still lit by butter lamps."
+      },
+      {
+        "day": 11,
+        "title": "Halji to Jang",
+        "kind": "trek",
+        "altitudeM": 3930,
+        "description": "Continue to Jang, the highest and remotest of Limi's three villages."
+      },
+      {
+        "day": 12,
+        "title": "Rest in the Limi valley",
+        "kind": "acclimatization",
+        "altitudeM": 3930,
+        "description": "Explore the valley — hot springs above Til, hermit caves, and villages unchanged for centuries."
+      },
+      {
+        "day": 13,
+        "title": "Jang to Talung",
+        "kind": "trek",
+        "altitudeM": 4370,
+        "description": "Climb to the last camp before the Nyalu La, in true wilderness."
+      },
+      {
+        "day": 14,
+        "title": "Cross the Nyalu La to Selima Tsho",
+        "kind": "summit",
+        "altitudeM": 4630,
+        "description": "The trek's highest point (4,940m) — a panorama from Api and Saipal to the Tibetan plateau — then camp by the sacred lake."
+      },
+      {
+        "day": 15,
+        "title": "Selima Tsho to Kermi",
+        "kind": "trek",
+        "altitudeM": 2870,
+        "description": "A long descent back to the Karnali — and another soak in the hot springs."
+      },
+      {
+        "day": 16,
+        "title": "Kermi to Simikot",
+        "kind": "trek",
+        "altitudeM": 2910,
+        "description": "Climb back to Simikot for a farewell night above the clouds."
+      },
+      {
+        "day": 17,
+        "title": "Fly to Kathmandu via Nepalgunj",
+        "kind": "travel",
+        "altitudeM": 1400,
+        "description": "Return to the capital from the far edge of Nepal."
+      }
+    ],
+    "coordinates": [
+      30.1,
+      81.63
+    ],
+    "path": [
+      [
+        28.053,
+        81.62
+      ],
+      [
+        29.97,
+        81.82
+      ],
+      [
+        30.03,
+        81.78
+      ],
+      [
+        30.08,
+        81.76
+      ],
+      [
+        30.12,
+        81.76
+      ],
+      [
+        30.15,
+        81.78
+      ],
+      [
+        30.03,
+        81.47
+      ],
+      [
+        30.08,
+        81.58
+      ],
+      [
+        30.07,
+        81.54
+      ],
+      [
+        30.07,
+        81.53
+      ],
+      [
+        30.09,
+        81.58
+      ],
+      [
+        30.09,
+        81.58
+      ],
+      [
+        30.15,
+        81.65
+      ],
+      [
+        30.2,
+        81.7
+      ],
+      [
+        30.03,
+        81.78
+      ],
+      [
+        29.97,
+        81.82
+      ],
+      [
+        27.7172,
+        85.324
+      ]
+    ],
+    "image": "/images/treks/limi-valley.jpg",
+    "gallery": [
+      "/images/scenes/monastery.jpg",
+      "/images/scenes/stars.jpg",
+      "/images/scenes/valley.jpg"
+    ],
+    "tags": [
+      "remote",
+      "restricted",
+      "cultural"
+    ]
+  }
+]
