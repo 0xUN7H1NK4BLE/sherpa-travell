@@ -2,18 +2,27 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import TrekForm from "@/components/admin/TrekForm";
+import AdminOverview from "@/components/admin/AdminOverview";
+import TrekManager from "@/components/admin/TrekManager";
 import GalleryAdmin from "@/components/admin/GalleryAdmin";
+import ConfirmDialog from "@/components/admin/ConfirmDialog";
 import type { Trek } from "@/data/treks";
 
-type Mode = { kind: "list" } | { kind: "new" } | { kind: "edit"; trek: Trek };
+type Tab = "overview" | "treks" | "gallery";
+
+const tabs: { id: Tab; label: string }[] = [
+  { id: "overview", label: "Overview" },
+  { id: "treks", label: "Treks" },
+  { id: "gallery", label: "Gallery" },
+];
 
 export default function AdminPage() {
   const router = useRouter();
   const [treks, setTreks] = useState<Trek[] | null>(null);
-  const [mode, setMode] = useState<Mode>({ kind: "list" });
+  const [tab, setTab] = useState<Tab>("overview");
   const [error, setError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [confirmTrek, setConfirmTrek] = useState<Trek | null>(null);
 
   const refresh = useCallback(async () => {
     const res = await fetch("/api/treks", { cache: "no-store" });
@@ -38,8 +47,9 @@ export default function AdminPage() {
     router.refresh();
   }
 
-  async function onDelete(trek: Trek) {
-    if (!window.confirm(`Delete "${trek.name}"? This cannot be undone.`)) return;
+  async function onDeleteConfirmed() {
+    const trek = confirmTrek;
+    if (!trek) return;
     setDeleting(trek.slug);
     setError(null);
     try {
@@ -49,6 +59,7 @@ export default function AdminPage() {
         setError(data.error ?? "Delete failed");
         return;
       }
+      setConfirmTrek(null);
       await refresh();
     } catch {
       setError("Delete failed");
@@ -57,14 +68,9 @@ export default function AdminPage() {
     }
   }
 
-  const saved = async () => {
-    await refresh();
-    setMode({ kind: "list" });
-  };
-
   return (
     <section className="border-b border-line">
-      <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
+      <div className="mx-auto max-w-6xl px-5 py-14 md:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="mb-3 flex items-center gap-3 text-xs font-medium uppercase tracking-eyebrow text-saffron">
@@ -72,26 +78,18 @@ export default function AdminPage() {
               Sherpa Treks Nepal
             </p>
             <h1 className="font-display text-4xl font-light tracking-tight md:text-5xl">
-              Treks admin
+              Dashboard
             </h1>
             <p className="mt-3 text-sm text-mist">
-              {treks ? `${treks.length} treks on the site` : "Loading…"}
+              {treks ? `${treks.length} treks live on the site` : "Loading…"}
             </p>
           </div>
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setMode({ kind: "new" })}
-              className="rounded-full bg-saffron px-5 py-2.5 text-sm font-medium text-night transition-colors hover:bg-snow"
-            >
-              + New trek
-            </button>
-            <button
-              onClick={logout}
-              className="text-xs text-mist underline underline-offset-4 hover:text-snow"
-            >
-              Sign out
-            </button>
-          </div>
+          <button
+            onClick={logout}
+            className="rounded-full border border-line-strong px-5 py-2.5 text-sm font-medium text-snow transition-colors hover:border-red-400/50 hover:text-red-300"
+          >
+            Sign out
+          </button>
         </div>
 
         {error && (
@@ -100,69 +98,63 @@ export default function AdminPage() {
           </p>
         )}
 
-        {mode.kind === "new" && (
+        <div
+          className="mt-10 flex gap-1.5 overflow-x-auto rounded-full border border-line bg-night/40 p-1.5"
+          role="tablist"
+          aria-label="Admin sections"
+        >
+          {tabs.map((t) => {
+            const active = tab === t.id;
+            return (
+              <button
+                key={t.id}
+                role="tab"
+                aria-selected={active}
+                onClick={() => setTab(t.id)}
+                className={`flex-1 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${
+                  active
+                    ? "bg-saffron text-night"
+                    : "text-mist hover:text-snow"
+                }`}
+              >
+                {t.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {tab === "overview" && (
+          <AdminOverview
+            treks={treks}
+            onNewTrek={() => setTab("treks")}
+            onGallery={() => setTab("gallery")}
+          />
+        )}
+
+        {tab === "treks" && (
+          <TrekManager
+            treks={treks}
+            onDelete={(trek) => setConfirmTrek(trek)}
+            deleting={deleting}
+          />
+        )}
+
+        {tab === "gallery" && treks && (
           <div className="mt-10">
-            <TrekForm initial={null} onSaved={saved} onCancel={() => setMode({ kind: "list" })} />
+            <GalleryAdmin treks={treks} />
           </div>
         )}
-
-        {mode.kind === "edit" && (
-          <div className="mt-10">
-            <TrekForm
-              initial={mode.trek}
-              onSaved={saved}
-              onCancel={() => setMode({ kind: "list" })}
-            />
-          </div>
-        )}
-
-        {mode.kind === "list" && (
-          <div className="mt-10 grid grid-cols-1 gap-4">
-            {treks === null ? (
-              <p className="text-sm text-mist">Loading…</p>
-            ) : (
-              treks.map((trek) => (
-                <div
-                  key={trek.slug}
-                  className="flex items-center gap-4 rounded-2xl border border-line bg-night/40 p-4"
-                >
-                  <img
-                    src={trek.image}
-                    alt=""
-                    className="h-16 w-24 shrink-0 rounded-lg object-cover"
-                  />
-                  <div className="min-w-0 flex-1">
-                    <h2 className="truncate font-display text-lg font-light">
-                      {trek.name}
-                    </h2>
-                    <p className="text-xs text-mist">
-                      {trek.region} · {trek.durationDays} days · {trek.difficulty}
-                    </p>
-                    <p className="truncate text-xs text-mist/70">{trek.summary}</p>
-                  </div>
-                  <div className="flex shrink-0 gap-3">
-                    <button
-                      onClick={() => setMode({ kind: "edit", trek })}
-                      className="text-xs text-saffron underline underline-offset-4 hover:text-snow"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => void onDelete(trek)}
-                      disabled={deleting === trek.slug}
-                      className="text-xs text-red-400 underline underline-offset-4 hover:text-red-300 disabled:opacity-50"
-                    >
-                      {deleting === trek.slug ? "Deleting…" : "Delete"}
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        )}
-
-        {treks && <GalleryAdmin treks={treks} />}
       </div>
+
+      {confirmTrek && (
+        <ConfirmDialog
+          title={`Delete "${confirmTrek.name}"?`}
+          message="This removes the trek from the site and cannot be undone. The itinerary, gallery and route data for it will be lost."
+          busy={deleting === confirmTrek.slug}
+          onConfirm={() => void onDeleteConfirmed()}
+          onCancel={() => setConfirmTrek(null)}
+        />
+      )}
     </section>
   );
 }

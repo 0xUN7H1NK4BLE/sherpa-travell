@@ -83,11 +83,14 @@ export default function TrekForm({
       );
       const data = await res.json();
       if (!res.ok || !data.ok) {
-        const msg =
-          typeof data.error === "string"
-            ? data.error
-            : JSON.stringify(data.error ?? data.issues ?? null);
-        setError(msg);
+        const issues = data.issues as Record<string, unknown> | undefined;
+        if (issues && Object.keys(issues).length > 0) {
+          const lines = Object.entries(issues)
+            .map(([field, val]) => `${field}: ${Array.isArray(val) ? val.join(", ") : String(val)}`);
+          setError(lines.join("\n"));
+        } else {
+          setError(typeof data.error === "string" ? data.error : "Save failed");
+        }
         setSaving(false);
         return;
       }
