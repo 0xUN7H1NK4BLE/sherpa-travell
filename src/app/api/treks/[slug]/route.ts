@@ -2,6 +2,7 @@ import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { trekSchema } from "@/lib/trekSchema";
 import { readTreks, writeTreks } from "@/lib/trekStore";
+import { deleteBlobRefs } from "@/lib/blobCleanup";
 
 export async function PUT(request: Request, ctx: RouteContext<"/api/treks/[slug]">) {
   if (!(await isAuthenticated())) {
@@ -39,7 +40,8 @@ export async function DELETE(_request: Request, ctx: RouteContext<"/api/treks/[s
   if (idx === -1) {
     return Response.json({ ok: false, error: "Trek not found" }, { status: 404 });
   }
-  treks.splice(idx, 1);
+  const [trek] = treks.splice(idx, 1);
   await writeTreks(treks);
+  await deleteBlobRefs([trek.image, ...(trek.gallery ?? [])]);
   return Response.json({ ok: true });
 }

@@ -2,6 +2,7 @@ import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { galleryFilmSchema, gallerySceneSchema } from "@/lib/gallerySchema";
 import { readGallery, writeGallery } from "@/lib/galleryStore";
+import { deleteBlobRefs } from "@/lib/blobCleanup";
 
 const kindSchema = z.enum(["scene", "video"]);
 
@@ -61,19 +62,24 @@ export async function DELETE(request: Request, ctx: RouteContext<"/api/gallery/[
   const content = await readGallery();
 
   if (kind.data === "scene") {
+    const removed = content.scenes.find((s) => s.id === id);
     const next = content.scenes.filter((s) => s.id !== id);
     if (next.length === content.scenes.length) {
       return Response.json({ ok: false, error: "Scene not found" }, { status: 404 });
     }
     content.scenes = next;
+    await writeGallery(content);
+    await deleteBlobRefs(removed?.src);
+    return Response.json({ ok: true });
   } else {
+    const removed = content.videos.find((v) => v.id === id);
     const next = content.videos.filter((v) => v.id !== id);
     if (next.length === content.videos.length) {
       return Response.json({ ok: false, error: "Video not found" }, { status: 404 });
     }
     content.videos = next;
+    await writeGallery(content);
+    await deleteBlobRefs([removed?.src, removed?.poster]);
+    return Response.json({ ok: true });
   }
-
-  await writeGallery(content);
-  return Response.json({ ok: true });
 }
