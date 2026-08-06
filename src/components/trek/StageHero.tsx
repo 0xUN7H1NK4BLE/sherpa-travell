@@ -65,7 +65,7 @@ export default function StageHero({ trek }: { trek: Trek }) {
 
       <motion.div
         style={reduce ? undefined : { x: contentX }}
-        className="relative mx-auto w-full max-w-7xl px-5 pt-44 pb-20 md:px-8 md:pb-28"
+        className="relative mx-auto w-full max-w-7xl px-5 pt-28 pb-20 md:px-8 md:pb-28"
       >
         <div className="grid gap-12 lg:grid-cols-[1.5fr_0.85fr] lg:items-end lg:gap-16">
           <div>
@@ -85,7 +85,7 @@ export default function StageHero({ trek }: { trek: Trek }) {
               {trek.region} · {formatCoordinates(trek.coordinates)}
             </p>
 
-            <h1 className="max-w-5xl font-display text-6xl leading-[0.95] font-light tracking-tight text-balance md:text-8xl lg:text-9xl">
+            <h1 className="max-w-5xl font-display text-5xl leading-[0.95] font-light tracking-tight text-balance sm:text-6xl md:text-8xl lg:text-9xl">
               {words.join(" ")}{" "}
               <em className="text-gradient not-italic">{last}</em>
             </h1>

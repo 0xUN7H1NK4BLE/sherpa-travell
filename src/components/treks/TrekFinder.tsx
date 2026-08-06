@@ -49,11 +49,16 @@ function FilterGroup({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center gap-2.5">
-      <span className="hidden text-[10px] uppercase tracking-[0.18em] text-mist/70 xl:inline">
-        {label}
+    <div className="flex flex-col gap-2.5 xl:flex-row xl:items-center xl:gap-2.5">
+      <span className="flex items-center gap-2.5">
+        <span className="hidden text-[10px] uppercase tracking-[0.18em] text-mist/70 xl:inline">
+          {label}
+        </span>
+        <span className="h-px w-6 bg-saffron/40 xl:hidden" aria-hidden />
       </span>
-      <div className="flex flex-wrap gap-1.5">{children}</div>
+      <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden xl:flex-wrap xl:overflow-visible xl:pb-0">
+        {children}
+      </div>
     </div>
   );
 }
@@ -116,11 +121,11 @@ export default function TrekFinder({ treks }: { treks: Trek[] }) {
     <div>
       <div
         className={cn(
-          "sticky top-26 z-40 border-y border-line bg-night/85 backdrop-blur-md transition-transform duration-300",
+          "sticky top-16 z-40 border-y border-line bg-night/85 backdrop-blur-md transition-transform duration-300 md:top-26",
           hidden && "-translate-y-[calc(100%+1px)]",
         )}
       >
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-3.5 md:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-x-8 gap-y-3 px-5 py-3.5 md:px-8 xl:flex-row xl:flex-wrap xl:items-center">
           <FilterGroup label="Region">
             {regions.map((region) => (
               <Chip

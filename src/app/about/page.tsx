@@ -27,7 +27,7 @@ export default function AboutPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/70 via-night/85 to-night"
           aria-hidden
         />
-        <div className="relative mx-auto max-w-7xl px-5 pt-44 pb-24 md:px-8 md:pt-52 md:pb-32">
+        <div className="relative mx-auto max-w-7xl px-5 pt-32 pb-24 md:px-8 md:pt-52 md:pb-32">
           <Reveal>
             <Eyebrow className="mb-6">About us</Eyebrow>
             <h1 className="max-w-3xl font-display text-5xl leading-[1.02] font-light tracking-tight text-balance md:text-7xl">

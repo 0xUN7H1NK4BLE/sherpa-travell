@@ -33,18 +33,18 @@ export default function Nav() {
           : "bg-night/55 backdrop-blur-md",
       )}
     >
-      <div className="mx-auto flex h-26 max-w-7xl items-center justify-between px-5 md:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-26 md:px-8">
         <Link
           href="/"
           aria-label="Sherpa Treks Nepal — home"
-          className="group flex items-center gap-2.5"
+          className="group flex items-center gap-2 md:gap-2.5"
         >
-          <SiteLogo variant="dark" className="h-24 w-24" />
+          <SiteLogo variant="dark" className="h-10 w-10 md:h-24 md:w-24" />
           <span className="flex items-baseline gap-1.5">
             <span className="font-display text-xl tracking-tight text-snow transition-colors group-hover:text-saffron">
               Sherpa Treks
             </span>
-            <span className="text-[10px] font-semibold uppercase tracking-eyebrow text-saffron">
+            <span className="hidden text-[10px] font-semibold uppercase tracking-eyebrow text-saffron sm:inline">
               Nepal
             </span>
           </span>
@@ -115,7 +115,7 @@ export default function Nav() {
             className="border-b border-line bg-night/95 backdrop-blur-md md:hidden"
             aria-label="Mobile"
           >
-            <div className="flex flex-col gap-1 px-5 py-4">
+            <div className="flex flex-col gap-1 px-5 py-4 [padding-bottom:max(1rem,env(safe-area-inset-bottom))]">
               {site.nav.map((item) => (
                 <Link
                   key={item.href}

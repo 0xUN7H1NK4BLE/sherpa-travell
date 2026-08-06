@@ -55,7 +55,7 @@ export default function TrekStage({
   return (
     <article
       ref={ref}
-      className="relative flex h-screen min-h-[600px] snap-start items-end overflow-hidden"
+      className="relative flex min-h-[100svh] snap-start items-end overflow-hidden"
     >
       <motion.div className="absolute inset-0" aria-hidden>
         <motion.img
