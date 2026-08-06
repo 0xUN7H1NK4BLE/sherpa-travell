@@ -48,13 +48,20 @@ export async function POST(request: Request) {
 
   const bytes = Buffer.from(await file.arrayBuffer());
   const pathname = `uploads/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
-  const result = await put(pathname, bytes, {
-    access: "public",
-    token,
-    contentType: file.type,
-    addRandomSuffix: true,
-    allowOverwrite: true,
-  });
+  try {
+    const result = await put(pathname, bytes, {
+      access: "public",
+      token,
+      contentType: file.type,
+      addRandomSuffix: true,
+      allowOverwrite: true,
+    });
 
-  return Response.json({ ok: true, url: result.url });
+    return Response.json({ ok: true, url: result.url });
+  } catch (error) {
+    return Response.json(
+      { ok: false, error: (error as Error).message },
+      { status: 500 },
+    );
+  }
 }
