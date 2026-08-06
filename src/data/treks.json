@@ -1538,5 +1538,45 @@
       "restricted",
       "cultural"
     ]
+  },
+  {
+    "slug": "cleanup-trek-suzd",
+    "name": "Cleanup Test Trek",
+    "region": "E2E",
+    "durationDays": 3,
+    "maxAltitudeM": 3000,
+    "difficulty": "Moderate",
+    "bestSeason": [
+      "Mar"
+    ],
+    "groupSize": "2-10",
+    "summary": "temp",
+    "highlights": [
+      "x"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Day",
+        "description": "",
+        "altitudeM": 2800,
+        "kind": "trek"
+      }
+    ],
+    "coordinates": [
+      27.9,
+      86.9
+    ],
+    "path": [
+      [
+        27.9,
+        86.9
+      ]
+    ],
+    "image": "/api/blob?pathname=uploads%2F1786015159232-trek-cleanup2-D9ZZaoOMDDYTSvii22M3mUvKRSwzdD.png",
+    "gallery": [],
+    "tags": [
+      "remote"
+    ]
   }
 ]
