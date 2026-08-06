@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import type { ReactNode } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -79,35 +79,6 @@ export default function NepalMap({
   const popupRef = useRef<maplibregl.Popup | null>(null);
   const activeRef = useRef(activeSlug);
   const onSelectRef = useRef(onSelect);
-  const [mobile, setMobile] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
-    const update = () => setMobile(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
-  useEffect(() => {
-    const m = mapRef.current;
-    if (!m) return;
-    if (mobile) {
-      m.touchZoomRotate.disable();
-      m.touchPitch.disable();
-      m.dragPan.disable();
-      m.dragRotate.disable();
-      m.keyboard.disable();
-      m.scrollZoom.disable();
-    } else {
-      m.touchZoomRotate.enable();
-      m.touchPitch.enable();
-      m.dragPan.enable();
-      m.dragRotate.enable();
-      m.keyboard.enable();
-      m.scrollZoom.disable();
-    }
-  }, [mobile]);
   useEffect(() => {
     activeRef.current = activeSlug;
   }, [activeSlug]);
@@ -557,6 +528,13 @@ export default function NepalMap({
     });
   }, [closePopup]);
 
+  const mapsUrl = useMemo(() => {
+    const [lat, lng] = activeTrek
+      ? activeTrek.coordinates
+      : (NEPAL.slice().reverse() as [number, number]);
+    return `https://maps.google.com/?q=${lat},${lng}`;
+  }, [activeTrek]);
+
   return (
     <div className="relative h-full w-full">
       <div ref={containerRef} style={{ position: "absolute", inset: 0 }} />
@@ -568,6 +546,17 @@ export default function NepalMap({
         <MapButton onClick={() => zoomBy(1)} label="Zoom in">+</MapButton>
         <MapButton onClick={() => zoomBy(-1)} label="Zoom out">−</MapButton>
         <MapButton onClick={resetView} label="Reset view">⌂</MapButton>
+        <a
+          href={mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open in maps app"
+          title="Open in maps app"
+          className="flex h-8 items-center gap-1 rounded-lg border border-line bg-night/80 px-2 text-[11px] font-medium tracking-wide text-snow/80 backdrop-blur-sm transition-colors hover:border-line-strong hover:text-snow"
+        >
+          <OpenInMapsIcon />
+          Maps
+        </a>
       </div>
     </div>
   );
@@ -597,5 +586,24 @@ function MapButton({
     >
       {children}
     </button>
+  );
+}
+
+function OpenInMapsIcon() {
+  return (
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
   );
 }
