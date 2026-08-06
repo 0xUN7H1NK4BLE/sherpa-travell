@@ -1,7 +1,8 @@
-import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
+import { put } from "@vercel/blob";
 import { isAuthenticated } from "@/lib/adminAuth";
 
-const ALLOWED = ["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif"];
+const ALLOWED = new Set(["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif"]);
+const MAX_BYTES = 10 * 1024 * 1024;
 
 export async function POST(request: Request) {
   if (!(await isAuthenticated())) {
@@ -16,23 +17,44 @@ export async function POST(request: Request) {
       error: "BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN is not configured",
     }, { status: 500 });
   }
-  const body = (await request.json()) as HandleUploadBody;
+
+  let file: File;
   try {
-    const jsonResponse = await handleUpload({
-      body,
-      request,
-      token,
-      onBeforeGenerateToken: async () => ({
-        allowedContentTypes: ALLOWED,
-        maximumSizeInBytes: 10 * 1024 * 1024,
-      }),
-      onUploadCompleted: async () => {},
-    });
-    return Response.json(jsonResponse);
-  } catch (error) {
+    const formData = await request.formData();
+    const candidate = formData.get("file");
+    if (!(candidate instanceof File)) {
+      return Response.json({ ok: false, error: "No file provided" }, { status: 400 });
+    }
+    file = candidate;
+  } catch {
     return Response.json(
-      { ok: false, error: (error as Error).message },
-      { status: 400 },
+      { ok: false, error: "Expected multipart/form-data" },
+      { status: 415 },
     );
   }
+
+  if (!ALLOWED.has(file.type)) {
+    return Response.json(
+      { ok: false, error: `Content type ${file.type} not allowed` },
+      { status: 415 },
+    );
+  }
+  if (file.size > MAX_BYTES) {
+    return Response.json(
+      { ok: false, error: "File exceeds 10 MB limit" },
+      { status: 413 },
+    );
+  }
+
+  const bytes = Buffer.from(await file.arrayBuffer());
+  const pathname = `uploads/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
+  const result = await put(pathname, bytes, {
+    access: "public",
+    token,
+    contentType: file.type,
+    addRandomSuffix: true,
+    allowOverwrite: true,
+  });
+
+  return Response.json({ ok: true, url: result.url });
 }
