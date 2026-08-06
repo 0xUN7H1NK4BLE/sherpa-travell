@@ -2,18 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { useScroll } from "framer-motion";
 import AccentedTitle from "@/components/ui/AccentedTitle";
 import { dayKindLabel } from "@/data/treks";
 import { dayPlaces } from "@/data/dayViews";
 import type { ItineraryDay, Trek } from "@/data/treks";
 import { cn, dayGain, formatAltitude, oxygenAt } from "@/lib/utils";
 import { photoForTrek } from "@/data/trekPhotos";
-
-const TrekCinema = dynamic(() => import("@/components/map/TrekCinema"), {
-  ssr: false,
-  loading: () => <div className="h-full w-full bg-night" />,
-});
 
 const RouteMap = dynamic(() => import("@/components/trek/RouteMap"), {
   ssr: false,
@@ -211,7 +205,6 @@ function StageDay({
 
 export default function TrekStory({ trek }: { trek: Trek }) {
   const [active, setActive] = useState(0);
-  const [mapVisible, setMapVisible] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
   const journeyRef = useRef<HTMLDivElement>(null);
@@ -223,21 +216,6 @@ export default function TrekStory({ trek }: { trek: Trek }) {
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: journeyRef,
-    offset: ["start start", "end end"],
-  });
-
-  useEffect(() => {
-    const el = journeyRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setMapVisible(entry.isIntersecting),
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -260,15 +238,7 @@ export default function TrekStory({ trek }: { trek: Trek }) {
 
   return (
     <div id="journey" ref={journeyRef} className="relative">
-      {mapVisible && (
-        <div
-          className="pointer-events-none fixed inset-0 z-0 opacity-80"
-          aria-hidden
-        >
-          <TrekCinema trek={trek} progress={scrollYProgress} />
-        </div>
-      )}
-      {mapVisible && isDesktop && (
+      {isDesktop && (
         <aside className="fixed bottom-0 right-0 top-26 z-40 hidden w-[400px] flex-col border-l border-line bg-night-raised/90 backdrop-blur-md lg:flex">
           <div className="border-b border-line px-5 py-3">
             <div className="flex items-center justify-between">
