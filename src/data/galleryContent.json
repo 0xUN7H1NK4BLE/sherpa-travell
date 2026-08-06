@@ -59,10 +59,10 @@
     {
       "id": "live-test-scene",
       "src": "/images/scenes/stars.jpg",
-      "title": "Live Test",
-      "subtitle": "verification",
-      "alt": "test",
-      "credit": "test"
+      "title": "Live Test Renamed",
+      "subtitle": "v",
+      "alt": "t",
+      "credit": "t"
     }
   ],
   "videos": []
