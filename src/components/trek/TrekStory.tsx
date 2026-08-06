@@ -205,6 +205,7 @@ function StageDay({
 
 export default function TrekStory({ trek }: { trek: Trek }) {
   const [active, setActive] = useState(0);
+  const [mapVisible, setMapVisible] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
   const journeyRef = useRef<HTMLDivElement>(null);
@@ -216,6 +217,16 @@ export default function TrekStory({ trek }: { trek: Trek }) {
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    const el = journeyRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setMapVisible(entry.isIntersecting),
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -238,7 +249,7 @@ export default function TrekStory({ trek }: { trek: Trek }) {
 
   return (
     <div id="journey" ref={journeyRef} className="relative">
-      {isDesktop && (
+      {mapVisible && isDesktop && (
         <aside className="fixed bottom-0 right-0 top-26 z-40 hidden w-[400px] flex-col border-l border-line bg-night-raised/90 backdrop-blur-md lg:flex">
           <div className="border-b border-line px-5 py-3">
             <div className="flex items-center justify-between">
