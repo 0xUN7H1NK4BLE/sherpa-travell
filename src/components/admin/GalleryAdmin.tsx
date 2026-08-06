@@ -13,6 +13,7 @@ export default function GalleryAdmin({ treks }: { treks: Trek[] }) {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [version, setVersion] = useState(0);
+  const [pending, setPending] = useState<Editable[]>([]);
 
   const refresh = useCallback(async () => {
     const res = await fetch("/api/gallery", { cache: "no-store" });
@@ -47,6 +48,9 @@ export default function GalleryAdmin({ treks }: { treks: Trek[] }) {
         setError(data.error ?? "Save failed");
         return;
       }
+      if (isNew) {
+        setPending((p) => p.filter((x) => x.id !== item.id));
+      }
       await refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Save failed");
@@ -75,12 +79,13 @@ export default function GalleryAdmin({ treks }: { treks: Trek[] }) {
   }
 
   function add(kind: Kind) {
+    setError(null);
     const id = `${kind}-${Math.random().toString(36).slice(2, 8)}`;
     const item: Editable =
       kind === "scene"
-        ? { id, src: "", title: "New scene", subtitle: "", alt: "", credit: "" }
-        : { id, src: "", title: "New film", subtitle: "Field film", alt: "", credit: "Sherpa Treks Nepal" };
-    void save(kind, item, true);
+        ? { id, src: "", title: "", subtitle: "", alt: "", credit: "" }
+        : { id, src: "", title: "", subtitle: "Field film", alt: "", credit: "Sherpa Treks Nepal" };
+    setPending((p) => [...p, item]);
   }
 
   return (
@@ -133,7 +138,19 @@ export default function GalleryAdmin({ treks }: { treks: Trek[] }) {
                   onRemove={() => void remove("scene", scene.id)}
                 />
               ))}
-              {content.scenes.length === 0 && <Empty>No scenes yet.</Empty>}
+              {pending.map((item) =>
+                item.id.startsWith("scene-") ? (
+                  <SceneRow
+                    key={item.id}
+                    item={item as unknown as GalleryScene}
+                    busy={false}
+                    isNew
+                    onSave={(draft) => void save("scene", draft, true)}
+                    onRemove={() => setPending((p) => p.filter((x) => x.id !== item.id))}
+                  />
+                ) : null,
+              )}
+              {content.scenes.length === 0 && pending.length === 0 && <Empty>No scenes yet.</Empty>}
             </div>
           </div>
 
@@ -152,7 +169,20 @@ export default function GalleryAdmin({ treks }: { treks: Trek[] }) {
                   onRemove={() => void remove("video", video.id)}
                 />
               ))}
-              {content.videos.length === 0 && <Empty>No films yet.</Empty>}
+              {pending.map((item) =>
+                item.id.startsWith("video-") ? (
+                  <VideoRow
+                    key={item.id}
+                    item={item as unknown as GalleryFilm}
+                    treks={treks}
+                    busy={false}
+                    isNew
+                    onSave={(draft) => void save("video", draft, true)}
+                    onRemove={() => setPending((p) => p.filter((x) => x.id !== item.id))}
+                  />
+                ) : null,
+              )}
+              {content.videos.length === 0 && pending.length === 0 && <Empty>No films yet.</Empty>}
             </div>
           </div>
         </div>
@@ -175,11 +205,13 @@ const field =
 function SceneRow({
   item,
   busy,
+  isNew = false,
   onSave,
   onRemove,
 }: {
   item: GalleryScene;
   busy: boolean;
+  isNew?: boolean;
   onSave: (item: GalleryScene, isNew: boolean) => void;
   onRemove: () => void;
 }) {
@@ -225,7 +257,7 @@ function SceneRow({
         busy={busy}
         dirty={dirty}
         hasContent={draft.src.length > 0 && draft.title.length > 0}
-        onSave={() => onSave(draft, false)}
+        onSave={() => onSave(draft, isNew)}
         onRemove={onRemove}
       />
     </div>
@@ -236,12 +268,14 @@ function VideoRow({
   item,
   treks,
   busy,
+  isNew = false,
   onSave,
   onRemove,
 }: {
   item: GalleryFilm;
   treks: Trek[];
   busy: boolean;
+  isNew?: boolean;
   onSave: (item: GalleryFilm, isNew: boolean) => void;
   onRemove: () => void;
 }) {
@@ -307,7 +341,7 @@ function VideoRow({
         busy={busy}
         dirty={dirty}
         hasContent={draft.src.length > 0 && draft.title.length > 0}
-        onSave={() => onSave(draft, false)}
+        onSave={() => onSave(draft, isNew)}
         onRemove={onRemove}
       />
     </div>
