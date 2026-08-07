@@ -3,6 +3,23 @@ import { z } from "zod";
 export const dayKindSchema = z.enum(["trek", "acclimatization", "travel", "summit"]);
 export const difficultySchema = z.enum(["Moderate", "Challenging", "Strenuous"]);
 export const tagSchema = z.enum(["remote", "classic", "lakes", "restricted", "cultural"]);
+export const placeKindSchema = z.enum([
+  "city",
+  "village",
+  "peak",
+  "pass",
+  "lake",
+  "monastery",
+  "basecamp",
+  "river",
+]);
+
+export const placeSchema = z.object({
+  name: z.string(),
+  lat: z.number(),
+  lng: z.number(),
+  kind: placeKindSchema.default("village"),
+});
 
 export const itineraryDaySchema = z.object({
   day: z.number().int().positive(),
@@ -10,6 +27,8 @@ export const itineraryDaySchema = z.object({
   description: z.string().default(""),
   altitudeM: z.number(),
   kind: dayKindSchema,
+  from: placeSchema,
+  to: placeSchema,
 });
 
 export const trekSchema = z.object({

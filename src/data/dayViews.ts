@@ -1,4 +1,7 @@
-// Per-day "street view" data for each trek's route map.
+import { treks } from "@/data/treks";
+import type { Trek } from "@/data/treks";
+
+
 // dayPlaces[slug][i] = the start and end place of itinerary day i.
 // trekLabels[slug] = named places rendered on the map (villages, peaks,
 // passes, lakes, monasteries) so the satellite view reads like a tour.
@@ -25,138 +28,9 @@ export interface PlaceLabel {
   kind: PlaceKind;
 }
 
-export const dayPlaces: Record<string, DayPlace[]> = {
-  "everest-base-camp": [
-    { from: "Kathmandu", to: "Phakding" },
-    { from: "Phakding", to: "Namche Bazaar" },
-    { from: "Namche Bazaar", to: "Namche Bazaar" },
-    { from: "Namche Bazaar", to: "Tengboche" },
-    { from: "Tengboche", to: "Dingboche" },
-    { from: "Dingboche", to: "Dingboche" },
-    { from: "Dingboche", to: "Lobuche" },
-    { from: "Lobuche", to: "Everest Base Camp" },
-    { from: "Kala Patthar", to: "Pheriche" },
-    { from: "Pheriche", to: "Namche Bazaar" },
-    { from: "Namche Bazaar", to: "Lukla" },
-    { from: "Lukla", to: "Kathmandu" },
-  ],
-  "manaslu-circuit": [
-    { from: "Kathmandu", to: "Machha Khola" },
-    { from: "Machha Khola", to: "Jagat" },
-    { from: "Jagat", to: "Deng" },
-    { from: "Deng", to: "Namrung" },
-    { from: "Namrung", to: "Samagaon" },
-    { from: "Samagaon", to: "Samagaon" },
-    { from: "Samagaon", to: "Samdo" },
-    { from: "Samdo", to: "Samdo" },
-    { from: "Samdo", to: "Dharamsala" },
-    { from: "Larkya La", to: "Bimthang" },
-    { from: "Bimthang", to: "Tilije" },
-    { from: "Dharapani", to: "Besisahar" },
-    { from: "Besisahar", to: "Kathmandu" },
-  ],
-  "kanchenjunga-base-camp": [
-    { from: "Kathmandu", to: "Ilam" },
-    { from: "Ilam", to: "Sekathum" },
-    { from: "Sekathum", to: "Amjilosa" },
-    { from: "Amjilosa", to: "Gyabla" },
-    { from: "Gyabla", to: "Ghunsa" },
-    { from: "Ghunsa", to: "Ghunsa" },
-    { from: "Ghunsa", to: "Khambachen" },
-    { from: "Khambachen", to: "Khambachen" },
-    { from: "Khambachen", to: "Lhonak" },
-    { from: "Lhonak", to: "Pangpema" },
-    { from: "Lhonak", to: "Ghunsa" },
-    { from: "Ghunsa", to: "Sele La camp" },
-    { from: "Sele La", to: "Tseram" },
-    { from: "Tseram", to: "Oktang" },
-    { from: "Tseram", to: "Tortong" },
-    { from: "Tortong", to: "Yamphudin" },
-    { from: "Yamphudin", to: "Khebang" },
-    { from: "Khebang", to: "Bhadrapur" },
-    { from: "Bhadrapur", to: "Kathmandu" },
-  ],
-  "langtang-valley": [
-    { from: "Kathmandu", to: "Syabrubesi" },
-    { from: "Syabrubesi", to: "Lama Hotel" },
-    { from: "Lama Hotel", to: "Langtang" },
-    { from: "Langtang", to: "Kyanjin Gompa" },
-    { from: "Kyanjin Gompa", to: "Tserko Ri" },
-    { from: "Kyanjin Gompa", to: "Lama Hotel" },
-    { from: "Lama Hotel", to: "Syabrubesi" },
-    { from: "Syabrubesi", to: "Kathmandu" },
-  ],
-  "gosaikunda-lake": [
-    { from: "Kathmandu", to: "Dhunche" },
-    { from: "Dhunche", to: "Sing Gompa" },
-    { from: "Sing Gompa", to: "Gosaikunda" },
-    { from: "Laurebina La", to: "Ghopte" },
-    { from: "Ghopte", to: "Kutumsang" },
-    { from: "Kutumsang", to: "Chisapani" },
-    { from: "Sundarijal", to: "Kathmandu" },
-  ],
-  "upper-dolpo": [
-    { from: "Kathmandu", to: "Nepalgunj" },
-    { from: "Nepalgunj", to: "Dunai" },
-    { from: "Dunai", to: "Chhepka" },
-    { from: "Chhepka", to: "Chunuwar" },
-    { from: "Chunuwar", to: "Phoksundo" },
-    { from: "Phoksundo", to: "Phoksundo" },
-    { from: "Phoksundo", to: "Sallaghari" },
-    { from: "Sallaghari", to: "Kang La" },
-    { from: "Kang La", to: "Shey Gompa" },
-    { from: "Shey Gompa", to: "Shey Gompa" },
-    { from: "Shey Gompa", to: "Saldang" },
-    { from: "Saldang", to: "Saldang" },
-    { from: "Saldang", to: "Namgung" },
-    { from: "Jeng La", to: "Dho Tarap" },
-    { from: "Dho Tarap", to: "Dho Tarap" },
-    { from: "Dho Tarap", to: "Tarap Khola" },
-    { from: "Tarap Khola", to: "Khanigaon" },
-    { from: "Khanigaon", to: "Tarakot" },
-    { from: "Tarakot", to: "Dunai" },
-    { from: "Dunai", to: "Juphal" },
-    { from: "Juphal", to: "Kathmandu" },
-  ],
-  "lower-dolpo": [
-    { from: "Kathmandu", to: "Nepalgunj" },
-    { from: "Nepalgunj", to: "Dunai" },
-    { from: "Dunai", to: "Tarakot" },
-    { from: "Tarakot", to: "Laini" },
-    { from: "Laini", to: "Nawarpani" },
-    { from: "Nawarpani", to: "Dho Tarap" },
-    { from: "Dho Tarap", to: "Dho Tarap" },
-    { from: "Dho Tarap", to: "Numa La" },
-    { from: "Numa La", to: "Pelung Tang" },
-    { from: "Baga La", to: "Dajok Tang" },
-    { from: "Dajok Tang", to: "Phoksundo" },
-    { from: "Phoksundo", to: "Phoksundo" },
-    { from: "Phoksundo", to: "Chhepka" },
-    { from: "Chhepka", to: "Juphal" },
-    { from: "Juphal", to: "Kathmandu" },
-  ],
-  "limi-valley": [
-    { from: "Kathmandu", to: "Nepalgunj" },
-    { from: "Nepalgunj", to: "Dharapuri" },
-    { from: "Dharapuri", to: "Kermi" },
-    { from: "Kermi", to: "Yalbang" },
-    { from: "Yalbang", to: "Tumkot" },
-    { from: "Tumkot", to: "Yari" },
-    { from: "Nara La", to: "Hilsa" },
-    { from: "Hilsa", to: "Manepeme" },
-    { from: "Manepeme", to: "Til" },
-    { from: "Til", to: "Halji" },
-    { from: "Halji", to: "Jang" },
-    { from: "Jang", to: "Jang" },
-    { from: "Jang", to: "Talung" },
-    { from: "Nyalu La", to: "Selima Tsho" },
-    { from: "Selima Tsho", to: "Kermi" },
-    { from: "Kermi", to: "Simikot" },
-    { from: "Simikot", to: "Kathmandu" },
-  ],
-};
 
-export const trekLabels: Record<string, PlaceLabel[]> = {
+
+export const scenicLabels: Record<string, PlaceLabel[]> = {
   "everest-base-camp": [
     { name: "Kathmandu", lat: 27.7172, lng: 85.324, kind: "city" },
     { name: "Lukla", lat: 27.6873, lng: 86.7314, kind: "village" },
@@ -301,6 +175,34 @@ export const trekLabels: Record<string, PlaceLabel[]> = {
 // trailWaypoints[slug][i] = intermediate points strictly between path[i-1]
 // and path[i] (day i's walking leg), as [lat, lng]. Empty for travel/acclimatization
 // days. Lets the camera follow the winding trail instead of a straight line.
+
+export const dayPlaces: Record<string, DayPlace[]> = Object.fromEntries(
+  treks.map((t: Trek) => [
+    t.slug,
+    t.itinerary.map((d) => ({
+      from: d.from.name,
+      to: d.to.name,
+    })),
+  ]),
+);
+
+export const trekLabels: Record<string, PlaceLabel[]> = Object.fromEntries(
+  treks.map((t: Trek) => {
+    const map = new Map<string, PlaceLabel>();
+    for (const d of t.itinerary) {
+      for (const p of [d.from, d.to]) {
+        if (p && p.name && !map.has(p.name)) {
+          map.set(p.name, { name: p.name, lat: p.lat, lng: p.lng, kind: p.kind });
+        }
+      }
+    }
+    for (const p of scenicLabels[t.slug] ?? []) {
+      if (!map.has(p.name)) map.set(p.name, p);
+    }
+    return [t.slug, [...map.values()]];
+  }),
+);
+
 export const trailWaypoints: Record<string, [number, number][][]> = {
   "everest-base-camp": [
     [],

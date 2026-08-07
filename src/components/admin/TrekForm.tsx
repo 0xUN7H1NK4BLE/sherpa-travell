@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ImageUpload from "./ImageUpload";
+import DayMap from "./DayMap";
 import { toSlug } from "@/lib/slug";
 import type { Trek } from "@/data/treks";
 
@@ -18,7 +19,17 @@ const emptyTrek: FormState = {
   groupSize: "2–10",
   summary: "",
   highlights: [],
-  itinerary: [{ day: 1, title: "", kind: "trek", altitudeM: 0, description: "" }],
+  itinerary: [
+    {
+      day: 1,
+      title: "",
+      kind: "trek",
+      altitudeM: 0,
+      description: "",
+      from: { name: "", lat: 0, lng: 0, kind: "village" },
+      to: { name: "", lat: 0, lng: 0, kind: "village" },
+    },
+  ],
   coordinates: [0, 0],
   path: [[0, 0]],
   image: "",
@@ -57,6 +68,51 @@ export default function TrekForm({
     value: string[],
   ) {
     set(key, value);
+  }
+
+  function deriveCoords(it: FormState["itinerary"], fallback: FormState["coordinates"]) {
+    const first = it[0]?.to;
+    if (first && Number.isFinite(first.lat) && Number.isFinite(first.lng)) {
+      return [first.lat, first.lng] as [number, number];
+    }
+    return fallback;
+  }
+
+  function updatePlace(i: number, which: "from" | "to", patch: Partial<Trek["itinerary"][number]["from"]>) {
+    setForm((f) => {
+      const it = f.itinerary.map((d, j) => {
+        if (j !== i) return d;
+        if (d.kind === "acclimatization") {
+          const p = { ...d.from, ...patch };
+          return { ...d, from: p, to: p };
+        }
+        return { ...d, [which]: { ...d[which], ...patch } };
+      });
+      return {
+        ...f,
+        itinerary: it,
+        path: it.map((d) => [d.to.lat, d.to.lng] as [number, number]),
+        coordinates: deriveCoords(it, f.coordinates),
+      };
+    });
+  }
+
+  function updateKind(i: number, kind: Trek["itinerary"][number]["kind"]) {
+    setForm((f) => {
+      const it = f.itinerary.map((d, j) => {
+        if (j !== i) return d;
+        if (kind === "acclimatization") {
+          return { ...d, kind, to: { ...d.from } };
+        }
+        return { ...d, kind };
+      });
+      return {
+        ...f,
+        itinerary: it,
+        path: it.map((d) => [d.to.lat, d.to.lng] as [number, number]),
+        coordinates: deriveCoords(it, f.coordinates),
+      };
+    });
   }
 
   async function onSubmit(e: React.FormEvent) {
@@ -333,9 +389,10 @@ export default function TrekForm({
                   className={field}
                   value={day.kind}
                   onChange={(e) => {
-                    const next = [...form.itinerary];
-                    next[i] = { ...day, kind: e.target.value as Trek["itinerary"][number]["kind"] };
-                    set("itinerary", next);
+                    updateKind(
+                      i,
+                      e.target.value as Trek["itinerary"][number]["kind"],
+                    );
                   }}
                 >
                   {allKinds.map((k) => (
@@ -377,6 +434,14 @@ export default function TrekForm({
                   Remove
                 </button>
               </div>
+              <div className="border-t border-line/60 pt-3 md:col-span-12">
+                <DayMap
+                  from={day.from}
+                  to={day.to}
+                  single={day.kind === "acclimatization"}
+                  onPlace={(which, patch) => updatePlace(i, which, patch)}
+                />
+              </div>
             </div>
           ))}
           <div>
@@ -385,7 +450,7 @@ export default function TrekForm({
               onClick={() =>
                 set("itinerary", [
                   ...form.itinerary,
-                  { day: form.itinerary.length + 1, title: "", kind: "trek", altitudeM: 0, description: "" },
+                  { ...form.itinerary, day: form.itinerary.length + 1, title: "", kind: "trek", altitudeM: 0, description: "", from: { name: "", lat: 0, lng: 0, kind: "village" }, to: { name: "", lat: 0, lng: 0, kind: "village" } },
                 ])
               }
               className="text-xs text-saffron underline underline-offset-4 hover:text-snow"
@@ -393,36 +458,6 @@ export default function TrekForm({
               + Add day
             </button>
           </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 gap-5 border-t border-line pt-5 md:grid-cols-2">
-        <div className={inputRow}>
-          <label className={label}>Coordinates (lat, lng)</label>
-          <input
-            className={field}
-            value={form.coordinates.join(", ")}
-            onChange={(e) => {
-              const [a, b] = e.target.value.split(",").map(Number);
-              if (!Number.isNaN(a) && !Number.isNaN(b)) set("coordinates", [a, b]);
-            }}
-          />
-        </div>
-        <div className={inputRow}>
-          <label className={label}>Path (lat, lng per line)</label>
-          <textarea
-            className={field}
-            rows={4}
-            value={form.path.map((p) => p.join(", ")).join("\n")}
-            onChange={(e) => {
-              const next = e.target.value
-                .split("\n")
-                .map((line) => line.split(",").map(Number))
-                .filter((p) => p.length === 2 && !Number.isNaN(p[0]) && !Number.isNaN(p[1]))
-                .map((p) => p as [number, number]);
-              if (next.length > 0) set("path", next);
-            }}
-          />
         </div>
       </div>
 

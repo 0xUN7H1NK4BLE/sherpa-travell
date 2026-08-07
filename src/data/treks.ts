@@ -4,6 +4,22 @@ export type TrekTag = "remote" | "classic" | "lakes" | "restricted" | "cultural"
 export type Difficulty = "Moderate" | "Challenging" | "Strenuous";
 
 export type DayKind = "trek" | "acclimatization" | "travel" | "summit";
+export type PlaceKind =
+  | "city"
+  | "village"
+  | "peak"
+  | "pass"
+  | "lake"
+  | "monastery"
+  | "basecamp"
+  | "river";
+
+export interface Place {
+  name: string;
+  lat: number;
+  lng: number;
+  kind: PlaceKind;
+}
 
 export interface ItineraryDay {
   day: number;
@@ -11,6 +27,8 @@ export interface ItineraryDay {
   description: string;
   altitudeM: number;
   kind: DayKind;
+  from: Place;
+  to: Place;
 }
 
 export interface Trek {
