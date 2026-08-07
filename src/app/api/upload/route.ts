@@ -4,6 +4,25 @@ import { isAuthenticated } from "@/lib/adminAuth";
 const ALLOWED = new Set(["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif"]);
 const MAX_BYTES = 10 * 1024 * 1024;
 
+// Lightweight magic-byte sniffing so a spoofed Content-Type alone can't pass.
+function sniffImage(buf: Buffer): boolean {
+  if (buf.length < 12) return false;
+  if (buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff) return true; // JPEG
+  if (buf.subarray(0, 8).equals(Buffer.from("89504e470d0a1a0a", "hex"))) return true; // PNG
+  if (
+    buf.subarray(0, 4).toString("ascii") === "RIFF" &&
+    buf.subarray(8, 12).toString("ascii") === "WEBP"
+  )
+    return true; // WebP
+  if (buf.subarray(0, 3).toString("ascii") === "GIF8") return true; // GIF
+  if (
+    buf.subarray(4, 8).toString("ascii") === "ftyp" &&
+    /^(avif|avis)/.test(buf.subarray(8, 12).toString("ascii"))
+  )
+    return true; // AVIF
+  return false;
+}
+
 export async function POST(request: Request) {
   if (!(await isAuthenticated())) {
     return Response.json({ ok: false, error: "Unauthorized" }, { status: 401 });
@@ -47,6 +66,12 @@ export async function POST(request: Request) {
   }
 
   const bytes = Buffer.from(await file.arrayBuffer());
+  if (!sniffImage(bytes)) {
+    return Response.json(
+      { ok: false, error: "File does not look like an image" },
+      { status: 415 },
+    );
+  }
   const pathname = `uploads/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
   try {
     const result = await put(pathname, bytes, {

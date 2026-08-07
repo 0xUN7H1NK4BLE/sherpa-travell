@@ -1,12 +1,12 @@
 import { z } from "zod";
 
 const inquirySchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  trek: z.string().optional(),
-  dates: z.string().optional(),
-  groupSize: z.string().optional(),
-  message: z.string().optional(),
+  name: z.string().min(1).max(120),
+  email: z.string().email().max(200),
+  trek: z.string().max(120).optional(),
+  dates: z.string().max(200).optional(),
+  groupSize: z.string().max(40).optional(),
+  message: z.string().max(4000).optional(),
 });
 
 export async function POST(request: Request) {

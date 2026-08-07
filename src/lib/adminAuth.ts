@@ -10,7 +10,11 @@ export const adminCredentials = {
 };
 
 function secret(): string {
-  return process.env.ADMIN_SESSION_SECRET ?? "sherpa-travell-insecure-session-secret";
+  if (process.env.ADMIN_SESSION_SECRET) return process.env.ADMIN_SESSION_SECRET;
+  // In production, never fall back to a public constant — use a random secret
+  // per boot (sessions reset on redeploy, but tokens can't be forged).
+  if (process.env.NODE_ENV === "production") return randomBytes(32).toString("hex");
+  return "sherpa-travell-insecure-session-secret";
 }
 
 export interface SessionPayload {
