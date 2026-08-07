@@ -43,3 +43,8 @@ next-env.d.ts
 
 # tooling
 .playwright-mcp/
+.commandcode/
+
+# session / scratch artifacts
+resum
+*.proto-*.png
