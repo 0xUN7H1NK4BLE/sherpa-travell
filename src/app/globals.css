@@ -64,6 +64,41 @@
   color-scheme: dark;
 }
 
+/* Theme-aware hero scrims (used inside .photo-dark full-bleed heroes).
+   Light theme: bright, open photo with a dark scrim only behind the
+   headline; dark theme: moody night vignette. Text stays white in both. */
+.photo-scrim-v {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0.1),
+    rgb(255 255 255 / 0) 40%,
+    rgb(10 14 20 / 0.75)
+  );
+}
+.photo-scrim-r {
+  background-image: linear-gradient(
+    to right,
+    rgb(255 255 255 / 0.25),
+    rgb(255 255 255 / 0)
+  );
+}
+:root[data-theme="dark"] .photo-scrim-v {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(10 14 20 / 0.85),
+    rgb(10 14 20 / 0.45) 55%,
+    rgb(10 14 20 / 1)
+  );
+}
+:root[data-theme="dark"] .photo-scrim-r {
+  background-image: linear-gradient(
+    to right,
+    rgb(10 14 20 / 0.8),
+    rgb(10 14 20 / 0.25),
+    rgb(10 14 20 / 0)
+  );
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -291,6 +326,11 @@ body {
   background: transparent;
 }
 
+.stn-pin {
+  background: transparent;
+  border: none;
+}
+
 .animate-bob {
   animation: bob 1.8s ease-in-out infinite;
 }
@@ -302,5 +342,30 @@ body {
   }
   50% {
     transform: translateY(6px);
+  }
+}
+
+/* Scrolling marquee band — duplicated track translated for a seamless loop. */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-flex;
+  align-items: center;
+  min-width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
   }
 }

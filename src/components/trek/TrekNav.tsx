@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Tilt from "@/components/ui/Tilt";
 import type { Trek } from "@/data/treks";
 import { formatAltitude } from "@/lib/utils";
 
@@ -12,10 +13,11 @@ function TrekCard({
   arrow: "←" | "→";
 }) {
   return (
-    <Link
-      href={`/treks/${trek.slug}`}
-      className="group photo-dark relative flex min-h-[190px] items-end overflow-hidden rounded-2xl border border-line p-6 md:p-8"
-    >
+    <Tilt max={6} depth={16} className="block">
+      <Link
+        href={`/treks/${trek.slug}`}
+        className="group photo-dark relative flex min-h-[190px] items-end overflow-hidden rounded-2xl border border-line p-6 md:p-8"
+      >
       <img
         src={trek.image}
         alt=""
@@ -45,7 +47,8 @@ function TrekCard({
           {arrow}
         </span>
       </div>
-    </Link>
+      </Link>
+    </Tilt>
   );
 }
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/ui/Reveal";
 import TrekFinder from "@/components/treks/TrekFinder";
+import Marquee from "@/components/ui/Marquee";
 import { treks } from "@/data/treks";
 import { formatAltitude } from "@/lib/utils";
 
@@ -31,7 +32,7 @@ export default function TreksPage() {
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-night via-night/75 to-night"
+          className="photo-scrim-v absolute inset-0"
           aria-hidden
         />
         <div className="relative mx-auto max-w-7xl px-5 pt-36 pb-16 md:px-8 md:pt-44 md:pb-20">
@@ -63,6 +64,7 @@ export default function TreksPage() {
           </Reveal>
         </div>
       </section>
+      <Marquee />
       <TrekFinder treks={treks} />
     </>
   );

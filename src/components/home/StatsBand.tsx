@@ -56,9 +56,9 @@ export default function StatsBand() {
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="flex flex-col gap-2 px-6 py-10 md:px-10 md:py-14"
+            className="group flex flex-col gap-2 px-6 py-10 transition-colors duration-300 hover:bg-night-overlay md:px-10 md:py-14"
           >
-            <span className="font-display text-4xl font-light text-saffron md:text-6xl">
+            <span className="font-display text-4xl font-light text-saffron transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110 md:text-6xl">
               <Counter to={stat.value} />
             </span>
             <span className="text-xs uppercase tracking-[0.18em] text-mist">

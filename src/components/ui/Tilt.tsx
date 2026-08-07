@@ -9,17 +9,20 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-/** 3D tilt-on-hover wrapper with a pointer-following glare highlight. */
+/** 3D tilt-on-hover wrapper with a pointer-following glare highlight and
+ *  optional layered depth (content floats above the card plane). */
 export default function Tilt({
   children,
   className,
   glareClassName = "rounded-2xl",
   max = 7,
+  depth = 0,
 }: {
   children: React.ReactNode;
   className?: string;
   glareClassName?: string;
   max?: number;
+  depth?: number;
 }) {
   const reduce = useReducedMotion();
   const x = useMotionValue(0.5);
@@ -55,7 +58,19 @@ export default function Tilt({
         }
         className="relative h-full will-change-transform"
       >
-        {children}
+        {depth > 0 ? (
+          <div
+            className="h-full"
+            style={{
+              transform: `translateZ(${depth}px)`,
+              transformStyle: "preserve-3d",
+            }}
+          >
+            {children}
+          </div>
+        ) : (
+          children
+        )}
         <div
           aria-hidden
           className={cn(

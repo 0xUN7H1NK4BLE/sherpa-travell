@@ -52,14 +52,8 @@ export default function Hero() {
           className="h-full w-full scale-105 object-cover"
         />
       </motion.div>
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-night/80 via-night/20 to-night"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 bg-gradient-to-r from-night/60 via-transparent to-transparent"
-        aria-hidden
-      />
+      <div className="photo-scrim-v absolute inset-0" aria-hidden />
+      <div className="photo-scrim-r absolute inset-0" aria-hidden />
 
       <motion.div
         style={reduce ? undefined : { x: contentX, y: contentY }}

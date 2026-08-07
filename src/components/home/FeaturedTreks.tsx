@@ -28,7 +28,7 @@ export default function FeaturedTreks() {
       <div className="grid gap-5 md:grid-cols-2">
         {featuredTreks.map((trek, i) => (
           <Reveal key={trek.slug} delay={i * 0.08}>
-            <Tilt max={6}>
+            <Tilt max={6} depth={20}>
               <Link
                 href={`/treks/${trek.slug}`}
                 className="photo-dark group relative block overflow-hidden rounded-2xl border border-line transition-shadow duration-300 hover:shadow-[0_30px_70px_-24px_rgba(0,0,0,0.6)]"

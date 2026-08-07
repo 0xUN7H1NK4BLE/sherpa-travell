@@ -54,14 +54,8 @@ export default function StageHero({ trek }: { trek: Trek }) {
           className="h-full w-full scale-110 object-cover"
         />
       </motion.div>
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-night/85 via-night/45 to-night"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 bg-gradient-to-r from-night/80 via-night/25 to-transparent"
-        aria-hidden
-      />
+      <div className="photo-scrim-v absolute inset-0" aria-hidden />
+      <div className="photo-scrim-r absolute inset-0" aria-hidden />
 
       <motion.div
         style={reduce ? undefined : { x: contentX }}

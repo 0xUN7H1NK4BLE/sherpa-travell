@@ -47,7 +47,7 @@ export default function GalleryCard({
       transition={{ duration: 0.5, delay: (index % 4) * 0.05 }}
       className="mb-4 break-inside-avoid"
     >
-      <Tilt max={7} className="block">
+      <Tilt max={7} depth={18} className="block">
         <button
           type="button"
           onClick={() => onOpen(item)}
