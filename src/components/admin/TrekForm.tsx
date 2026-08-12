@@ -1,10 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import ImageUpload from "./ImageUpload";
-import DayMap from "./DayMap";
 import { toSlug } from "@/lib/slug";
 import type { Trek } from "@/data/treks";
+
+const DayMap = dynamic(() => import("./DayMap"), {
+  ssr: false,
+  loading: () => <div className="map-skeleton h-56 w-full rounded-lg" />,
+});
 
 type FormState = Trek;
 
