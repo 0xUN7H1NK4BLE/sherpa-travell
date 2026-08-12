@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "@/components/ui/Button";
-import type { Trek } from "@/data/treks";
+import type { RouteContent } from "@/lib/routeContent";
 import { formatAltitude, formatCoordinates, toRoman } from "@/lib/utils";
 
 function AccentedName({ name }: { name: string }) {
@@ -21,10 +21,12 @@ export default function TrekStage({
   trek,
   index,
   total,
+  basePath = "/treks",
 }: {
-  trek: Trek;
+  trek: RouteContent;
   index: number;
   total: number;
+  basePath?: string;
 }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -124,7 +126,7 @@ export default function TrekStage({
             </ul>
 
             <div className="mt-10">
-              <Button href={`/treks/${trek.slug}`} size="lg">
+              <Button href={`${basePath}/${trek.slug}`} size="lg">
                 Explore this trek
                 <span aria-hidden>→</span>
               </Button>

@@ -9,10 +9,18 @@ import {
   useTransform,
 } from "framer-motion";
 import Badge from "@/components/ui/Badge";
-import type { Trek } from "@/data/treks";
+import type { RouteContent } from "@/lib/routeContent";
 import { formatAltitude, formatCoordinates } from "@/lib/utils";
 
-export default function StageHero({ trek }: { trek: Trek }) {
+export default function StageHero({
+  trek,
+  basePath = "/treks",
+  listLabel = "Treks",
+}: {
+  trek: RouteContent;
+  basePath?: string;
+  listLabel?: string;
+}) {
   const reduce = useReducedMotion();
 
   const mx = useMotionValue(0);
@@ -67,8 +75,8 @@ export default function StageHero({ trek }: { trek: Trek }) {
               aria-label="Breadcrumb"
               className="mb-10 flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-mist"
             >
-              <Link href="/treks" className="transition-colors hover:text-saffron">
-                Treks
+              <Link href={basePath} className="transition-colors hover:text-saffron">
+                {listLabel}
               </Link>
               <span aria-hidden>/</span>
               <span className="text-snow/70">{trek.region}</span>
