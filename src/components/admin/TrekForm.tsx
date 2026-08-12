@@ -455,7 +455,7 @@ export default function TrekForm({
               onClick={() =>
                 set("itinerary", [
                   ...form.itinerary,
-                  { ...form.itinerary, day: form.itinerary.length + 1, title: "", kind: "trek", altitudeM: 0, description: "", from: { name: "", lat: 0, lng: 0, kind: "village" }, to: { name: "", lat: 0, lng: 0, kind: "village" } },
+                  { day: form.itinerary.length + 1, title: "", kind: "trek", altitudeM: 0, description: "", from: { name: "", lat: 0, lng: 0, kind: "village" }, to: { name: "", lat: 0, lng: 0, kind: "village" } },
                 ])
               }
               className="text-xs text-saffron underline underline-offset-4 hover:text-snow"

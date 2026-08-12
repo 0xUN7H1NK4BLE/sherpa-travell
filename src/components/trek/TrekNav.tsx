@@ -58,10 +58,12 @@ export default function TrekNav({
   trek,
   all,
   basePath = "/treks",
+  itemLabel = "trek",
 }: {
   trek: RouteContent;
   all: RouteContent[];
   basePath?: string;
+  itemLabel?: string;
 }) {
   const idx = all.findIndex((t) => t.slug === trek.slug);
   const prev = idx > 0 ? all[idx - 1] : null;
@@ -71,8 +73,8 @@ export default function TrekNav({
     <div
       className={`grid gap-5 ${prev && next ? "sm:grid-cols-2" : ""}`}
     >
-      {prev && <TrekCard trek={prev} label="Previous trek" arrow="←" basePath={basePath} />}
-      {next && <TrekCard trek={next} label="Next trek" arrow="→" basePath={basePath} />}
+      {prev && <TrekCard trek={prev} label={`Previous ${itemLabel}`} arrow="←" basePath={basePath} />}
+      {next && <TrekCard trek={next} label={`Next ${itemLabel}`} arrow="→" basePath={basePath} />}
     </div>
   );
 }

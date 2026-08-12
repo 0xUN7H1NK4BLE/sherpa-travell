@@ -7,6 +7,7 @@ export const expeditionTagSchema = z.enum([
   "altitude",
   "remote",
   "classic",
+  "restricted",
 ]);
 
 export const expeditionSchema = z.object({

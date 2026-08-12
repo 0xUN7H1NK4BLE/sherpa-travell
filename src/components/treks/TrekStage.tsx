@@ -22,11 +22,15 @@ export default function TrekStage({
   index,
   total,
   basePath = "/treks",
+  itemLabel = "Trek",
+  ctaLabel = "Explore this trek",
 }: {
   trek: RouteContent;
   index: number;
   total: number;
   basePath?: string;
+  itemLabel?: string;
+  ctaLabel?: string;
 }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -85,7 +89,7 @@ export default function TrekStage({
 
       <div className="absolute right-5 top-6 z-10 flex items-center gap-3 md:right-8">
         <span className="rounded-full border border-line bg-night/40 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-snow/70 backdrop-blur-sm">
-          Trek {toRoman(index + 1)} / {toRoman(total)}
+          {itemLabel} {toRoman(index + 1)} / {toRoman(total)}
         </span>
       </div>
 
@@ -127,7 +131,7 @@ export default function TrekStage({
 
             <div className="mt-10">
               <Button href={`${basePath}/${trek.slug}`} size="lg">
-                Explore this trek
+                {ctaLabel}
                 <span aria-hidden>→</span>
               </Button>
             </div>

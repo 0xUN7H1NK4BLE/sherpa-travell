@@ -1,7 +1,7 @@
 import expeditionsData from "./expeditions.json";
 import type { ItineraryDay } from "./treks";
 
-export type ExpeditionTag = "trekking-peak" | "technical" | "altitude" | "remote" | "classic";
+export type ExpeditionTag = "trekking-peak" | "technical" | "altitude" | "remote" | "classic" | "restricted";
 export type Difficulty = "Moderate" | "Challenging" | "Strenuous";
 
 export interface Expedition {

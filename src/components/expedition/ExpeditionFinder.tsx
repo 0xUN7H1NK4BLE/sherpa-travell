@@ -212,6 +212,8 @@ export default function ExpeditionFinder({ expeditions }: { expeditions: Expedit
               index={expeditions.indexOf(expedition)}
               total={filtered.length}
               basePath="/expeditions"
+              itemLabel="Expedition"
+              ctaLabel="Explore this expedition"
             />
           ))}
         </div>

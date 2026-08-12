@@ -117,7 +117,7 @@
     ],
     "image": "/images/scenes/glacier.jpg",
     "gallery": ["/images/scenes/valley.jpg", "/images/scenes/trail.jpg", "/images/places/dharapani.jpg"],
-    "tags": ["technical", "altitude", "remote"]
+    "tags": ["technical", "altitude", "remote", "restricted"]
   },
   {
     "slug": "ama-dablam",

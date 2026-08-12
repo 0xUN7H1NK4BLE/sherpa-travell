@@ -47,7 +47,7 @@ const emptyExpedition: FormState = {
   tags: [],
 };
 
-const allTags: Expedition["tags"] = ["trekking-peak", "technical", "altitude", "remote", "classic"];
+const allTags: Expedition["tags"] = ["trekking-peak", "technical", "altitude", "remote", "classic", "restricted"];
 const allDifficulties: Expedition["difficulty"][] = ["Moderate", "Challenging", "Strenuous"];
 const allKinds: Expedition["itinerary"][number]["kind"][] = ["trek", "acclimatization", "travel", "summit"];
 
@@ -514,7 +514,7 @@ export default function ExpeditionForm({
               onClick={() =>
                 set("itinerary", [
                   ...form.itinerary,
-                  { ...form.itinerary, day: form.itinerary.length + 1, title: "", kind: "trek", altitudeM: 0, description: "", from: { name: "", lat: 0, lng: 0, kind: "village" }, to: { name: "", lat: 0, lng: 0, kind: "village" } },
+                  { day: form.itinerary.length + 1, title: "", kind: "trek", altitudeM: 0, description: "", from: { name: "", lat: 0, lng: 0, kind: "village" }, to: { name: "", lat: 0, lng: 0, kind: "village" } },
                 ])
               }
               className="text-xs text-saffron underline underline-offset-4 hover:text-snow"
