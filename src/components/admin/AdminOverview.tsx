@@ -10,10 +10,12 @@ const difficultyColor: Record<string, string> = {
 
 export default function AdminOverview({
   treks,
+  newInquiryCount,
   onNewTrek,
   onGallery,
 }: {
   treks: Trek[] | null;
+  newInquiryCount?: number;
   onNewTrek: () => void;
   onGallery: () => void;
 }) {
@@ -46,6 +48,9 @@ export default function AdminOverview({
   );
 
   const stats = [
+    ...(newInquiryCount !== undefined
+      ? [{ label: "New inquiries", value: String(newInquiryCount) }]
+      : []),
     { label: "Treks", value: String(treks.length) },
     { label: "Regions", value: String(regions) },
     { label: "Trip days", value: String(totalDays) },

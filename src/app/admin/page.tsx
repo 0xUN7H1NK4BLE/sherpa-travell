@@ -5,20 +5,23 @@ import { useRouter } from "next/navigation";
 import AdminOverview from "@/components/admin/AdminOverview";
 import TrekManager from "@/components/admin/TrekManager";
 import GalleryAdmin from "@/components/admin/GalleryAdmin";
+import InquiryInbox from "@/components/admin/InquiryInbox";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
 import type { Trek } from "@/data/treks";
 
-type Tab = "overview" | "treks" | "gallery";
+type Tab = "overview" | "treks" | "gallery" | "inquiries";
 
 const tabs: { id: Tab; label: string }[] = [
   { id: "overview", label: "Overview" },
   { id: "treks", label: "Treks" },
   { id: "gallery", label: "Gallery" },
+  { id: "inquiries", label: "Inquiries" },
 ];
 
 export default function AdminPage() {
   const router = useRouter();
   const [treks, setTreks] = useState<Trek[] | null>(null);
+  const [newInquiryCount, setNewInquiryCount] = useState<number | undefined>(undefined);
   const [tab, setTab] = useState<Tab>("overview");
   const [error, setError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
@@ -39,6 +42,14 @@ export default function AdminPage() {
         else setError((data && data.error) ?? "Failed to load treks");
       })
       .catch(() => setError("Failed to load treks"));
+    fetch("/api/admin/inquiries", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.ok) {
+          setNewInquiryCount(data.inquiries.filter((i: { status: string }) => i.status === "new").length);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   async function logout() {
@@ -126,6 +137,7 @@ export default function AdminPage() {
         {tab === "overview" && (
           <AdminOverview
             treks={treks}
+            newInquiryCount={newInquiryCount}
             onNewTrek={() => setTab("treks")}
             onGallery={() => setTab("gallery")}
           />
@@ -144,6 +156,8 @@ export default function AdminPage() {
             <GalleryAdmin treks={treks} />
           </div>
         )}
+
+        {tab === "inquiries" && <InquiryInbox />}
       </div>
 
       {confirmTrek && (
