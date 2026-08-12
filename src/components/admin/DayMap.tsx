@@ -62,12 +62,12 @@ export default function DayMap({
   const lineRef = useRef<L.Polyline | null>(null);
   const onPlaceRef = useRef(onPlace);
   const singleRef = useRef(single);
-  const targetRef = useRef<"from" | "to">(single ? "from" : "to");
+  const targetRef = useRef<"from" | "to">("from");
   const lastFitKeyRef = useRef("");
   const seqRef = useRef(0);
   const timerRef = useRef(0);
 
-  const [target, setTarget] = useState<"from" | "to">(single ? "from" : "to");
+  const [target, setTarget] = useState<"from" | "to">("from");
   const [query, setQuery] = useState("");
   const [hits, setHits] = useState<Hit[]>([]);
   const [open, setOpen] = useState(false);
