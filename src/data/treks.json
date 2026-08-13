@@ -2882,46 +2882,5 @@
       "restricted",
       "cultural"
     ]
-  },
-  {
-    "slug": "test",
-    "name": "test",
-    "region": "test",
-    "durationDays": 10,
-    "maxAltitudeM": 7000,
-    "difficulty": "Strenuous",
-    "bestSeason": [
-      "autom"
-    ],
-    "groupSize": "2–10",
-    "summary": "tthid ",
-    "highlights": [
-      "thisisahightligh"
-    ],
-    "itinerary": [
-      {
-        "day": 1,
-        "title": "ktm to pokhra",
-        "description": "trvall",
-        "altitudeM": 2000,
-        "kind": "travel"
-      }
-    ],
-    "coordinates": [
-      0,
-      0
-    ],
-    "path": [
-      [
-        0,
-        0
-      ]
-    ],
-    "image": "/api/blob?pathname=uploads%2F1786541356847-dark-mode-logo-5JhSVOIIi5n6LJP9fkb4QV15UKIcEt.png",
-    "gallery": [],
-    "tags": [
-      "remote",
-      "lakes"
-    ]
   }
 ]
