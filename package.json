@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:push": "drizzle-kit push",
-    "test": "node --import tsx --test 'src/**/*.test.ts'"
+    "db:push": "node --env-file-if-exists=.env.local node_modules/.bin/drizzle-kit push",
+    "test": "node --env-file-if-exists=.env.local --import tsx --test 'src/**/*.test.ts'"
   },
   "dependencies": {
     "@react-three/fiber": "^9.7.0",
