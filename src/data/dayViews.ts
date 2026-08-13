@@ -1,5 +1,13 @@
 import { treks } from "@/data/treks";
-import type { Trek } from "@/data/treks";
+import { expeditions } from "@/data/expeditions";
+import type { ItineraryDay } from "@/data/treks";
+
+interface RouteLike {
+  slug: string;
+  itinerary: ItineraryDay[];
+}
+
+const allRoutes: RouteLike[] = [...treks, ...expeditions];
 
 
 // dayPlaces[slug][i] = the start and end place of itinerary day i.
@@ -177,7 +185,7 @@ export const scenicLabels: Record<string, PlaceLabel[]> = {
 // days. Lets the camera follow the winding trail instead of a straight line.
 
 export const dayPlaces: Record<string, DayPlace[]> = Object.fromEntries(
-  treks.map((t: Trek) => [
+  allRoutes.map((t) => [
     t.slug,
     t.itinerary.map((d) => ({
       from: d.from.name,
@@ -187,7 +195,7 @@ export const dayPlaces: Record<string, DayPlace[]> = Object.fromEntries(
 );
 
 export const trekLabels: Record<string, PlaceLabel[]> = Object.fromEntries(
-  treks.map((t: Trek) => {
+  allRoutes.map((t) => {
     const map = new Map<string, PlaceLabel>();
     for (const d of t.itinerary) {
       for (const p of [d.from, d.to]) {
