@@ -42,3 +42,10 @@ test("ama-dablam day 0 dayPlaces matches its itinerary from/to names", () => {
   assert.equal(dayPlaces["ama-dablam"][0].from, ama.itinerary[0].from.name);
   assert.equal(dayPlaces["ama-dablam"][0].to, ama.itinerary[0].to.name);
 });
+
+test("no slug collisions between treks and expeditions", () => {
+  const trekSlugs = new Set(treks.map((t) => t.slug));
+  for (const e of expeditions) {
+    assert.ok(!trekSlugs.has(e.slug), `slug collision: ${e.slug}`);
+  }
+});
