@@ -112,13 +112,14 @@ export default function TerrainScene({
   className?: string;
 }) {
   const reduced = usePrefersReducedMotion();
-  const [mobile, setMobile] = useState(false);
+  const [mobile, setMobile] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(max-width: 639.98px)").matches,
+  );
   const [contextLost, setContextLost] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const query = window.matchMedia("(max-width: 639.98px)");
-    setMobile(query.matches);
     const handler = (e: MediaQueryListEvent) => setMobile(e.matches);
     query.addEventListener("change", handler);
     return () => query.removeEventListener("change", handler);

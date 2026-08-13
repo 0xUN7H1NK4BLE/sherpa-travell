@@ -36,6 +36,9 @@ export default function Scene3DBoundary({
   const [webglOk, setWebglOk] = useState(true);
 
   useEffect(() => {
+    // Intentional SSR-hydration guard: fallback must render on server and
+    // first client paint, then flip once mounted — no lazy-init equivalent.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     setWebglOk(isWebGLAvailable());
   }, []);
