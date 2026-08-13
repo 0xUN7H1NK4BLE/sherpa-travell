@@ -374,6 +374,7 @@ export default function TerrainScene({
 }) {
   const reduced = usePrefersReducedMotion();
   const [mobile, setMobile] = useState(false);
+  const [contextLost, setContextLost] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -386,6 +387,14 @@ export default function TerrainScene({
 
   const peakHeight = peakAltitudeM ? Math.min(6, 2 + peakAltitudeM / 3000) : 4;
 
+  if (contextLost) {
+    return (
+      <div ref={containerRef} className={className}>
+        {fallback}
+      </div>
+    );
+  }
+
   return (
     <div ref={containerRef} className={className}>
       <Scene3DBoundary fallback={fallback}>
@@ -393,6 +402,17 @@ export default function TerrainScene({
           dpr={[1, 2]}
           camera={{ position: [0, 5, 18], fov: 45 }}
           gl={{ antialias: true, alpha: true }}
+          onCreated={(state) => {
+            const handleContextLost = (event: Event) => {
+              event.preventDefault();
+              setContextLost(true);
+            };
+            state.gl.domElement.addEventListener(
+              "webglcontextlost",
+              handleContextLost,
+              { once: true },
+            );
+          }}
         >
           <Suspense fallback={null}>
             <TerrainContents
@@ -409,6 +429,8 @@ export default function TerrainScene({
   );
 }
 ```
+
+**Note on this addition:** `Scene3DBoundary`'s React error boundary (Task 3) only catches synchronous render-phase errors — it cannot catch a `webglcontextlost` event, which fires asynchronously outside React's render cycle (a GPU driver reset, browser resource pressure, or too many concurrent WebGL contexts). Without this handler, a context loss after mount would leave a dead/blank canvas on screen, violating the "never a blank canvas" Global Constraint. The `onCreated` callback runs once when the R3F `Canvas` finishes its own WebGL context setup, giving direct access to the renderer's `<canvas>` DOM element to attach the listener; `{ once: true }` mirrors the fact that this component fully unmounts the `Canvas` in favor of `fallback` on the first loss event, so no repeat firings need handling.
 
 - [ ] **Step 2: Typecheck**
 
