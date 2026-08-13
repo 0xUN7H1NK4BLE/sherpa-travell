@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { dayPlaces, trekLabels } from "./dayViews";
+import { dayPlaces, trekLabels, scenicLabels } from "./dayViews";
 import { expeditions } from "./expeditions";
 import { treks } from "./treks";
 
@@ -47,5 +47,36 @@ test("no slug collisions between treks and expeditions", () => {
   const trekSlugs = new Set(treks.map((t) => t.slug));
   for (const e of expeditions) {
     assert.ok(!trekSlugs.has(e.slug), `slug collision: ${e.slug}`);
+  }
+});
+
+test("everest-base-camp day 0 dayPlaces matches its itinerary from/to names", () => {
+  const trek = treks.find((t) => t.slug === "everest-base-camp");
+  assert.ok(trek, "everest-base-camp fixture missing from treks");
+  assert.equal(dayPlaces["everest-base-camp"][0].from, trek.itinerary[0].from.name);
+  assert.equal(dayPlaces["everest-base-camp"][0].to, trek.itinerary[0].to.name);
+});
+
+test("trekLabels includes every trek's itinerary place names and scenic labels", () => {
+  for (const t of treks) {
+    const labels = trekLabels[t.slug];
+    assert.ok(labels, `missing trekLabels for trek ${t.slug}`);
+    const names = new Set(labels.map((l) => l.name));
+    for (const day of t.itinerary) {
+      assert.ok(
+        names.has(day.from.name),
+        `${t.slug} trekLabels missing "${day.from.name}"`,
+      );
+      assert.ok(
+        names.has(day.to.name),
+        `${t.slug} trekLabels missing "${day.to.name}"`,
+      );
+    }
+    for (const scenic of scenicLabels[t.slug] ?? []) {
+      assert.ok(
+        names.has(scenic.name),
+        `${t.slug} trekLabels missing scenic "${scenic.name}"`,
+      );
+    }
   }
 });
