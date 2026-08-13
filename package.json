@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "db:push": "drizzle-kit push",
-    "test": "node --import tsx --test src/**/*.test.ts"
+    "test": "node --import tsx --test 'src/**/*.test.ts'"
   },
   "dependencies": {
     "@react-three/fiber": "^9.7.0",

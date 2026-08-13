@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+// Its lazy `useState` initializer reads `window` directly, so this hook must
+// only be used behind a `dynamic(..., { ssr: false })` boundary.
 export function usePrefersReducedMotion(): boolean {
   const [reduced, setReduced] = useState(
     () =>

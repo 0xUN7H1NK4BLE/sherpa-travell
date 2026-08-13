@@ -57,6 +57,10 @@ function Ridge({
     return geo;
   }, [seed, peakHeight]);
 
+  useEffect(() => {
+    return () => geometry.dispose();
+  }, [geometry]);
+
   return (
     <mesh geometry={geometry} receiveShadow castShadow>
       <meshStandardMaterial color={color} flatShading roughness={0.9} metalness={0.05} />
@@ -67,18 +71,15 @@ function Ridge({
 function TerrainContents({
   seed,
   peakHeight,
-  reduced,
-  mobile,
+  driftEnabled,
   containerRef,
 }: {
   seed: number;
   peakHeight: number;
-  reduced: boolean;
-  mobile: boolean;
+  driftEnabled: boolean;
   containerRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const groupRef = useRef<THREE.Group>(null);
-  const driftEnabled = !reduced && !mobile;
 
   useFrame((state) => {
     if (!driftEnabled || !groupRef.current) return;
@@ -88,11 +89,9 @@ function TerrainContents({
 
   const terrainColor = useThemeColor(containerRef, "--ink-muted", "#93a3b5");
   const accentColor = useThemeColor(containerRef, "--accent", "#f59e0b");
-  const bgColor = useThemeColor(containerRef, "--bg", "#0a0e14");
 
   return (
     <group ref={groupRef}>
-      <fog attach="fog" args={[bgColor, 20, 55]} />
       <ambientLight intensity={0.5} />
       <directionalLight position={[8, 12, 6]} intensity={1.1} color={accentColor} castShadow />
       <Ridge seed={seed} peakHeight={peakHeight} color={terrainColor} />
@@ -117,6 +116,8 @@ export default function TerrainScene({
   );
   const [contextLost, setContextLost] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const driftEnabled = !reduced && !mobile;
+  const bgColor = useThemeColor(containerRef, "--bg", "#0a0e14");
 
   useEffect(() => {
     const query = window.matchMedia("(max-width: 639.98px)");
@@ -142,6 +143,8 @@ export default function TerrainScene({
           dpr={[1, 2]}
           camera={{ position: [0, 5, 18], fov: 45 }}
           gl={{ antialias: true, alpha: true }}
+          shadows
+          frameloop={driftEnabled ? "always" : "demand"}
           onCreated={(state) => {
             const handleContextLost = (event: Event) => {
               event.preventDefault();
@@ -154,12 +157,12 @@ export default function TerrainScene({
             );
           }}
         >
+          <fog attach="fog" args={[bgColor, 20, 55]} />
           <Suspense fallback={null}>
             <TerrainContents
               seed={seed}
               peakHeight={peakHeight}
-              reduced={reduced}
-              mobile={mobile}
+              driftEnabled={driftEnabled}
               containerRef={containerRef}
             />
           </Suspense>
