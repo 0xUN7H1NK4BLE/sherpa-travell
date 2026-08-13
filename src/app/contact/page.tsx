@@ -36,6 +36,12 @@ export default async function ContactPage({
       note: "Direct line to Abishek",
     },
     {
+      label: "Instagram",
+      value: "@sherpaadventureandexpedition",
+      href: site.contact.instagram,
+      note: "Photos from every trek and expedition we've run",
+    },
+    {
       label: "Based in",
       value: site.contact.address,
       note: "Meet for tea and route planning before your trek",

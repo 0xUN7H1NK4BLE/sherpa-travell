@@ -24,6 +24,14 @@ and path; the site picks it up automatically. Landscape, ≥1000px wide.
 | `treks/lower-dolpo.jpg` | Lower Dolpo |
 | `treks/limi-valley.jpg` | Limi Valley |
 
+## Per expedition (`expeditions/`) — referenced via each expedition's `image` field in `src/data/expeditions.json`
+
+| File | Expedition | License |
+| --- | --- | --- |
+| `expeditions/mt-himlung.jpg` | Mt Himlung (ISS orbital view of Himlung Himal — no ground-level Commons photo exists under this name) | Public domain (PD-USGov-NASA) |
+| `expeditions/island-peak.jpg` | Island Peak (Imja Tse) from Dingboche village | CC BY-SA 4.0, Rohit Sharma |
+| (ama-dablam uses `places/amadablam.jpg`, already a real photo of the mountain — see below) | Ama Dablam | — |
+
 ## Gallery scenes (`scenes/`) — each trek picks three via its `gallery` field; also home CTA uses `stars.jpg`
 
 | File | Subject |

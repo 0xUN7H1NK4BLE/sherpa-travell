@@ -11,19 +11,6 @@ import {
 import Badge from "@/components/ui/Badge";
 import type { RouteContent } from "@/lib/routeContent";
 import { formatAltitude, formatCoordinates } from "@/lib/utils";
-import dynamic from "next/dynamic";
-
-const TerrainScene = dynamic(() => import("@/components/three/TerrainScene"), {
-  ssr: false,
-});
-
-function seedFromSlug(slug: string): number {
-  let hash = 0;
-  for (let i = 0; i < slug.length; i++) {
-    hash = (hash * 31 + slug.charCodeAt(i)) | 0;
-  }
-  return Math.abs(hash) || 1;
-}
 
 export default function StageHero({
   trek,
@@ -68,18 +55,11 @@ export default function StageHero({
         className="absolute inset-0"
         aria-hidden
       >
-        <TerrainScene
-          seed={seedFromSlug(trek.slug)}
-          peakAltitudeM={trek.maxAltitudeM}
-          className="h-full w-full"
-          fallback={
-            <img
-              src={trek.image}
-              alt=""
-              aria-hidden
-              className="h-full w-full scale-110 object-cover"
-            />
-          }
+        <img
+          src={trek.image}
+          alt=""
+          aria-hidden
+          className="h-full w-full scale-110 object-cover"
         />
       </motion.div>
       <div className="photo-scrim-v absolute inset-0" aria-hidden />

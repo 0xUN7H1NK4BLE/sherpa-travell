@@ -158,7 +158,7 @@ export default function InquiryForm({
         type="submit"
         className="w-full rounded-full bg-saffron px-6 py-3.5 font-medium text-night transition-colors hover:bg-snow"
       >
-        Send via WhatsApp
+        Send Inquiry
       </button>
       <p className="text-center text-xs leading-relaxed text-mist">
         Submitting opens WhatsApp with your message pre-filled — the fastest way

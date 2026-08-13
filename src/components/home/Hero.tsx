@@ -8,15 +8,10 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import dynamic from "next/dynamic";
 import Button from "@/components/ui/Button";
 import { site, waLink } from "@/data/site";
 import { cn } from "@/lib/utils";
 import { easeOut } from "@/lib/motion";
-
-const TerrainScene = dynamic(() => import("@/components/three/TerrainScene"), {
-  ssr: false,
-});
 
 const words = ["Walk", "where", "the", "maps", "end."];
 
@@ -51,17 +46,10 @@ export default function Hero() {
         className="absolute inset-0"
         aria-hidden
       >
-        <TerrainScene
-          seed={1}
-          peakAltitudeM={8848}
-          className="h-full w-full"
-          fallback={
-            <img
-              src="/images/hero.jpg"
-              alt=""
-              className="h-full w-full scale-105 object-cover"
-            />
-          }
+        <img
+          src="/images/hero.jpg"
+          alt=""
+          className="h-full w-full scale-105 object-cover"
         />
       </motion.div>
       <div className="photo-scrim-v absolute inset-0" aria-hidden />

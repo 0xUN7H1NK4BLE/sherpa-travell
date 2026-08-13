@@ -9,6 +9,7 @@ export const site = {
     phoneDisplay: "+977 9818561151",
     phoneHref: "tel:+9779818561151",
     whatsapp: "https://wa.me/9779818561151",
+    instagram: "https://www.instagram.com/sherpaadventureandexpedition",
     address: "Kathmandu, Nepal",
   },
   nav: [

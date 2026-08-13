@@ -115,7 +115,7 @@
       [28.9000, 84.5200],
       [27.6977, 85.3230]
     ],
-    "image": "/images/scenes/glacier.jpg",
+    "image": "/images/expeditions/mt-himlung.jpg",
     "gallery": ["/images/scenes/valley.jpg", "/images/scenes/trail.jpg", "/images/places/dharapani.jpg"],
     "tags": ["technical", "altitude", "remote", "restricted"]
   },
@@ -355,7 +355,7 @@
       [27.9255, 86.9361],
       [27.6977, 85.3230]
     ],
-    "image": "/images/places/dingboche.jpg",
+    "image": "/images/expeditions/island-peak.jpg",
     "gallery": ["/images/scenes/glacier.jpg", "/images/places/tengboche.jpg", "/images/scenes/valley.jpg"],
     "tags": ["trekking-peak", "altitude", "classic"]
   }
