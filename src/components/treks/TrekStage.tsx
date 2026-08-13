@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "@/components/ui/Button";
-import type { Trek } from "@/data/treks";
+import type { RouteContent } from "@/lib/routeContent";
 import { formatAltitude, formatCoordinates, toRoman } from "@/lib/utils";
 
 function AccentedName({ name }: { name: string }) {
@@ -21,10 +21,16 @@ export default function TrekStage({
   trek,
   index,
   total,
+  basePath = "/treks",
+  itemLabel = "Trek",
+  ctaLabel = "Explore this trek",
 }: {
-  trek: Trek;
+  trek: RouteContent;
   index: number;
   total: number;
+  basePath?: string;
+  itemLabel?: string;
+  ctaLabel?: string;
 }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -83,7 +89,7 @@ export default function TrekStage({
 
       <div className="absolute right-5 top-6 z-10 flex items-center gap-3 md:right-8">
         <span className="rounded-full border border-line bg-night/40 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-snow/70 backdrop-blur-sm">
-          Trek {toRoman(index + 1)} / {toRoman(total)}
+          {itemLabel} {toRoman(index + 1)} / {toRoman(total)}
         </span>
       </div>
 
@@ -124,8 +130,8 @@ export default function TrekStage({
             </ul>
 
             <div className="mt-10">
-              <Button href={`/treks/${trek.slug}`} size="lg">
-                Explore this trek
+              <Button href={`${basePath}/${trek.slug}`} size="lg">
+                {ctaLabel}
                 <span aria-hidden>→</span>
               </Button>
             </div>

@@ -4,21 +4,26 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import ImageUpload from "./ImageUpload";
 import { toSlug } from "@/lib/slug";
-import type { Trek } from "@/data/treks";
+import type { Expedition } from "@/data/expeditions";
 
 const DayMap = dynamic(() => import("./DayMap"), {
   ssr: false,
   loading: () => <div className="map-skeleton h-56 w-full rounded-lg" />,
 });
 
-type FormState = Trek;
+type FormState = Expedition;
 
-const emptyTrek: FormState = {
+const emptyExpedition: FormState = {
   slug: "",
   name: "",
   region: "",
   durationDays: 1,
   maxAltitudeM: 0,
+  peakHeightM: 0,
+  climbingGrade: "",
+  permitCostUSD: 0,
+  technicalGearRequired: false,
+  summitSuccessNotes: "",
   difficulty: "Moderate",
   bestSeason: [""],
   groupSize: "2–10",
@@ -42,24 +47,24 @@ const emptyTrek: FormState = {
   tags: [],
 };
 
-const allTags: Trek["tags"] = ["remote", "classic", "lakes", "restricted", "cultural"];
-const allDifficulties: Trek["difficulty"][] = ["Moderate", "Challenging", "Strenuous"];
-const allKinds: Trek["itinerary"][number]["kind"][] = ["trek", "acclimatization", "travel", "summit"];
+const allTags: Expedition["tags"] = ["trekking-peak", "technical", "altitude", "remote", "classic", "restricted"];
+const allDifficulties: Expedition["difficulty"][] = ["Moderate", "Challenging", "Strenuous"];
+const allKinds: Expedition["itinerary"][number]["kind"][] = ["trek", "acclimatization", "travel", "summit"];
 
 const field = "rounded-lg border border-line-strong bg-night px-3.5 py-2.5 text-sm text-snow outline-none transition-colors focus:border-saffron";
 const label = "text-xs uppercase tracking-[0.18em] text-mist";
 const inputRow = "flex flex-col gap-1.5";
 
-export default function TrekForm({
+export default function ExpeditionForm({
   initial,
   onSaved,
   onCancel,
 }: {
-  initial?: Trek | null;
+  initial?: Expedition | null;
   onSaved: () => void;
   onCancel: () => void;
 }) {
-  const [form, setForm] = useState<FormState>(initial ?? emptyTrek);
+  const [form, setForm] = useState<FormState>(initial ?? emptyExpedition);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const isEdit = Boolean(initial);
@@ -83,7 +88,7 @@ export default function TrekForm({
     return fallback;
   }
 
-  function updatePlace(i: number, which: "from" | "to", patch: Partial<Trek["itinerary"][number]["from"]>) {
+  function updatePlace(i: number, which: "from" | "to", patch: Partial<Expedition["itinerary"][number]["from"]>) {
     setForm((f) => {
       const it = f.itinerary.map((d, j) => {
         if (j !== i) return d;
@@ -102,7 +107,7 @@ export default function TrekForm({
     });
   }
 
-  function updateKind(i: number, kind: Trek["itinerary"][number]["kind"]) {
+  function updateKind(i: number, kind: Expedition["itinerary"][number]["kind"]) {
     setForm((f) => {
       const it = f.itinerary.map((d, j) => {
         if (j !== i) return d;
@@ -125,7 +130,7 @@ export default function TrekForm({
     setSaving(true);
     setError(null);
 
-    const payload: Trek = {
+    const payload: Expedition = {
       ...form,
       bestSeason: form.bestSeason.filter(Boolean),
       highlights: form.highlights.filter(Boolean),
@@ -135,7 +140,7 @@ export default function TrekForm({
 
     try {
       const res = await fetch(
-        isEdit ? `/api/treks/${initial?.slug}` : "/api/treks",
+        isEdit ? `/api/expeditions/${initial?.slug}` : "/api/expeditions",
         {
           method: isEdit ? "PUT" : "POST",
           headers: { "Content-Type": "application/json" },
@@ -166,7 +171,7 @@ export default function TrekForm({
     <form onSubmit={onSubmit} className="flex flex-col gap-6 rounded-2xl border border-line bg-night/40 p-6">
       <div className="flex items-center justify-between">
         <h2 className="font-display text-2xl font-light">
-          {isEdit ? `Edit ${initial?.name}` : "New trek"}
+          {isEdit ? `Edit ${initial?.name}` : "New expedition"}
         </h2>
         <button
           type="button"
@@ -240,11 +245,55 @@ export default function TrekForm({
           />
         </div>
         <div className={inputRow}>
+          <label className={label}>Peak height (m)</label>
+          <input
+            type="number"
+            className={field}
+            value={form.peakHeightM}
+            onChange={(e) => set("peakHeightM", Number(e.target.value))}
+            min={0}
+            required
+          />
+        </div>
+        <div className={inputRow}>
+          <label className={label}>Climbing grade</label>
+          <input
+            className={field}
+            value={form.climbingGrade}
+            onChange={(e) => set("climbingGrade", e.target.value)}
+            placeholder="e.g. Alpine PD, Trekking peak"
+            required
+          />
+        </div>
+        <div className={inputRow}>
+          <label className={label}>Permit cost (USD)</label>
+          <input
+            type="number"
+            className={field}
+            value={form.permitCostUSD}
+            onChange={(e) => set("permitCostUSD", Number(e.target.value))}
+            min={0}
+            required
+          />
+        </div>
+        <div className="flex items-end gap-2 pb-2.5">
+          <input
+            type="checkbox"
+            id="technicalGearRequired"
+            checked={form.technicalGearRequired}
+            onChange={(e) => set("technicalGearRequired", e.target.checked)}
+            className="h-4 w-4 rounded border-line-strong bg-night accent-saffron"
+          />
+          <label htmlFor="technicalGearRequired" className={label}>
+            Technical gear required
+          </label>
+        </div>
+        <div className={inputRow}>
           <label className={label}>Difficulty</label>
           <select
             className={field}
             value={form.difficulty}
-            onChange={(e) => set("difficulty", e.target.value as Trek["difficulty"])}
+            onChange={(e) => set("difficulty", e.target.value as Expedition["difficulty"])}
           >
             {allDifficulties.map((d) => (
               <option key={d}>{d}</option>
@@ -290,6 +339,16 @@ export default function TrekForm({
           value={form.summary}
           onChange={(e) => set("summary", e.target.value)}
           required
+        />
+      </div>
+
+      <div className={inputRow}>
+        <label className={label}>Summit success notes</label>
+        <textarea
+          className={field}
+          rows={2}
+          value={form.summitSuccessNotes}
+          onChange={(e) => set("summitSuccessNotes", e.target.value)}
         />
       </div>
 
@@ -396,7 +455,7 @@ export default function TrekForm({
                   onChange={(e) => {
                     updateKind(
                       i,
-                      e.target.value as Trek["itinerary"][number]["kind"],
+                      e.target.value as Expedition["itinerary"][number]["kind"],
                     );
                   }}
                 >
@@ -478,7 +537,7 @@ export default function TrekForm({
           disabled={saving}
           className="rounded-full bg-saffron px-6 py-3 text-sm font-medium text-night transition-all hover:bg-snow disabled:opacity-50"
         >
-          {saving ? "Saving…" : isEdit ? "Save changes" : "Create trek"}
+          {saving ? "Saving…" : isEdit ? "Save changes" : "Create expedition"}
         </button>
         {isEdit && (
           <button

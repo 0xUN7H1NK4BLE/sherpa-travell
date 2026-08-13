@@ -1,0 +1,362 @@
+[
+  {
+    "slug": "mt-himlung",
+    "name": "Mt Himlung Expedition",
+    "region": "Manang, Nar-Phu Valley",
+    "durationDays": 9,
+    "maxAltitudeM": 7126,
+    "peakHeightM": 7126,
+    "climbingGrade": "Alpine PD — glacier travel with fixed lines above Base Camp",
+    "permitCostUSD": 1800,
+    "technicalGearRequired": true,
+    "summitSuccessNotes": "Best summit window is mid-September to mid-October; two rotations through High Camp materially improve success odds.",
+    "difficulty": "Strenuous",
+    "bestSeason": ["Spring", "Autumn"],
+    "groupSize": "2–8",
+    "summary": "A remote 7,000m peak above the restricted Nar-Phu valley, climbed via glacier travel and fixed lines — technical enough to test experienced climbers, without the crowds of the 8,000m circuit.",
+    "highlights": [
+      "Restricted Nar-Phu valley approach",
+      "Glacier travel above Base Camp",
+      "Summit views across the Manang Himal",
+      "Small, high-touch expedition teams"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Drive to Koto",
+        "description": "A long, scenic drive from Kathmandu up the Marsyangdi valley to Koto, the gateway to the restricted Nar-Phu valley.",
+        "altitudeM": 2600,
+        "kind": "travel",
+        "from": { "name": "Kathmandu", "lat": 27.6977, "lng": 85.3230, "kind": "city" },
+        "to": { "name": "Koto", "lat": 28.5915, "lng": 84.2938, "kind": "village" }
+      },
+      {
+        "day": 2,
+        "title": "Koto to Meta",
+        "description": "Enter the restricted Nar-Phu valley, following the Nar Khola gorge through pine forest and cliffside trail.",
+        "altitudeM": 3560,
+        "kind": "trek",
+        "from": { "name": "Koto", "lat": 28.5915, "lng": 84.2938, "kind": "village" },
+        "to": { "name": "Meta", "lat": 28.6500, "lng": 84.3000, "kind": "village" }
+      },
+      {
+        "day": 3,
+        "title": "Meta to Phu Gaon",
+        "description": "Climb through narrowing gorge walls into the fortress-like village of Phu Gaon, one of the most remote settlements in Nepal.",
+        "altitudeM": 4080,
+        "kind": "trek",
+        "from": { "name": "Meta", "lat": 28.6500, "lng": 84.3000, "kind": "village" },
+        "to": { "name": "Phu Gaon", "lat": 28.8300, "lng": 84.4500, "kind": "village" }
+      },
+      {
+        "day": 4,
+        "title": "Acclimatization day in Phu Gaon",
+        "description": "A rest day to explore Phu's gompa and let the body adjust before pushing higher toward Base Camp.",
+        "altitudeM": 4080,
+        "kind": "acclimatization",
+        "from": { "name": "Phu Gaon", "lat": 28.8300, "lng": 84.4500, "kind": "village" },
+        "to": { "name": "Phu Gaon", "lat": 28.8300, "lng": 84.4500, "kind": "village" }
+      },
+      {
+        "day": 5,
+        "title": "Phu Gaon to Himlung Base Camp",
+        "description": "Leave the last permanent settlement behind and follow moraine trail to Base Camp beneath Himlung's south face.",
+        "altitudeM": 4900,
+        "kind": "trek",
+        "from": { "name": "Phu Gaon", "lat": 28.8300, "lng": 84.4500, "kind": "village" },
+        "to": { "name": "Himlung Base Camp", "lat": 28.8700, "lng": 84.4800, "kind": "basecamp" }
+      },
+      {
+        "day": 6,
+        "title": "Base Camp acclimatization and rotation",
+        "description": "Rest, gear checks and a short rotation onto the lower glacier to prepare for the climb to High Camp.",
+        "altitudeM": 4900,
+        "kind": "acclimatization",
+        "from": { "name": "Himlung Base Camp", "lat": 28.8700, "lng": 84.4800, "kind": "basecamp" },
+        "to": { "name": "Himlung Base Camp", "lat": 28.8700, "lng": 84.4800, "kind": "basecamp" }
+      },
+      {
+        "day": 7,
+        "title": "Base Camp to High Camp",
+        "description": "Rope up for the glacier crossing to High Camp, the last stop before the summit push.",
+        "altitudeM": 5850,
+        "kind": "trek",
+        "from": { "name": "Himlung Base Camp", "lat": 28.8700, "lng": 84.4800, "kind": "basecamp" },
+        "to": { "name": "High Camp", "lat": 28.8900, "lng": 84.5000, "kind": "basecamp" }
+      },
+      {
+        "day": 8,
+        "title": "Summit day",
+        "description": "An early alpine start on fixed lines up the summit ridge, standing atop Himlung's 7,126m summit before descending to High Camp.",
+        "altitudeM": 7126,
+        "kind": "summit",
+        "from": { "name": "High Camp", "lat": 28.8900, "lng": 84.5000, "kind": "basecamp" },
+        "to": { "name": "Mt Himlung Summit", "lat": 28.9000, "lng": 84.5200, "kind": "peak" }
+      },
+      {
+        "day": 9,
+        "title": "Descend to Kathmandu",
+        "description": "Retrace the valley trail to Koto and drive back to Kathmandu for a celebratory dinner.",
+        "altitudeM": 1400,
+        "kind": "travel",
+        "from": { "name": "Mt Himlung Summit", "lat": 28.9000, "lng": 84.5200, "kind": "peak" },
+        "to": { "name": "Kathmandu", "lat": 27.6977, "lng": 85.3230, "kind": "city" }
+      }
+    ],
+    "coordinates": [28.5915, 84.2938],
+    "path": [
+      [28.5915, 84.2938],
+      [28.6500, 84.3000],
+      [28.8300, 84.4500],
+      [28.8300, 84.4500],
+      [28.8700, 84.4800],
+      [28.8700, 84.4800],
+      [28.8900, 84.5000],
+      [28.9000, 84.5200],
+      [27.6977, 85.3230]
+    ],
+    "image": "/images/scenes/glacier.jpg",
+    "gallery": ["/images/scenes/valley.jpg", "/images/scenes/trail.jpg", "/images/places/dharapani.jpg"],
+    "tags": ["technical", "altitude", "remote", "restricted"]
+  },
+  {
+    "slug": "ama-dablam",
+    "name": "Ama Dablam Expedition",
+    "region": "Khumbu",
+    "durationDays": 10,
+    "maxAltitudeM": 6812,
+    "peakHeightM": 6812,
+    "climbingGrade": "Alpine AD — steep fixed-rope sections above Camp 2",
+    "permitCostUSD": 2500,
+    "technicalGearRequired": true,
+    "summitSuccessNotes": "One of the most photogenic 6,000ers in the world; the Yellow Tower and Mushroom Ridge sections demand solid jumaring technique.",
+    "difficulty": "Strenuous",
+    "bestSeason": ["Autumn"],
+    "groupSize": "2–6",
+    "summary": "The iconic sculpted peak above Tengboche — a technical, fixed-rope climb with some of the most exposed camps in the Himalaya.",
+    "highlights": [
+      "Classic Khumbu approach via Namche and Tengboche",
+      "Camp 2's exposed granite ridge",
+      "The Yellow Tower and Mushroom Ridge pitches",
+      "Summit views of Everest, Lhotse and Makalu"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Fly to Lukla, trek to Phakding",
+        "description": "A dramatic mountain flight into Lukla, then an easy walk down the Dudh Koshi valley to Phakding.",
+        "altitudeM": 2610,
+        "kind": "travel",
+        "from": { "name": "Kathmandu", "lat": 27.6977, "lng": 85.3230, "kind": "city" },
+        "to": { "name": "Phakding", "lat": 27.7432, "lng": 86.7125, "kind": "village" }
+      },
+      {
+        "day": 2,
+        "title": "Phakding to Namche Bazaar",
+        "description": "Cross the Hillary suspension bridges and climb steeply into the Sherpa capital, Namche Bazaar.",
+        "altitudeM": 3440,
+        "kind": "trek",
+        "from": { "name": "Phakding", "lat": 27.7432, "lng": 86.7125, "kind": "village" },
+        "to": { "name": "Namche Bazaar", "lat": 27.8045, "lng": 86.7102, "kind": "village" }
+      },
+      {
+        "day": 3,
+        "title": "Acclimatization day in Namche",
+        "description": "A rest day with a short hike up to the Everest View Hotel for first sight of the big peaks.",
+        "altitudeM": 3440,
+        "kind": "acclimatization",
+        "from": { "name": "Namche Bazaar", "lat": 27.8045, "lng": 86.7102, "kind": "village" },
+        "to": { "name": "Namche Bazaar", "lat": 27.8045, "lng": 86.7102, "kind": "village" }
+      },
+      {
+        "day": 4,
+        "title": "Namche to Tengboche",
+        "description": "A rolling trail with the first full view of Ama Dablam's sculpted ridgeline, ending at Tengboche's famous monastery.",
+        "altitudeM": 3860,
+        "kind": "trek",
+        "from": { "name": "Namche Bazaar", "lat": 27.8045, "lng": 86.7102, "kind": "village" },
+        "to": { "name": "Tengboche", "lat": 27.8365, "lng": 86.7638, "kind": "village" }
+      },
+      {
+        "day": 5,
+        "title": "Tengboche to Pangboche",
+        "description": "Descend through rhododendron forest and climb again to Pangboche, home to the Khumbu's oldest monastery.",
+        "altitudeM": 3985,
+        "kind": "trek",
+        "from": { "name": "Tengboche", "lat": 27.8365, "lng": 86.7638, "kind": "village" },
+        "to": { "name": "Pangboche", "lat": 27.8330, "lng": 86.7880, "kind": "village" }
+      },
+      {
+        "day": 6,
+        "title": "Pangboche to Ama Dablam Base Camp",
+        "description": "Leave the main trekking trail and climb moraine to Base Camp, pitched directly beneath the peak's south-west ridge.",
+        "altitudeM": 4570,
+        "kind": "trek",
+        "from": { "name": "Pangboche", "lat": 27.8330, "lng": 86.7880, "kind": "village" },
+        "to": { "name": "Ama Dablam Base Camp", "lat": 27.8614, "lng": 86.8611, "kind": "basecamp" }
+      },
+      {
+        "day": 7,
+        "title": "Base Camp acclimatization and rotation",
+        "description": "Rest, technical gear checks, and a rotation partway up the ridge to fix ropes and pre-acclimatize.",
+        "altitudeM": 4570,
+        "kind": "acclimatization",
+        "from": { "name": "Ama Dablam Base Camp", "lat": 27.8614, "lng": 86.8611, "kind": "basecamp" },
+        "to": { "name": "Ama Dablam Base Camp", "lat": 27.8614, "lng": 86.8611, "kind": "basecamp" }
+      },
+      {
+        "day": 8,
+        "title": "Base Camp to Camp 2",
+        "description": "Climb the exposed granite ridge past Camp 1 to Camp 2's dramatically perched tent platforms.",
+        "altitudeM": 5900,
+        "kind": "trek",
+        "from": { "name": "Ama Dablam Base Camp", "lat": 27.8614, "lng": 86.8611, "kind": "basecamp" },
+        "to": { "name": "Camp 2", "lat": 27.8600, "lng": 86.8580, "kind": "basecamp" }
+      },
+      {
+        "day": 9,
+        "title": "Summit day",
+        "description": "Jumar the fixed ropes through the Yellow Tower and Mushroom Ridge to the summit, with Everest and Lhotse filling the skyline.",
+        "altitudeM": 6812,
+        "kind": "summit",
+        "from": { "name": "Camp 2", "lat": 27.8600, "lng": 86.8580, "kind": "basecamp" },
+        "to": { "name": "Ama Dablam Summit", "lat": 27.8608, "lng": 86.8611, "kind": "peak" }
+      },
+      {
+        "day": 10,
+        "title": "Descend to Lukla, fly to Kathmandu",
+        "description": "A long descent day back down the valley to Lukla, followed by the flight home to Kathmandu.",
+        "altitudeM": 1400,
+        "kind": "travel",
+        "from": { "name": "Ama Dablam Summit", "lat": 27.8608, "lng": 86.8611, "kind": "peak" },
+        "to": { "name": "Kathmandu", "lat": 27.6977, "lng": 85.3230, "kind": "city" }
+      }
+    ],
+    "coordinates": [27.7432, 86.7125],
+    "path": [
+      [27.7432, 86.7125],
+      [27.8045, 86.7102],
+      [27.8045, 86.7102],
+      [27.8365, 86.7638],
+      [27.8330, 86.7880],
+      [27.8614, 86.8611],
+      [27.8614, 86.8611],
+      [27.8600, 86.8580],
+      [27.8608, 86.8611],
+      [27.6977, 85.3230]
+    ],
+    "image": "/images/places/amadablam.jpg",
+    "gallery": ["/images/places/tengboche.jpg", "/images/places/namche.jpg", "/images/places/dingboche.jpg"],
+    "tags": ["technical", "classic", "altitude"]
+  },
+  {
+    "slug": "island-peak",
+    "name": "Island Peak Expedition",
+    "region": "Khumbu",
+    "durationDays": 8,
+    "maxAltitudeM": 6189,
+    "peakHeightM": 6189,
+    "climbingGrade": "Trekking peak — glacier walk with a fixed-rope headwall near the summit",
+    "permitCostUSD": 600,
+    "technicalGearRequired": true,
+    "summitSuccessNotes": "The most accessible 6,000m summit in the Khumbu — strong trek fitness plus a day of basic ice-climbing training is normally enough.",
+    "difficulty": "Challenging",
+    "bestSeason": ["Spring", "Autumn"],
+    "groupSize": "2–10",
+    "summary": "Nepal's most popular trekking peak — a glacier walk to a fixed-rope headwall, with sweeping views of Lhotse, Makalu and Ama Dablam from the summit ridge.",
+    "highlights": [
+      "Beginner-friendly climbing training day",
+      "Glacier crossing on the Lhotse Nup Glacier",
+      "Fixed-rope headwall to the summit ridge",
+      "Views of four 8,000m peaks from the top"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Fly to Lukla, trek to Phakding",
+        "description": "A dramatic mountain flight into Lukla, then an easy walk down the Dudh Koshi valley to Phakding.",
+        "altitudeM": 2610,
+        "kind": "travel",
+        "from": { "name": "Kathmandu", "lat": 27.6977, "lng": 85.3230, "kind": "city" },
+        "to": { "name": "Phakding", "lat": 27.7432, "lng": 86.7125, "kind": "village" }
+      },
+      {
+        "day": 2,
+        "title": "Phakding to Namche Bazaar",
+        "description": "Cross the Hillary suspension bridges and climb steeply into the Sherpa capital, Namche Bazaar.",
+        "altitudeM": 3440,
+        "kind": "trek",
+        "from": { "name": "Phakding", "lat": 27.7432, "lng": 86.7125, "kind": "village" },
+        "to": { "name": "Namche Bazaar", "lat": 27.8045, "lng": 86.7102, "kind": "village" }
+      },
+      {
+        "day": 3,
+        "title": "Namche to Tengboche",
+        "description": "A rolling trail with wide Himalayan views, ending at Tengboche's famous monastery.",
+        "altitudeM": 3860,
+        "kind": "trek",
+        "from": { "name": "Namche Bazaar", "lat": 27.8045, "lng": 86.7102, "kind": "village" },
+        "to": { "name": "Tengboche", "lat": 27.8365, "lng": 86.7638, "kind": "village" }
+      },
+      {
+        "day": 4,
+        "title": "Tengboche to Dingboche",
+        "description": "Follow the Imja Khola valley up into drier, higher terrain, with Ama Dablam close overhead.",
+        "altitudeM": 4410,
+        "kind": "trek",
+        "from": { "name": "Tengboche", "lat": 27.8365, "lng": 86.7638, "kind": "village" },
+        "to": { "name": "Dingboche", "lat": 27.8953, "lng": 86.8278, "kind": "village" }
+      },
+      {
+        "day": 5,
+        "title": "Dingboche to Chhukung",
+        "description": "A short, high acclimatization walk to Chhukung, the last village before Island Peak's approach.",
+        "altitudeM": 4730,
+        "kind": "trek",
+        "from": { "name": "Dingboche", "lat": 27.8953, "lng": 86.8278, "kind": "village" },
+        "to": { "name": "Chhukung", "lat": 27.8860, "lng": 86.8760, "kind": "village" }
+      },
+      {
+        "day": 6,
+        "title": "Chhukung to Island Peak Base Camp",
+        "description": "Cross moraine below the Lhotse Nup Glacier to Base Camp, with a climbing-technique refresher on arrival.",
+        "altitudeM": 5087,
+        "kind": "trek",
+        "from": { "name": "Chhukung", "lat": 27.8860, "lng": 86.8760, "kind": "village" },
+        "to": { "name": "Island Peak Base Camp", "lat": 27.9210, "lng": 86.9340, "kind": "basecamp" }
+      },
+      {
+        "day": 7,
+        "title": "Summit day",
+        "description": "An early start across the glacier and up the fixed-rope headwall to the summit ridge, with Lhotse, Makalu and Ama Dablam all visible from the top.",
+        "altitudeM": 6189,
+        "kind": "summit",
+        "from": { "name": "Island Peak Base Camp", "lat": 27.9210, "lng": 86.9340, "kind": "basecamp" },
+        "to": { "name": "Island Peak Summit", "lat": 27.9255, "lng": 86.9361, "kind": "peak" }
+      },
+      {
+        "day": 8,
+        "title": "Descend to Lukla, fly to Kathmandu",
+        "description": "A long descent back down the valley to Lukla, followed by the flight home to Kathmandu.",
+        "altitudeM": 1400,
+        "kind": "travel",
+        "from": { "name": "Island Peak Summit", "lat": 27.9255, "lng": 86.9361, "kind": "peak" },
+        "to": { "name": "Kathmandu", "lat": 27.6977, "lng": 85.3230, "kind": "city" }
+      }
+    ],
+    "coordinates": [27.7432, 86.7125],
+    "path": [
+      [27.7432, 86.7125],
+      [27.8045, 86.7102],
+      [27.8365, 86.7638],
+      [27.8953, 86.8278],
+      [27.8860, 86.8760],
+      [27.9210, 86.9340],
+      [27.9255, 86.9361],
+      [27.6977, 85.3230]
+    ],
+    "image": "/images/places/dingboche.jpg",
+    "gallery": ["/images/scenes/glacier.jpg", "/images/places/tengboche.jpg", "/images/scenes/valley.jpg"],
+    "tags": ["trekking-peak", "altitude", "classic"]
+  }
+]

@@ -1,9 +1,9 @@
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
 import { site, waLink } from "@/data/site";
-import type { Trek } from "@/data/treks";
+import type { RouteContent } from "@/lib/routeContent";
 
-export default function InquiryCTA({ trek }: { trek: Trek }) {
+export default function InquiryCTA({ trek }: { trek: RouteContent }) {
   return (
     <Reveal>
       <div className="relative overflow-hidden rounded-2xl border border-saffron/30 bg-night-raised p-8 md:p-12">

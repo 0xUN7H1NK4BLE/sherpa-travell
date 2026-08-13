@@ -10,7 +10,7 @@ Sherpa Travell is a Next.js 16 site for guided treks in Nepal. Current state:
 - **Content ("treks")**: stored as JSON (`src/data/treks.json`), read via `src/lib/jsonStore.ts`. Admin writes go either straight to the local file or, if `GITHUB_REPO`/`GITHUB_TOKEN` are set, as a commit to the GitHub repo via the Contents API (git-as-database). No relational DB.
 - **Admin**: HMAC-signed cookie session (`src/lib/adminAuth.ts`), trek CRUD (`TrekManager.tsx` + `TrekForm.tsx`, 551 lines, covers most trek fields including a Leaflet day-by-day map editor `DayMap.tsx`), gallery CRUD (`GalleryAdmin.tsx`), image upload to Vercel Blob.
 - **Inquiries**: `POST /api/inquiry` validates with zod and **only `console.info`s the result** — no persistence, no email, no admin visibility. Leads are currently lost.
-- **Map**: `RouteMap.tsx` exists as a trek-detail component but is **not rendered** on `/treks/[slug]` — only the standalone `/map` page (`MapExplorer.tsx`) shows routes. Confirmed by reading the page source.
+- **Map**: `RouteMap.tsx` is already wired in — `TrekStory.tsx` dynamically imports and renders it for every trek. It uses the Google Maps JS API and pulls slug-keyed `trailWaypoints`/`trekLabels` from `src/data/dayViews.ts` for its flythrough animation. Expeditions (new content type) will need this same map, but the slug-keyed lookup table pattern doesn't scale to admin-created content — see Phase 2/3 design below for the fix.
 - **Expeditions**: no content type. Only "treks" exist (`difficulty` capped at "Strenuous", no peak/summit-specific fields like permit cost, technical grade, or summit success considerations).
 - **Site settings** (contact info, nav, hero copy): hardcoded in `src/data/site.ts`, not admin-editable.
 - Hosting: Vercel, user has Vercel CLI available, wants **free-tier-only** infra.
@@ -73,7 +73,7 @@ src/app/api/inquiries/route.ts (admin GET, list) — POST stays public at /api/i
 src/app/api/admin/settings/route.ts  # site settings read/write
 ```
 
-Trek detail and expedition detail pages both render `RouteMap` (already built, currently orphaned) using `trek.coordinates`/`trek.path` — no new map component needed, just wiring plus reuse for expeditions.
+Trek detail pages already render `RouteMap` via `TrekStory.tsx`. Expedition detail pages need the same wiring using `trek.coordinates`/`trek.path` — no new map component needed, just reuse.
 
 ## Data flow
 
@@ -97,11 +97,11 @@ Trek detail and expedition detail pages both render `RouteMap` (already built, c
 
 1. **DB + inquiries** — Postgres provisioning, Drizzle schema/client, inquiry persistence, admin inquiry inbox.
 2. **Expeditions content type** — schema, store, admin CRUD (form + manager), public listing + detail pages.
-3. **Map everywhere + mobile UI pass** — wire `RouteMap` into trek and expedition detail pages; responsive audit/fixes across public site and admin (nav, forms, tables, image upload, map controls) at mobile breakpoints.
+3. **Map everywhere + mobile UI pass** — generalize `RouteMap`'s slug-keyed waypoint/label lookups (`src/data/dayViews.ts`) so it works for any content type without hand-authored per-slug data, then wire it into expedition detail pages too; responsive audit/fixes across public site and admin (nav, forms, tables, image upload, map controls) at mobile breakpoints.
 4. **Site settings admin + Vercel deploy** — make `site.ts` content admin-editable; provision Postgres and env vars via Vercel CLI; deploy; verify production.
 
 ## Open items resolved during self-review
 
-- Confirmed `RouteMap.tsx` is currently unused dead code on the trek detail page (not a design assumption — verified by reading `src/app/treks/[slug]/page.tsx`).
+- Corrected an earlier assumption: `RouteMap.tsx` is already wired into `TrekStory.tsx` for treks, not dead code — verified by reading `TrekStory.tsx` directly, not just the page file.
 - Confirmed no existing DB dependency in `package.json` — Postgres client/Drizzle will be new dependencies (justified: this is the one place the design intentionally adds real persistence).
 - `site.ts` conversion to JSON-backed is called out explicitly since it changes a currently-hardcoded module into data — avoids surprise later.

@@ -1,21 +1,23 @@
 import Link from "next/link";
 import Tilt from "@/components/ui/Tilt";
-import type { Trek } from "@/data/treks";
+import type { RouteContent } from "@/lib/routeContent";
 import { formatAltitude } from "@/lib/utils";
 
 function TrekCard({
   trek,
   label,
   arrow,
+  basePath = "/treks",
 }: {
-  trek: Trek;
+  trek: RouteContent;
   label: string;
   arrow: "←" | "→";
+  basePath?: string;
 }) {
   return (
     <Tilt max={6} depth={16} className="block">
       <Link
-        href={`/treks/${trek.slug}`}
+        href={`${basePath}/${trek.slug}`}
         className="group photo-dark relative flex min-h-[190px] items-end overflow-hidden rounded-2xl border border-line p-6 md:p-8"
       >
       <img
@@ -52,7 +54,17 @@ function TrekCard({
   );
 }
 
-export default function TrekNav({ trek, all }: { trek: Trek; all: Trek[] }) {
+export default function TrekNav({
+  trek,
+  all,
+  basePath = "/treks",
+  itemLabel = "trek",
+}: {
+  trek: RouteContent;
+  all: RouteContent[];
+  basePath?: string;
+  itemLabel?: string;
+}) {
   const idx = all.findIndex((t) => t.slug === trek.slug);
   const prev = idx > 0 ? all[idx - 1] : null;
   const next = idx < all.length - 1 ? all[idx + 1] : null;
@@ -61,8 +73,8 @@ export default function TrekNav({ trek, all }: { trek: Trek; all: Trek[] }) {
     <div
       className={`grid gap-5 ${prev && next ? "sm:grid-cols-2" : ""}`}
     >
-      {prev && <TrekCard trek={prev} label="Previous trek" arrow="←" />}
-      {next && <TrekCard trek={next} label="Next trek" arrow="→" />}
+      {prev && <TrekCard trek={prev} label={`Previous ${itemLabel}`} arrow="←" basePath={basePath} />}
+      {next && <TrekCard trek={next} label={`Next ${itemLabel}`} arrow="→" basePath={basePath} />}
     </div>
   );
 }

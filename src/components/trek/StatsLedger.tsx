@@ -1,6 +1,7 @@
 import SectionHeading from "@/components/ui/SectionHeading";
 import { dayKindLabel } from "@/data/treks";
-import type { ItineraryDay, Trek } from "@/data/treks";
+import type { ItineraryDay } from "@/data/treks";
+import type { RouteContent } from "@/lib/routeContent";
 import { cn, formatAltitude, oxygenAt, totalAscent } from "@/lib/utils";
 
 const kindBar: Record<ItineraryDay["kind"], string> = {
@@ -10,7 +11,7 @@ const kindBar: Record<ItineraryDay["kind"], string> = {
   summit: "bg-saffron",
 };
 
-export default function StatsLedger({ trek }: { trek: Trek }) {
+export default function StatsLedger({ trek }: { trek: RouteContent }) {
   const alts = trek.itinerary.map((d) => d.altitudeM);
   const min = Math.min(...alts);
   const max = Math.max(...alts);

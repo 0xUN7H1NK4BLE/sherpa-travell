@@ -62,12 +62,12 @@ export default function DayMap({
   const lineRef = useRef<L.Polyline | null>(null);
   const onPlaceRef = useRef(onPlace);
   const singleRef = useRef(single);
-  const targetRef = useRef<"from" | "to">(single ? "from" : "to");
+  const targetRef = useRef<"from" | "to">("from");
   const lastFitKeyRef = useRef("");
   const seqRef = useRef(0);
   const timerRef = useRef(0);
 
-  const [target, setTarget] = useState<"from" | "to">(single ? "from" : "to");
+  const [target, setTarget] = useState<"from" | "to">("from");
   const [query, setQuery] = useState("");
   const [hits, setHits] = useState<Hit[]>([]);
   const [open, setOpen] = useState(false);
@@ -290,7 +290,7 @@ export default function DayMap({
       </div>
 
       <div className="relative">
-        <div className="absolute left-3 right-3 top-3 z-[1000] flex flex-col gap-1.5 sm:right-auto sm:w-72">
+        <div className="static mb-2 flex flex-col gap-1.5 sm:absolute sm:left-3 sm:right-auto sm:top-3 sm:z-[1000] sm:mb-0 sm:w-72">
           {!single && (
             <div className="flex gap-1.5">
               <button
@@ -358,7 +358,7 @@ export default function DayMap({
             </ul>
           )}
         </div>
-        <div ref={containerRef} className="h-56 w-full rounded-lg border border-line" />
+        <div ref={containerRef} className="h-72 w-full rounded-lg border border-line sm:h-56" />
       </div>
 
       <p className="text-[10px] uppercase tracking-[0.18em] text-mist">

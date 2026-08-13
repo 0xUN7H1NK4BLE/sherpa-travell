@@ -229,6 +229,15 @@ body {
   color: var(--accent);
 }
 
+@media (max-width: 639px) {
+  .leaflet-bar a,
+  .leaflet-touch .leaflet-bar a {
+    width: 44px !important;
+    height: 44px !important;
+    line-height: 44px !important;
+  }
+}
+
 .route-dot {
   display: grid;
   place-items: center;

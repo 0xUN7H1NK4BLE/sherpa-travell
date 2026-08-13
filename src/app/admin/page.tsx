@@ -4,31 +4,47 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AdminOverview from "@/components/admin/AdminOverview";
 import TrekManager from "@/components/admin/TrekManager";
+import ExpeditionManager from "@/components/admin/ExpeditionManager";
 import GalleryAdmin from "@/components/admin/GalleryAdmin";
+import InquiryInbox from "@/components/admin/InquiryInbox";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
 import type { Trek } from "@/data/treks";
+import type { Expedition } from "@/data/expeditions";
 
-type Tab = "overview" | "treks" | "gallery";
+type Tab = "overview" | "treks" | "expeditions" | "gallery" | "inquiries";
 
 const tabs: { id: Tab; label: string }[] = [
   { id: "overview", label: "Overview" },
   { id: "treks", label: "Treks" },
+  { id: "expeditions", label: "Expeditions" },
   { id: "gallery", label: "Gallery" },
+  { id: "inquiries", label: "Inquiries" },
 ];
 
 export default function AdminPage() {
   const router = useRouter();
   const [treks, setTreks] = useState<Trek[] | null>(null);
+  const [newInquiryCount, setNewInquiryCount] = useState<number | undefined>(undefined);
   const [tab, setTab] = useState<Tab>("overview");
   const [error, setError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [confirmTrek, setConfirmTrek] = useState<Trek | null>(null);
+  const [expeditions, setExpeditions] = useState<Expedition[] | null>(null);
+  const [deletingExpedition, setDeletingExpedition] = useState<string | null>(null);
+  const [confirmExpedition, setConfirmExpedition] = useState<Expedition | null>(null);
 
   const refresh = useCallback(async () => {
     const res = await fetch("/api/treks", { cache: "no-store" });
     const data = await res.json();
     if (res.ok && data.ok) setTreks(data.treks);
     else setError(data.error ?? "Failed to load treks");
+  }, []);
+
+  const refreshExpeditions = useCallback(async () => {
+    const res = await fetch("/api/expeditions", { cache: "no-store" });
+    const data = await res.json();
+    if (res.ok && data.ok) setExpeditions(data.expeditions);
+    else setError(data.error ?? "Failed to load expeditions");
   }, []);
 
   useEffect(() => {
@@ -39,6 +55,21 @@ export default function AdminPage() {
         else setError((data && data.error) ?? "Failed to load treks");
       })
       .catch(() => setError("Failed to load treks"));
+    fetch("/api/expeditions", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.ok) setExpeditions(data.expeditions);
+        else setError((data && data.error) ?? "Failed to load expeditions");
+      })
+      .catch(() => setError("Failed to load expeditions"));
+    fetch("/api/admin/inquiries", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.ok) {
+          setNewInquiryCount(data.inquiries.filter((i: { status: string }) => i.status === "new").length);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   async function logout() {
@@ -65,6 +96,27 @@ export default function AdminPage() {
       setError("Delete failed");
     } finally {
       setDeleting(null);
+    }
+  }
+
+  async function onDeleteExpeditionConfirmed() {
+    const expedition = confirmExpedition;
+    if (!expedition) return;
+    setDeletingExpedition(expedition.slug);
+    setError(null);
+    try {
+      const res = await fetch(`/api/expeditions/${expedition.slug}`, { method: "DELETE" });
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        setError(data.error ?? "Delete failed");
+        return;
+      }
+      setConfirmExpedition(null);
+      await refreshExpeditions();
+    } catch {
+      setError("Delete failed");
+    } finally {
+      setDeletingExpedition(null);
     }
   }
 
@@ -126,6 +178,8 @@ export default function AdminPage() {
         {tab === "overview" && (
           <AdminOverview
             treks={treks}
+            newInquiryCount={newInquiryCount}
+            expeditionCount={expeditions?.length}
             onNewTrek={() => setTab("treks")}
             onGallery={() => setTab("gallery")}
           />
@@ -139,11 +193,21 @@ export default function AdminPage() {
           />
         )}
 
+        {tab === "expeditions" && (
+          <ExpeditionManager
+            expeditions={expeditions}
+            onDelete={(expedition) => setConfirmExpedition(expedition)}
+            deleting={deletingExpedition}
+          />
+        )}
+
         {tab === "gallery" && treks && (
           <div className="mt-10">
             <GalleryAdmin treks={treks} />
           </div>
         )}
+
+        {tab === "inquiries" && <InquiryInbox />}
       </div>
 
       {confirmTrek && (
@@ -153,6 +217,16 @@ export default function AdminPage() {
           busy={deleting === confirmTrek.slug}
           onConfirm={() => void onDeleteConfirmed()}
           onCancel={() => setConfirmTrek(null)}
+        />
+      )}
+
+      {confirmExpedition && (
+        <ConfirmDialog
+          title={`Delete "${confirmExpedition.name}"?`}
+          message="This removes the expedition from the site and cannot be undone. The itinerary, gallery and route data for it will be lost."
+          busy={deletingExpedition === confirmExpedition.slug}
+          onConfirm={() => void onDeleteExpeditionConfirmed()}
+          onCancel={() => setConfirmExpedition(null)}
         />
       )}
     </section>

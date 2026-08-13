@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import type { ReactNode } from "react";
-import type { Trek } from "@/data/treks";
+import type { RouteContent } from "@/lib/routeContent";
 import { trailWaypoints, trekLabels } from "@/data/dayViews";
 import { loadGoogleMaps } from "@/lib/googleMaps";
 
@@ -73,7 +73,7 @@ export default function RouteMap({
   active = null,
   onSelect,
 }: {
-  trek: Trek;
+  trek: RouteContent;
   active?: number | null;
   onSelect?: (index: number) => void;
 }) {

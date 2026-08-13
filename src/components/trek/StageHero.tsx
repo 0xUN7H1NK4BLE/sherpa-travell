@@ -9,10 +9,31 @@ import {
   useTransform,
 } from "framer-motion";
 import Badge from "@/components/ui/Badge";
-import type { Trek } from "@/data/treks";
+import type { RouteContent } from "@/lib/routeContent";
 import { formatAltitude, formatCoordinates } from "@/lib/utils";
+import dynamic from "next/dynamic";
 
-export default function StageHero({ trek }: { trek: Trek }) {
+const TerrainScene = dynamic(() => import("@/components/three/TerrainScene"), {
+  ssr: false,
+});
+
+function seedFromSlug(slug: string): number {
+  let hash = 0;
+  for (let i = 0; i < slug.length; i++) {
+    hash = (hash * 31 + slug.charCodeAt(i)) | 0;
+  }
+  return Math.abs(hash) || 1;
+}
+
+export default function StageHero({
+  trek,
+  basePath = "/treks",
+  listLabel = "Treks",
+}: {
+  trek: RouteContent;
+  basePath?: string;
+  listLabel?: string;
+}) {
   const reduce = useReducedMotion();
 
   const mx = useMotionValue(0);
@@ -47,11 +68,18 @@ export default function StageHero({ trek }: { trek: Trek }) {
         className="absolute inset-0"
         aria-hidden
       >
-        <img
-          src={trek.image}
-          alt=""
-          aria-hidden
-          className="h-full w-full scale-110 object-cover"
+        <TerrainScene
+          seed={seedFromSlug(trek.slug)}
+          peakAltitudeM={trek.maxAltitudeM}
+          className="h-full w-full"
+          fallback={
+            <img
+              src={trek.image}
+              alt=""
+              aria-hidden
+              className="h-full w-full scale-110 object-cover"
+            />
+          }
         />
       </motion.div>
       <div className="photo-scrim-v absolute inset-0" aria-hidden />
@@ -67,8 +95,8 @@ export default function StageHero({ trek }: { trek: Trek }) {
               aria-label="Breadcrumb"
               className="mb-10 flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-mist"
             >
-              <Link href="/treks" className="transition-colors hover:text-saffron">
-                Treks
+              <Link href={basePath} className="transition-colors hover:text-saffron">
+                {listLabel}
               </Link>
               <span aria-hidden>/</span>
               <span className="text-snow/70">{trek.region}</span>

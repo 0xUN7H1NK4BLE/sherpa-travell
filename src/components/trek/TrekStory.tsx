@@ -5,7 +5,8 @@ import dynamic from "next/dynamic";
 import AccentedTitle from "@/components/ui/AccentedTitle";
 import { dayKindLabel } from "@/data/treks";
 import { dayPlaces } from "@/data/dayViews";
-import type { ItineraryDay, Trek } from "@/data/treks";
+import type { ItineraryDay } from "@/data/treks";
+import type { RouteContent } from "@/lib/routeContent";
 import { cn, dayGain, formatAltitude, oxygenAt } from "@/lib/utils";
 import { photoForTrek } from "@/data/trekPhotos";
 
@@ -21,7 +22,7 @@ const kindAccent: Record<ItineraryDay["kind"], string> = {
   summit: "text-saffron",
 };
 
-function AltitudeRail({ trek, active }: { trek: Trek; active: number }) {
+function AltitudeRail({ trek, active }: { trek: RouteContent; active: number }) {
   const alts = trek.itinerary.map((d) => d.altitudeM);
   const min = Math.min(...alts);
   const max = Math.max(...alts);
@@ -60,7 +61,7 @@ function StageDay({
   index,
   total,
 }: {
-  trek: Trek;
+  trek: RouteContent;
   day: ItineraryDay;
   index: number;
   total: number;
@@ -203,7 +204,7 @@ function StageDay({
   );
 }
 
-export default function TrekStory({ trek }: { trek: Trek }) {
+export default function TrekStory({ trek }: { trek: RouteContent }) {
   const [active, setActive] = useState(0);
   const [mapVisible, setMapVisible] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
