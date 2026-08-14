@@ -70,7 +70,12 @@ export default async function TrekPage({
         <Gallery images={trek.gallery} name={trek.name} />
       </section>
 
-      <ReviewsSection subjectType="trek" subjectSlug={trek.slug} />
+      <ReviewsSection
+        subjectType="trek"
+        subjectSlug={trek.slug}
+        subjectName={trek.name}
+        subjectImage={trek.image}
+      />
 
       <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8 md:pb-32">
         <Reveal>

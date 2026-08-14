@@ -109,3 +109,18 @@ export const reviews = pgTable("reviews", {
 
 export type Review = typeof reviews.$inferSelect;
 export type NewReview = typeof reviews.$inferInsert;
+
+export const teamMembers = pgTable("team_members", {
+  id: text("id").primaryKey(),
+  position: integer("position").notNull(),
+  name: text("name").notNull(),
+  role: text("role").notNull(),
+  photo: text("photo").notNull(),
+  bio: text("bio"),
+  instagram: text("instagram"),
+  facebook: text("facebook"),
+  whatsapp: text("whatsapp"),
+});
+
+export type TeamMemberRow = typeof teamMembers.$inferSelect;
+export type NewTeamMemberRow = typeof teamMembers.$inferInsert;

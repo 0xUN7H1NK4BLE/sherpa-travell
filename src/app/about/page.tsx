@@ -4,8 +4,10 @@ import Button from "@/components/ui/Button";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import TeamSection from "@/components/about/TeamSection";
 import { site, waLink } from "@/data/site";
 import { getRegions } from "@/data/treks";
+import { getTeamMembers } from "@/data/team";
 
 export const metadata: Metadata = {
   title: "About",
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const regions = await getRegions();
+  const [regions, team] = await Promise.all([getRegions(), getTeamMembers()]);
   return (
     <>
       <section className="photo-dark relative overflow-hidden">
@@ -105,6 +107,8 @@ export default async function AboutPage() {
           </div>
         </Reveal>
       </section>
+
+      <TeamSection members={team} />
 
       <section className="border-t border-line bg-night-raised">
         <div className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">

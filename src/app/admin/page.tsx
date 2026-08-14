@@ -8,11 +8,12 @@ import ExpeditionManager from "@/components/admin/ExpeditionManager";
 import GalleryAdmin from "@/components/admin/GalleryAdmin";
 import InquiryInbox from "@/components/admin/InquiryInbox";
 import ReviewsAdmin from "@/components/admin/ReviewsAdmin";
+import TeamAdmin from "@/components/admin/TeamAdmin";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
 import type { Trek } from "@/data/treks";
 import type { Expedition } from "@/data/expeditions";
 
-type Tab = "overview" | "treks" | "expeditions" | "gallery" | "inquiries" | "reviews";
+type Tab = "overview" | "treks" | "expeditions" | "gallery" | "inquiries" | "reviews" | "team";
 
 const tabs: { id: Tab; label: string }[] = [
   { id: "overview", label: "Overview" },
@@ -21,6 +22,7 @@ const tabs: { id: Tab; label: string }[] = [
   { id: "gallery", label: "Gallery" },
   { id: "inquiries", label: "Inquiries" },
   { id: "reviews", label: "Reviews" },
+  { id: "team", label: "Team" },
 ];
 
 export default function AdminPage() {
@@ -224,6 +226,8 @@ export default function AdminPage() {
         {tab === "inquiries" && <InquiryInbox />}
 
         {tab === "reviews" && <ReviewsAdmin />}
+
+        {tab === "team" && <TeamAdmin />}
       </div>
 
       {confirmTrek && (

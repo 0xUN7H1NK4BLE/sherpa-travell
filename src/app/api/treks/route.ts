@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { trekSchema } from "@/lib/trekSchema";
@@ -26,5 +26,8 @@ export async function POST(request: Request) {
   }
   await insertTrek(parsed.data);
   revalidateTag("treks", { expire: 0 });
+  revalidatePath("/");
+  revalidatePath("/treks");
+  revalidatePath("/map");
   return Response.json({ ok: true, trek: parsed.data });
 }

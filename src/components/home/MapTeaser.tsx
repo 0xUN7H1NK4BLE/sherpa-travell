@@ -6,8 +6,9 @@ import { getTreks } from "@/data/treks";
 
 export default async function MapTeaser() {
   const treks = await getTreks();
+  const routes = treks.map((t) => ({ kind: "trek" as const, ...t }));
   return (
-    <section className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
+    <section className="snap-page mx-auto flex min-h-dvh max-w-7xl flex-col justify-center px-5 py-24 md:px-8 md:py-32">
       <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
         <Reveal>
           <SectionHeading
@@ -22,7 +23,7 @@ export default async function MapTeaser() {
           </div>
         </Reveal>
         <Reveal delay={0.15} className="h-[380px] md:h-[460px]">
-          <MapLoader treks={treks} />
+          <MapLoader routes={routes} />
         </Reveal>
       </div>
     </section>

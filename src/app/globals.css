@@ -101,6 +101,18 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+/* Homepage sections opt into this — a section per full page, snapping without
+   forcing clipped content on taller sections (proximity, not mandatory). */
+.snap-page {
+  scroll-snap-align: start;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+  }
 }
 
 body {
@@ -377,4 +389,26 @@ body {
   .marquee-track {
     animation: none;
   }
+}
+
+/* Testimonial card rail — JS-driven autoscroll (rAF) over native overflow-x scroll,
+   so hover/drag lets the user browse manually instead of just pausing in place. */
+.testimonial-marquee {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+.testimonial-marquee:active {
+  cursor: grabbing;
+}
+.testimonial-marquee::-webkit-scrollbar {
+  display: none;
+}
+.testimonial-marquee-track {
+  display: flex;
+  width: max-content;
 }

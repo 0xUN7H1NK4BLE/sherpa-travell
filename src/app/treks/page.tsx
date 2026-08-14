@@ -25,7 +25,7 @@ export default async function TreksPage() {
 
   return (
     <>
-      <section className="photo-dark relative overflow-hidden border-b border-line">
+      <section className="photo-dark relative flex h-svh min-h-[640px] items-end overflow-hidden border-b border-line">
         <img
           src="/images/hero.jpg"
           alt=""
@@ -36,7 +36,7 @@ export default async function TreksPage() {
           className="photo-scrim-v absolute inset-0"
           aria-hidden
         />
-        <div className="relative mx-auto max-w-7xl px-5 pt-36 pb-16 md:px-8 md:pt-44 md:pb-20">
+        <div className="relative mx-auto w-full max-w-7xl px-5 pb-16 md:px-8 md:pb-20">
           <Reveal>
             <p className="mb-6 flex items-center gap-3 text-xs font-medium uppercase tracking-eyebrow text-saffron">
               <span className="h-px w-10 bg-saffron" aria-hidden />

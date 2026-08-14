@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { expeditionSchema } from "@/lib/expeditionSchema";
@@ -27,6 +27,11 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/expeditions/
   }
   await updateExpedition(slug, parsed.data);
   revalidateTag("expeditions", { expire: 0 });
+  revalidatePath("/");
+  revalidatePath("/expeditions");
+  revalidatePath("/map");
+  revalidatePath(`/expeditions/${slug}`);
+  if (parsed.data.slug !== slug) revalidatePath(`/expeditions/${parsed.data.slug}`);
   return Response.json({ ok: true, expedition: parsed.data });
 }
 
@@ -41,6 +46,10 @@ export async function DELETE(_request: Request, ctx: RouteContext<"/api/expediti
   }
   await deleteExpedition(slug);
   revalidateTag("expeditions", { expire: 0 });
+  revalidatePath("/");
+  revalidatePath("/expeditions");
+  revalidatePath("/map");
+  revalidatePath(`/expeditions/${slug}`);
   await deleteBlobRefs([existing.image, ...(existing.gallery ?? [])]);
   return Response.json({ ok: true });
 }

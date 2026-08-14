@@ -101,7 +101,12 @@ export default async function ExpeditionPage({
         <Gallery images={expedition.gallery} name={expedition.name} />
       </section>
 
-      <ReviewsSection subjectType="expedition" subjectSlug={expedition.slug} />
+      <ReviewsSection
+        subjectType="expedition"
+        subjectSlug={expedition.slug}
+        subjectName={expedition.name}
+        subjectImage={expedition.image}
+      />
 
       <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8 md:pb-32">
         <Reveal>

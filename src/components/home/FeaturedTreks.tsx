@@ -10,7 +10,7 @@ import { formatAltitude } from "@/lib/utils";
 export default async function FeaturedTreks() {
   const featuredTreks = await getFeaturedTreks();
   return (
-    <section className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
+    <section className="snap-page mx-auto flex min-h-dvh max-w-7xl flex-col justify-center px-5 py-24 md:px-8 md:py-32">
       <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
         <Reveal>
           <SectionHeading

@@ -4,17 +4,31 @@ import { useCallback, useEffect, useMemo, useRef } from "react";
 import type { ReactNode } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import type { Trek } from "@/data/treks";
+import type { ItineraryDay } from "@/data/treks";
 import { trailWaypoints, getTrekLabels } from "@/data/dayViews";
 
 const AIR_KM = 45;
 const DARK = "#0a0e14";
 const NEPAL: [number, number] = [84.1, 28.35];
 
+export interface MapRoute {
+  kind: "trek" | "expedition";
+  slug: string;
+  name: string;
+  region: string;
+  coordinates: [number, number];
+  path: [number, number][];
+  itinerary: ItineraryDay[];
+}
+
 export interface NepalMapProps {
-  treks: Trek[];
-  activeSlug?: string | null;
-  onSelect?: (slug: string) => void;
+  routes: MapRoute[];
+  activeKey?: string | null;
+  onSelect?: (key: string) => void;
+}
+
+function key(r: { kind: string; slug: string }): string {
+  return `${r.kind}:${r.slug}`;
 }
 
 function ll(p: [number, number]): [number, number] {
@@ -32,9 +46,9 @@ function haversineKm(a: [number, number], b: [number, number]) {
   return 2 * R * Math.asin(Math.sqrt(h));
 }
 
-function raceRoute(trek: Trek) {
-  const wps = trailWaypoints[trek.slug] ?? [];
-  const path = trek.path;
+function raceRoute(route: MapRoute) {
+  const wps = trailWaypoints[route.slug] ?? [];
+  const path = route.path;
   const segs: { points: [number, number][]; air: boolean }[] = [];
   for (let i = 0; i < path.length - 1; i++) {
     const a = path[i];
@@ -70,18 +84,18 @@ function raceRoute(trek: Trek) {
 }
 
 export default function NepalMap({
-  treks,
-  activeSlug = null,
+  routes,
+  activeKey = null,
   onSelect,
 }: NepalMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
-  const activeRef = useRef(activeSlug);
+  const activeRef = useRef(activeKey);
   const onSelectRef = useRef(onSelect);
   useEffect(() => {
-    activeRef.current = activeSlug;
-  }, [activeSlug]);
+    activeRef.current = activeKey;
+  }, [activeKey]);
   useEffect(() => {
     onSelectRef.current = onSelect;
   }, [onSelect]);
@@ -89,44 +103,44 @@ export default function NepalMap({
   const routesGeo = useMemo(() => {
     const features: {
       type: "Feature";
-      properties: { slug: string; air?: boolean };
+      properties: { key: string; air?: boolean };
       geometry: { type: "LineString"; coordinates: number[][] };
     }[] = [];
-    for (const trek of treks) {
-      const { walk, air } = raceRoute(trek);
+    for (const route of routes) {
+      const { walk, air } = raceRoute(route);
       for (const coords of walk)
         features.push({
           type: "Feature",
-          properties: { slug: trek.slug },
+          properties: { key: key(route) },
           geometry: { type: "LineString", coordinates: coords },
         });
       for (const coords of air)
         features.push({
           type: "Feature",
-          properties: { slug: trek.slug, air: true },
+          properties: { key: key(route), air: true },
           geometry: { type: "LineString", coordinates: coords },
         });
     }
     return { type: "FeatureCollection", features };
-  }, [treks]);
+  }, [routes]);
 
   const placesGeo = useMemo(() => {
-    const features = treks.flatMap((trek) =>
-      getTrekLabels(trek).map((p) => ({
+    const features = routes.flatMap((route) =>
+      getTrekLabels(route).map((p) => ({
         type: "Feature",
-        properties: { name: p.name, kind: p.kind, slug: trek.slug },
+        properties: { name: p.name, kind: p.kind, key: key(route) },
         geometry: { type: "Point", coordinates: [p.lng, p.lat] },
       })),
     );
     return { type: "FeatureCollection", features };
-  }, [treks]);
+  }, [routes]);
 
-  const activeSlugMemo = activeSlug;
+  const activeKeyMemo = activeKey;
 
   const activeRouteGeo = useMemo(() => {
-    const trek = treks.find((t) => t.slug === activeSlugMemo);
-    if (!trek) return empty;
-    const { walk } = raceRoute(trek);
+    const route = routes.find((r) => key(r) === activeKeyMemo);
+    if (!route) return empty;
+    const { walk } = raceRoute(route);
     return {
       type: "FeatureCollection",
       features: walk.map((coords) => ({
@@ -135,21 +149,21 @@ export default function NepalMap({
         geometry: { type: "LineString", coordinates: coords },
       })),
     };
-  }, [treks, activeSlugMemo]);
+  }, [routes, activeKeyMemo]);
 
   const daysGeo = useMemo(() => {
-    const trek = treks.find((t) => t.slug === activeSlugMemo);
-    if (!trek) return empty;
+    const route = routes.find((r) => key(r) === activeKeyMemo);
+    if (!route) return empty;
     return {
       type: "FeatureCollection",
-      features: trek.itinerary.map((d, i) => ({
+      features: route.itinerary.map((d, i) => ({
         type: "Feature",
         id: i,
         properties: { day: d.day, kind: d.kind, air: d.kind === "travel" },
-        geometry: { type: "Point", coordinates: ll(trek.path[i]) },
+        geometry: { type: "Point", coordinates: ll(route.path[i]) },
       })),
     };
-  }, [treks, activeSlugMemo]);
+  }, [routes, activeKeyMemo]);
 
   const style = useMemo(() => {
     const accent = "#f59e0b";
@@ -389,9 +403,9 @@ export default function NepalMap({
     [],
   );
 
-  const activeTrek = useMemo(
-    () => treks.find((t) => t.slug === activeSlugMemo) ?? null,
-    [treks, activeSlugMemo],
+  const activeRoute = useMemo(
+    () => routes.find((r) => key(r) === activeKeyMemo) ?? null,
+    [routes, activeKeyMemo],
   );
 
   useEffect(() => {
@@ -421,18 +435,18 @@ export default function NepalMap({
     (el as HTMLDivElement & { __map?: maplibregl.Map }).__map = map;
 
     map.on("click", "route-walk", (e: maplibregl.MapLayerMouseEvent) => {
-      const slug = e.features?.[0]?.properties?.slug as string | undefined;
-      if (slug) onSelectRef.current?.(slug);
+      const k = e.features?.[0]?.properties?.key as string | undefined;
+      if (k) onSelectRef.current?.(k);
     });
     map.on("click", "route-air", (e: maplibregl.MapLayerMouseEvent) => {
-      const slug = e.features?.[0]?.properties?.slug as string | undefined;
-      if (slug) onSelectRef.current?.(slug);
+      const k = e.features?.[0]?.properties?.key as string | undefined;
+      if (k) onSelectRef.current?.(k);
     });
     map.on("click", "place-dot", (e: maplibregl.MapLayerMouseEvent) => {
       const f = e.features?.[0];
       const props = f?.properties;
       if (!props?.name) return;
-      const trek = treks.find((t) => t.slug === props.slug);
+      const route = routes.find((r) => key(r) === props.key);
       const label = String(props.kind).charAt(0).toUpperCase() + String(props.kind).slice(1);
       popupRef.current?.remove();
       popupRef.current = new maplibregl.Popup({
@@ -445,7 +459,7 @@ export default function NepalMap({
         .setHTML(`
           <div style="min-width:128px">
             <div style="font-size:15px;font-weight:500;color:var(--color-snow);line-height:1.15">${props.name}</div>
-            <div style="margin-top:3px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--color-mist)">${label} · ${trek?.name ?? ""}</div>
+            <div style="margin-top:3px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--color-mist)">${label} · ${route?.name ?? ""}</div>
           </div>`)
         .addTo(map);
     });
@@ -464,8 +478,8 @@ export default function NepalMap({
         { mode: "cors", priority: "low" },
       ).catch(() => {});
       if (activeRef.current) {
-        const t = treks.find((x) => x.slug === activeRef.current);
-        if (t) warmTiles([t.coordinates], [11.5, 12.5]);
+        const r = routes.find((x) => key(x) === activeRef.current);
+        if (r) warmTiles([r.coordinates], [11.5, 12.5]);
       }
     };
     map.on("load", ready);
@@ -486,15 +500,15 @@ export default function NepalMap({
     const map = mapRef.current;
     if (!map) return;
     closePopup();
-    if (activeTrek) {
+    if (activeRoute) {
       map.easeTo({
-        center: ll(activeTrek.coordinates),
+        center: ll(activeRoute.coordinates),
         zoom: 12,
         pitch: 0,
         bearing: 0,
         duration: 1100,
       });
-      warmTiles([activeTrek.coordinates], [11.5, 12.5]);
+      warmTiles([activeRoute.coordinates], [11.5, 12.5]);
     } else {
       map.easeTo({
         center: NEPAL,
@@ -504,7 +518,7 @@ export default function NepalMap({
         duration: 900,
       });
     }
-  }, [activeSlug, activeTrek, warmTiles, closePopup]);
+  }, [activeKey, activeRoute, warmTiles, closePopup]);
 
   const zoomBy = useCallback(
     (d: number) => {
@@ -529,11 +543,11 @@ export default function NepalMap({
   }, [closePopup]);
 
   const mapsUrl = useMemo(() => {
-    const [lat, lng] = activeTrek
-      ? activeTrek.coordinates
+    const [lat, lng] = activeRoute
+      ? activeRoute.coordinates
       : (NEPAL.slice().reverse() as [number, number]);
     return `https://maps.google.com/?q=${lat},${lng}`;
-  }, [activeTrek]);
+  }, [activeRoute]);
 
   return (
     <div className="relative h-full w-full">

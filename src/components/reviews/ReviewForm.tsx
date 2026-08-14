@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ImageUpload from "@/components/admin/ImageUpload";
-import StarRating from "@/components/reviews/StarRating";
+import { Star } from "@/components/reviews/StarRating";
 
 const inputStyles =
   "w-full rounded-lg border border-line bg-night px-4 py-3 text-sm text-snow placeholder:text-mist/60 transition-colors focus:border-saffron focus:outline-none";
@@ -75,7 +75,7 @@ export default function ReviewForm({
       <label className="block space-y-2">
         <span className="text-xs uppercase tracking-[0.16em] text-mist">Your rating *</span>
         <div
-          className="flex gap-1"
+          className="flex gap-1 text-saffron"
           onMouseLeave={() => setHoverRating(0)}
         >
           {[1, 2, 3, 4, 5].map((n) => (
@@ -87,7 +87,7 @@ export default function ReviewForm({
               aria-label={`Rate ${n} out of 5`}
               className="p-0.5"
             >
-              <StarRating rating={hoverRating || rating} size="md" className="pointer-events-none" />
+              <Star filled={n <= (hoverRating || rating)} size="md" className="pointer-events-none" />
             </button>
           ))}
         </div>
@@ -105,17 +105,17 @@ export default function ReviewForm({
           />
         </label>
         <div className="space-y-2">
-          <span className="text-xs uppercase tracking-[0.16em] text-mist">Your photo</span>
+          <span className="text-xs uppercase tracking-[0.16em] text-mist">Your best trek shot</span>
           <ImageUpload
             endpoint="/api/reviews/upload"
-            label={photoUrl ? "Change photo" : "Add photo (optional)"}
+            label={photoUrl ? "Change photo" : "Add a photo (optional)"}
             onUploaded={setPhotoUrl}
           />
         </div>
       </div>
 
       <label className="block space-y-2">
-        <span className="text-xs uppercase tracking-[0.16em] text-mist">Your review *</span>
+        <span className="text-xs uppercase tracking-[0.16em] text-mist">Your review and experience *</span>
         <textarea
           required
           rows={4}

@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { trekSchema } from "@/lib/trekSchema";
@@ -27,6 +27,11 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/treks/[slug]
   }
   await updateTrek(slug, parsed.data);
   revalidateTag("treks", { expire: 0 });
+  revalidatePath("/");
+  revalidatePath("/treks");
+  revalidatePath("/map");
+  revalidatePath(`/treks/${slug}`);
+  if (parsed.data.slug !== slug) revalidatePath(`/treks/${parsed.data.slug}`);
   return Response.json({ ok: true, trek: parsed.data });
 }
 
@@ -41,6 +46,10 @@ export async function DELETE(_request: Request, ctx: RouteContext<"/api/treks/[s
   }
   await deleteTrek(slug);
   revalidateTag("treks", { expire: 0 });
+  revalidatePath("/");
+  revalidatePath("/treks");
+  revalidatePath("/map");
+  revalidatePath(`/treks/${slug}`);
   await deleteBlobRefs([existing.image, ...(existing.gallery ?? [])]);
   return Response.json({ ok: true });
 }

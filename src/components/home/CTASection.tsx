@@ -4,7 +4,7 @@ import { site, waLink } from "@/data/site";
 
 export default function CTASection() {
   return (
-    <section className="photo-dark relative overflow-hidden border-t border-line">
+    <section className="snap-page photo-dark relative flex min-h-dvh flex-col justify-center overflow-hidden border-t border-line">
       <img
         src="/images/scenes/stars.jpg"
         alt=""

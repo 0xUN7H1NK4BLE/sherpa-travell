@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { expeditionSchema } from "@/lib/expeditionSchema";
@@ -26,5 +26,8 @@ export async function POST(request: Request) {
   }
   await insertExpedition(parsed.data);
   revalidateTag("expeditions", { expire: 0 });
+  revalidatePath("/");
+  revalidatePath("/expeditions");
+  revalidatePath("/map");
   return Response.json({ ok: true, expedition: parsed.data });
 }

@@ -27,7 +27,7 @@ const values = [
 
 export default function WhyUs() {
   return (
-    <section className="border-y border-line bg-night-raised">
+    <section className="snap-page flex min-h-dvh flex-col justify-center border-y border-line bg-night-raised">
       <div className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
         <Reveal>
           <SectionHeading
