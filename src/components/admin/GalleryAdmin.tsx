@@ -243,7 +243,7 @@ function SceneRow({
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <ImageUpload onUploaded={(url) => update("src", url)} label="Upload image" />
+        <ImageUpload onUploaded={(url) => update("src", url)} label="Upload image" autoOpen={isNew} />
         {draft.src && (
           <input
             className={field}
@@ -319,7 +319,7 @@ function VideoRow({
         onChange={(e) => update("src", e.target.value)}
       />
       <div className="flex flex-wrap items-center gap-3">
-        <ImageUpload onUploaded={(url) => update("poster", url)} label="Upload poster" />
+        <ImageUpload onUploaded={(url) => update("poster", url)} label="Upload poster" autoOpen={isNew} />
         <select
           className={field}
           value={draft.trekSlug ?? ""}

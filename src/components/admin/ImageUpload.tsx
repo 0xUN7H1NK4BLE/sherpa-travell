@@ -1,17 +1,24 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function ImageUpload({
   onUploaded,
   label = "Upload image",
+  autoOpen = false,
 }: {
   onUploaded: (url: string) => void;
   label?: string;
+  autoOpen?: boolean;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (autoOpen) inputRef.current?.click();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function onFile(file: File) {
     setError(null);
