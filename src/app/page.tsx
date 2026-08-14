@@ -3,12 +3,15 @@ import FeaturedTreks from "@/components/home/FeaturedTreks";
 import Hero from "@/components/home/Hero";
 import MapTeaser from "@/components/home/MapTeaser";
 import StatsBand from "@/components/home/StatsBand";
+import Testimonials from "@/components/home/Testimonials";
 import WhyUs from "@/components/home/WhyUs";
 import Marquee from "@/components/ui/Marquee";
 import { getTreks } from "@/data/treks";
+import { getFeaturedReviews } from "@/data/reviews";
 
 export default async function Home() {
   const treks = await getTreks();
+  const reviews = await getFeaturedReviews();
   return (
     <>
       <Hero />
@@ -16,6 +19,7 @@ export default async function Home() {
       <Marquee />
       <FeaturedTreks />
       <WhyUs />
+      <Testimonials reviews={reviews} />
       <MapTeaser />
       <CTASection />
     </>

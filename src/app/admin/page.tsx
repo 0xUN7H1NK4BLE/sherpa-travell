@@ -7,11 +7,12 @@ import TrekManager from "@/components/admin/TrekManager";
 import ExpeditionManager from "@/components/admin/ExpeditionManager";
 import GalleryAdmin from "@/components/admin/GalleryAdmin";
 import InquiryInbox from "@/components/admin/InquiryInbox";
+import ReviewsAdmin from "@/components/admin/ReviewsAdmin";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
 import type { Trek } from "@/data/treks";
 import type { Expedition } from "@/data/expeditions";
 
-type Tab = "overview" | "treks" | "expeditions" | "gallery" | "inquiries";
+type Tab = "overview" | "treks" | "expeditions" | "gallery" | "inquiries" | "reviews";
 
 const tabs: { id: Tab; label: string }[] = [
   { id: "overview", label: "Overview" },
@@ -19,12 +20,14 @@ const tabs: { id: Tab; label: string }[] = [
   { id: "expeditions", label: "Expeditions" },
   { id: "gallery", label: "Gallery" },
   { id: "inquiries", label: "Inquiries" },
+  { id: "reviews", label: "Reviews" },
 ];
 
 export default function AdminPage() {
   const router = useRouter();
   const [treks, setTreks] = useState<Trek[] | null>(null);
   const [newInquiryCount, setNewInquiryCount] = useState<number | undefined>(undefined);
+  const [newReviewCount, setNewReviewCount] = useState<number | undefined>(undefined);
   const [tab, setTab] = useState<Tab>("overview");
   const [error, setError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
@@ -67,6 +70,14 @@ export default function AdminPage() {
       .then((data) => {
         if (data && data.ok) {
           setNewInquiryCount(data.inquiries.filter((i: { status: string }) => i.status === "new").length);
+        }
+      })
+      .catch(() => {});
+    fetch("/api/admin/reviews", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.ok) {
+          setNewReviewCount(data.reviews.filter((r: { approved: boolean }) => !r.approved).length);
         }
       })
       .catch(() => {});
@@ -179,6 +190,7 @@ export default function AdminPage() {
           <AdminOverview
             treks={treks}
             newInquiryCount={newInquiryCount}
+            newReviewCount={newReviewCount}
             expeditionCount={expeditions?.length}
             onNewTrek={() => setTab("treks")}
             onGallery={() => setTab("gallery")}
@@ -210,6 +222,8 @@ export default function AdminPage() {
         )}
 
         {tab === "inquiries" && <InquiryInbox />}
+
+        {tab === "reviews" && <ReviewsAdmin />}
       </div>
 
       {confirmTrek && (

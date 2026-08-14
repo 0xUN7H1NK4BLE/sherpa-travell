@@ -9,6 +9,7 @@ import StageHero from "@/components/trek/StageHero";
 import StatsLedger from "@/components/trek/StatsLedger";
 import TrekNav from "@/components/trek/TrekNav";
 import TrekStory from "@/components/trek/TrekStory";
+import ReviewsSection from "@/components/reviews/ReviewsSection";
 import { getTrek, getTreks } from "@/data/treks";
 
 export async function generateStaticParams() {
@@ -68,6 +69,8 @@ export default async function TrekPage({
         </Reveal>
         <Gallery images={trek.gallery} name={trek.name} />
       </section>
+
+      <ReviewsSection subjectType="trek" subjectSlug={trek.slug} />
 
       <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8 md:pb-32">
         <Reveal>

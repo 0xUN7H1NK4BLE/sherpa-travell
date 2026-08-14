@@ -5,9 +5,11 @@ import { useRef, useState } from "react";
 export default function ImageUpload({
   onUploaded,
   label = "Upload image",
+  endpoint = "/api/upload",
 }: {
   onUploaded: (url: string) => void;
   label?: string;
+  endpoint?: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
@@ -20,7 +22,7 @@ export default function ImageUpload({
     try {
       const form = new FormData();
       form.append("file", file);
-      const res = await fetch("/api/upload", { method: "POST", body: form });
+      const res = await fetch(endpoint, { method: "POST", body: form });
       const data = (await res.json()) as { ok: boolean; url?: string; error?: string };
       if (!res.ok || !data.ok || !data.url) {
         throw new Error(data.error || "Upload failed");

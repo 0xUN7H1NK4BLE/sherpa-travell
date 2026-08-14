@@ -11,12 +11,14 @@ const difficultyColor: Record<string, string> = {
 export default function AdminOverview({
   treks,
   newInquiryCount,
+  newReviewCount,
   expeditionCount,
   onNewTrek,
   onGallery,
 }: {
   treks: Trek[] | null;
   newInquiryCount?: number;
+  newReviewCount?: number;
   expeditionCount?: number;
   onNewTrek: () => void;
   onGallery: () => void;
@@ -52,6 +54,9 @@ export default function AdminOverview({
   const stats = [
     ...(newInquiryCount !== undefined
       ? [{ label: "New inquiries", value: String(newInquiryCount) }]
+      : []),
+    ...(newReviewCount !== undefined
+      ? [{ label: "Pending reviews", value: String(newReviewCount) }]
       : []),
     { label: "Treks", value: String(treks.length) },
     ...(expeditionCount !== undefined

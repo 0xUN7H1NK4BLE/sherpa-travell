@@ -1,15 +1,6 @@
-import { z } from "zod";
-import { insertInquiry } from "@/lib/inquiryStore";
+import { insertReview } from "@/lib/reviewStore";
+import { reviewSubmitSchema } from "@/lib/reviewSchema";
 import { clientIp, rateLimited } from "@/lib/rateLimit";
-
-const inquirySchema = z.object({
-  name: z.string().min(1).max(120),
-  email: z.string().email().max(200),
-  trek: z.string().max(120).optional(),
-  dates: z.string().max(200).optional(),
-  groupSize: z.string().max(40).optional(),
-  message: z.string().max(4000).optional(),
-});
 
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_ATTEMPTS = 5;
@@ -24,15 +15,14 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json().catch(() => null);
-  const parsed = inquirySchema.safeParse(body);
-
+  const parsed = reviewSubmitSchema.safeParse(body);
   if (!parsed.success) {
     return Response.json(
-      { ok: false, errors: z.flattenError(parsed.error).fieldErrors },
+      { ok: false, errors: parsed.error.flatten().fieldErrors },
       { status: 400 },
     );
   }
 
-  const created = await insertInquiry(parsed.data);
+  const created = await insertReview(parsed.data);
   return Response.json({ ok: true, id: created.id });
 }

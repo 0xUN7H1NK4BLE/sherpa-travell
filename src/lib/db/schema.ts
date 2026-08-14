@@ -94,3 +94,18 @@ export const galleryFilms = pgTable("gallery_films", {
 
 export type GalleryFilmRow = typeof galleryFilms.$inferSelect;
 export type NewGalleryFilmRow = typeof galleryFilms.$inferInsert;
+
+export const reviews = pgTable("reviews", {
+  id: serial("id").primaryKey(),
+  subjectType: text("subject_type").notNull(),
+  subjectSlug: text("subject_slug").notNull(),
+  name: text("name"),
+  photoUrl: text("photo_url"),
+  rating: integer("rating").notNull(),
+  text: text("text").notNull(),
+  approved: boolean("approved").notNull().default(false),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export type Review = typeof reviews.$inferSelect;
+export type NewReview = typeof reviews.$inferInsert;
