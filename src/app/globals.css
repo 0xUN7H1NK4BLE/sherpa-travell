@@ -70,16 +70,18 @@
 .photo-scrim-v {
   background-image: linear-gradient(
     to bottom,
-    rgb(255 255 255 / 0.1),
-    rgb(255 255 255 / 0) 40%,
-    rgb(10 14 20 / 0.75)
+    rgb(10 14 20 / 0.35),
+    rgb(10 14 20 / 0.3) 35%,
+    rgb(10 14 20 / 0.6) 65%,
+    rgb(10 14 20 / 0.88)
   );
 }
 .photo-scrim-r {
   background-image: linear-gradient(
     to right,
-    rgb(255 255 255 / 0.25),
-    rgb(255 255 255 / 0)
+    rgb(10 14 20 / 0.55),
+    rgb(10 14 20 / 0.15) 55%,
+    rgb(10 14 20 / 0)
   );
 }
 :root[data-theme="dark"] .photo-scrim-v {

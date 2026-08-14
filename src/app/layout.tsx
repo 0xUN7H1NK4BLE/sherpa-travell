@@ -4,6 +4,8 @@ import "./globals.css";
 import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
 import { site } from "@/data/site";
+import { getTreks } from "@/data/treks";
+import { getExpeditions } from "@/data/expeditions";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -23,11 +25,15 @@ export const metadata: Metadata = {
   description: site.description,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [treks, expeditions] = await Promise.all([getTreks(), getExpeditions()]);
+  const navTreks = treks.map((t) => ({ slug: t.slug, name: t.name }));
+  const navExpeditions = expeditions.map((e) => ({ slug: e.slug, name: e.name }));
+
   return (
     <html
       lang="en"
@@ -44,7 +50,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-night font-sans text-snow">
         <div className="aurora-bg" aria-hidden />
         <div className="grain-overlay" aria-hidden />
-        <Nav />
+        <Nav treks={navTreks} expeditions={navExpeditions} />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
