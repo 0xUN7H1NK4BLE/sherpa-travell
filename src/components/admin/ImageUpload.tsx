@@ -45,7 +45,6 @@ export default function ImageUpload({
           const file = e.target.files?.[0];
           if (file) void onFile(file);
         }}
-        id="image-upload-input"
       />
       <button
         type="button"

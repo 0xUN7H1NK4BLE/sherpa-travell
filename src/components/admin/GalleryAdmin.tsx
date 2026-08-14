@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ImageUpload from "./ImageUpload";
 import type { GalleryContent, GalleryFilm, GalleryScene } from "@/data/galleryContent";
 import type { Trek } from "@/data/treks";
@@ -14,6 +14,8 @@ export default function GalleryAdmin({ treks }: { treks: Trek[] }) {
   const [busy, setBusy] = useState<string | null>(null);
   const [version, setVersion] = useState(0);
   const [pending, setPending] = useState<Editable[]>([]);
+  const [uploadingScene, setUploadingScene] = useState(false);
+  const sceneFileInputRef = useRef<HTMLInputElement>(null);
 
   const refresh = useCallback(async () => {
     const res = await fetch("/api/gallery", { cache: "no-store" });
@@ -79,13 +81,37 @@ export default function GalleryAdmin({ treks }: { treks: Trek[] }) {
   }
 
   function add(kind: Kind) {
+    if (pending.length > 0 || uploadingScene) return;
     setError(null);
-    const id = `${kind}-${Math.random().toString(36).slice(2, 8)}`;
-    const item: Editable =
-      kind === "scene"
-        ? { id, src: "", title: "", subtitle: "", alt: "", credit: "" }
-        : { id, src: "", title: "", subtitle: "Field film", alt: "", credit: "Sherpa Treks Nepal" };
-    setPending((p) => [...p, item]);
+    if (kind === "scene") {
+      sceneFileInputRef.current?.click();
+      return;
+    }
+    const id = `video-${Math.random().toString(36).slice(2, 8)}`;
+    setPending([{ id, src: "", title: "", subtitle: "Field film", alt: "", credit: "Sherpa Treks Nepal" }]);
+  }
+
+  async function onNewSceneFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setError(null);
+    setUploadingScene(true);
+    try {
+      const form = new FormData();
+      form.append("file", file);
+      const res = await fetch("/api/upload", { method: "POST", body: form });
+      const data = (await res.json()) as { ok: boolean; url?: string; error?: string };
+      if (!res.ok || !data.ok || !data.url) {
+        throw new Error(data.error || "Upload failed");
+      }
+      const id = `scene-${Math.random().toString(36).slice(2, 8)}`;
+      setPending([{ id, src: data.url, title: "", subtitle: "", alt: "", credit: "" }]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploadingScene(false);
+    }
   }
 
   return (
@@ -99,11 +125,19 @@ export default function GalleryAdmin({ treks }: { treks: Trek[] }) {
           </p>
         </div>
         <div className="flex gap-3">
+          <input
+            ref={sceneFileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/avif,image/gif"
+            className="hidden"
+            onChange={(e) => void onNewSceneFile(e)}
+          />
           <button
             onClick={() => add("scene")}
-            className="rounded-full bg-saffron px-5 py-2.5 text-sm font-medium text-night transition-colors hover:bg-snow"
+            disabled={uploadingScene}
+            className="rounded-full bg-saffron px-5 py-2.5 text-sm font-medium text-night transition-colors hover:bg-snow disabled:opacity-50"
           >
-            + New scene
+            {uploadingScene ? "Uploading…" : "+ New scene"}
           </button>
           <button
             onClick={() => add("video")}
@@ -138,19 +172,7 @@ export default function GalleryAdmin({ treks }: { treks: Trek[] }) {
                   onRemove={() => void remove("scene", scene.id)}
                 />
               ))}
-              {pending.map((item) =>
-                item.id.startsWith("scene-") ? (
-                  <SceneRow
-                    key={item.id}
-                    item={item as unknown as GalleryScene}
-                    busy={false}
-                    isNew
-                    onSave={(draft) => void save("scene", draft, true)}
-                    onRemove={() => setPending((p) => p.filter((x) => x.id !== item.id))}
-                  />
-                ) : null,
-              )}
-              {content.scenes.length === 0 && pending.length === 0 && <Empty>No scenes yet.</Empty>}
+              {content.scenes.length === 0 && <Empty>No scenes yet.</Empty>}
             </div>
           </div>
 
@@ -169,21 +191,53 @@ export default function GalleryAdmin({ treks }: { treks: Trek[] }) {
                   onRemove={() => void remove("video", video.id)}
                 />
               ))}
-              {pending.map((item) =>
-                item.id.startsWith("video-") ? (
-                  <VideoRow
-                    key={item.id}
-                    item={item as unknown as GalleryFilm}
-                    treks={treks}
-                    busy={false}
-                    isNew
-                    onSave={(draft) => void save("video", draft, true)}
-                    onRemove={() => setPending((p) => p.filter((x) => x.id !== item.id))}
-                  />
-                ) : null,
-              )}
-              {content.videos.length === 0 && pending.length === 0 && <Empty>No films yet.</Empty>}
+              {content.videos.length === 0 && <Empty>No films yet.</Empty>}
             </div>
+          </div>
+        </div>
+      )}
+
+      {pending.length > 0 && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+          onClick={() => setPending([])}
+        >
+          <div
+            className="w-full max-w-lg rounded-2xl border border-line bg-night p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="font-display text-xl font-light">
+                {pending[0].id.startsWith("scene-") ? "New scene" : "New film"}
+              </h3>
+              <button
+                onClick={() => setPending([])}
+                aria-label="Close"
+                className="text-mist transition-colors hover:text-snow"
+              >
+                ✕
+              </button>
+            </div>
+            {pending[0].id.startsWith("scene-") ? (
+              <SceneRow
+                key={pending[0].id}
+                item={pending[0] as GalleryScene}
+                busy={busy === pending[0].id}
+                isNew
+                onSave={(draft) => void save("scene", draft, true)}
+                onRemove={() => setPending([])}
+              />
+            ) : (
+              <VideoRow
+                key={pending[0].id}
+                item={pending[0] as GalleryFilm}
+                treks={treks}
+                busy={busy === pending[0].id}
+                isNew
+                onSave={(draft) => void save("video", draft, true)}
+                onRemove={() => setPending([])}
+              />
+            )}
           </div>
         </div>
       )}
