@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Reveal from "@/components/ui/Reveal";
 import TrekFinder from "@/components/treks/TrekFinder";
 import Marquee from "@/components/ui/Marquee";
-import { treks } from "@/data/treks";
+import { getTreks } from "@/data/treks";
 import { formatAltitude } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -11,7 +11,8 @@ export const metadata: Metadata = {
     "Eight Sherpa-guided treks across Nepal — from Everest Base Camp to Upper Dolpo and the Limi Valley. Filter by region, difficulty and duration.",
 };
 
-export default function TreksPage() {
+export default async function TreksPage() {
+  const treks = await getTreks();
   const regions = new Set(
     treks.flatMap((t) => t.region.split(",").map((r) => r.trim())),
   );

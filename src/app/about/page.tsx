@@ -5,7 +5,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { site, waLink } from "@/data/site";
-import { regions } from "@/data/treks";
+import { getRegions } from "@/data/treks";
 
 export const metadata: Metadata = {
   title: "About",
@@ -13,7 +13,8 @@ export const metadata: Metadata = {
     "Sherpa Treks Nepal is a Kathmandu-based trekking company founded by Abishek Sherpa, guiding the country's most remote and rewarding regions.",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const regions = await getRegions();
   return (
     <>
       <section className="photo-dark relative overflow-hidden">

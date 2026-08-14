@@ -9,9 +9,10 @@ import StageHero from "@/components/trek/StageHero";
 import StatsLedger from "@/components/trek/StatsLedger";
 import TrekNav from "@/components/trek/TrekNav";
 import TrekStory from "@/components/trek/TrekStory";
-import { getTrek, treks } from "@/data/treks";
+import { getTrek, getTreks } from "@/data/treks";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const treks = await getTreks();
   return treks.map((trek) => ({ slug: trek.slug }));
 }
 
@@ -21,7 +22,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const trek = getTrek(slug);
+  const trek = await getTrek(slug);
   if (!trek) return {};
   return { title: trek.name, description: trek.summary };
 }
@@ -32,8 +33,9 @@ export default async function TrekPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const trek = getTrek(slug);
+  const trek = await getTrek(slug);
   if (!trek) notFound();
+  const treks = await getTreks();
 
   return (
     <>

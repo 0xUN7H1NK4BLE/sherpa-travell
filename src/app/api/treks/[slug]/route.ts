@@ -1,7 +1,8 @@
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { trekSchema } from "@/lib/trekSchema";
-import { readTreks, writeTreks } from "@/lib/trekStore";
+import { getTrekBySlug, updateTrek, deleteTrek } from "@/lib/trekStore";
 import { deleteBlobRefs } from "@/lib/blobCleanup";
 
 export async function PUT(request: Request, ctx: RouteContext<"/api/treks/[slug]">) {
@@ -17,16 +18,15 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/treks/[slug]
       { status: 400 },
     );
   }
-  const treks = await readTreks();
-  const idx = treks.findIndex((t) => t.slug === slug);
-  if (idx === -1) {
+  const existing = await getTrekBySlug(slug);
+  if (!existing) {
     return Response.json({ ok: false, error: "Trek not found" }, { status: 404 });
   }
-  if (parsed.data.slug !== slug && treks.some((t) => t.slug === parsed.data.slug)) {
+  if (parsed.data.slug !== slug && (await getTrekBySlug(parsed.data.slug))) {
     return Response.json({ ok: false, error: "A trek with that slug already exists" }, { status: 409 });
   }
-  treks[idx] = parsed.data;
-  await writeTreks(treks);
+  await updateTrek(slug, parsed.data);
+  revalidateTag("treks", { expire: 0 });
   return Response.json({ ok: true, trek: parsed.data });
 }
 
@@ -35,13 +35,12 @@ export async function DELETE(_request: Request, ctx: RouteContext<"/api/treks/[s
     return Response.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
   const { slug } = await ctx.params;
-  const treks = await readTreks();
-  const idx = treks.findIndex((t) => t.slug === slug);
-  if (idx === -1) {
+  const existing = await getTrekBySlug(slug);
+  if (!existing) {
     return Response.json({ ok: false, error: "Trek not found" }, { status: 404 });
   }
-  const [trek] = treks.splice(idx, 1);
-  await writeTreks(treks);
-  await deleteBlobRefs([trek.image, ...(trek.gallery ?? [])]);
+  await deleteTrek(slug);
+  revalidateTag("treks", { expire: 0 });
+  await deleteBlobRefs([existing.image, ...(existing.gallery ?? [])]);
   return Response.json({ ok: true });
 }

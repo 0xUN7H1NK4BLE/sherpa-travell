@@ -1,17 +1,12 @@
-import { treks } from "@/data/treks";
-import { expeditions } from "@/data/expeditions";
 import type { ItineraryDay } from "@/data/treks";
 
-interface RouteLike {
+export interface RouteLike {
   slug: string;
   itinerary: ItineraryDay[];
 }
 
-const allRoutes: RouteLike[] = [...treks, ...expeditions];
-
-
-// dayPlaces[slug][i] = the start and end place of itinerary day i.
-// trekLabels[slug] = named places rendered on the map (villages, peaks,
+// getDayPlaces(route)[i] = the start and end place of itinerary day i.
+// getTrekLabels(route) = named places rendered on the map (villages, peaks,
 // passes, lakes, monasteries) so the satellite view reads like a tour.
 
 export interface DayPlace {
@@ -184,32 +179,27 @@ export const scenicLabels: Record<string, PlaceLabel[]> = {
 // and path[i] (day i's walking leg), as [lat, lng]. Empty for travel/acclimatization
 // days. Lets the camera follow the winding trail instead of a straight line.
 
-export const dayPlaces: Record<string, DayPlace[]> = Object.fromEntries(
-  allRoutes.map((t) => [
-    t.slug,
-    t.itinerary.map((d) => ({
-      from: d.from.name,
-      to: d.to.name,
-    })),
-  ]),
-);
+export function getDayPlaces(route: RouteLike): DayPlace[] {
+  return route.itinerary.map((d) => ({
+    from: d.from.name,
+    to: d.to.name,
+  }));
+}
 
-export const trekLabels: Record<string, PlaceLabel[]> = Object.fromEntries(
-  allRoutes.map((t) => {
-    const map = new Map<string, PlaceLabel>();
-    for (const d of t.itinerary) {
-      for (const p of [d.from, d.to]) {
-        if (p && p.name && !map.has(p.name)) {
-          map.set(p.name, { name: p.name, lat: p.lat, lng: p.lng, kind: p.kind });
-        }
+export function getTrekLabels(route: RouteLike): PlaceLabel[] {
+  const map = new Map<string, PlaceLabel>();
+  for (const d of route.itinerary) {
+    for (const p of [d.from, d.to]) {
+      if (p && p.name && !map.has(p.name)) {
+        map.set(p.name, { name: p.name, lat: p.lat, lng: p.lng, kind: p.kind });
       }
     }
-    for (const p of scenicLabels[t.slug] ?? []) {
-      if (!map.has(p.name)) map.set(p.name, p);
-    }
-    return [t.slug, [...map.values()]];
-  }),
-);
+  }
+  for (const p of scenicLabels[route.slug] ?? []) {
+    if (!map.has(p.name)) map.set(p.name, p);
+  }
+  return [...map.values()];
+}
 
 export const trailWaypoints: Record<string, [number, number][][]> = {
   "everest-base-camp": [

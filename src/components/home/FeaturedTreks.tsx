@@ -4,10 +4,11 @@ import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Tilt from "@/components/ui/Tilt";
-import { featuredTreks } from "@/data/treks";
+import { getFeaturedTreks } from "@/data/treks";
 import { formatAltitude } from "@/lib/utils";
 
-export default function FeaturedTreks() {
+export default async function FeaturedTreks() {
+  const featuredTreks = await getFeaturedTreks();
   return (
     <section className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
       <div className="mb-14 flex flex-wrap items-end justify-between gap-6">

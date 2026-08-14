@@ -5,9 +5,9 @@
 // and add an entry to `galleryVideos` below — the wall picks it up with no
 // other changes. Keep files under ~8MB for smooth streaming.
 
-import { treks } from "@/data/treks";
+import { getTreks } from "@/data/treks";
 import { trekPhotos } from "@/data/trekPhotos";
-import { dayPlaces, trekLabels, type PlaceKind } from "@/data/dayViews";
+import { getDayPlaces, getTrekLabels, type PlaceKind, type PlaceLabel } from "@/data/dayViews";
 import type { GalleryContent } from "@/data/galleryContent";
 
 export type MediaType = "image" | "video";
@@ -50,19 +50,16 @@ const KIND_LABEL: Record<PlaceKind, string> = {
   river: "River",
 };
 
-function kindOfPlace(name?: string): string | undefined {
+function kindOfPlace(labels: PlaceLabel[], name?: string): string | undefined {
   if (!name) return undefined;
   const needle = name.toLowerCase();
-  for (const slug of Object.keys(trekLabels)) {
-    const hit = trekLabels[slug].find(
-      (l) => l.name.toLowerCase() === needle,
-    );
-    if (hit) return KIND_LABEL[hit.kind];
-  }
-  return undefined;
+  const hit = labels.find((l) => l.name.toLowerCase() === needle);
+  return hit ? KIND_LABEL[hit.kind] : undefined;
 }
 
-export function buildGallery(content: GalleryContent): GalleryItem[] {
+export async function buildGallery(content: GalleryContent): Promise<GalleryItem[]> {
+  const treks = await getTreks();
+  const allLabels: PlaceLabel[] = treks.flatMap((t) => getTrekLabels(t));
   const seen = new Set<string>();
   const items: GalleryItem[] = [];
 
@@ -102,7 +99,7 @@ export function buildGallery(content: GalleryContent): GalleryItem[] {
 
   for (const t of treks) {
     const photos = trekPhotos[t.slug] ?? [];
-    const places = dayPlaces[t.slug] ?? [];
+    const places = getDayPlaces(t);
     photos.forEach((src, i) => {
       const place = places[i]?.to;
       const title = place || t.name;
@@ -112,7 +109,7 @@ export function buildGallery(content: GalleryContent): GalleryItem[] {
         src,
         title,
         subtitle: t.itinerary[i]?.title ?? "",
-        badge: kindOfPlace(place) ?? "Place",
+        badge: kindOfPlace(allLabels, place) ?? "Place",
         trekSlug: t.slug,
         trekName: t.name,
         alt: `${title} — ${t.name}`,

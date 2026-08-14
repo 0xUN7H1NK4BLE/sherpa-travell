@@ -190,6 +190,7 @@ export default function AdminPage() {
             treks={treks}
             onDelete={(trek) => setConfirmTrek(trek)}
             deleting={deleting}
+            onSaved={refresh}
           />
         )}
 
@@ -198,6 +199,7 @@ export default function AdminPage() {
             expeditions={expeditions}
             onDelete={(expedition) => setConfirmExpedition(expedition)}
             deleting={deletingExpedition}
+            onSaved={refreshExpeditions}
           />
         )}
 

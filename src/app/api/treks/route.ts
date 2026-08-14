@@ -1,10 +1,11 @@
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { trekSchema } from "@/lib/trekSchema";
-import { readTreks, writeTreks } from "@/lib/trekStore";
+import { listTreks, insertTrek, getTrekBySlug } from "@/lib/trekStore";
 
 export async function GET() {
-  const treks = await readTreks();
+  const treks = await listTreks();
   return Response.json({ ok: true, treks });
 }
 
@@ -20,11 +21,10 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   }
-  const treks = await readTreks();
-  if (treks.some((t) => t.slug === parsed.data.slug)) {
+  if (await getTrekBySlug(parsed.data.slug)) {
     return Response.json({ ok: false, error: "A trek with that slug already exists" }, { status: 409 });
   }
-  treks.push(parsed.data);
-  await writeTreks(treks);
+  await insertTrek(parsed.data);
+  revalidateTag("treks", { expire: 0 });
   return Response.json({ ok: true, trek: parsed.data });
 }

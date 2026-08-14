@@ -3,7 +3,7 @@ import Reveal from "@/components/ui/Reveal";
 import Eyebrow from "@/components/ui/Eyebrow";
 import GalleryWall from "@/components/gallery/GalleryWall";
 import { buildGallery } from "@/data/gallery";
-import { treks } from "@/data/treks";
+import { getTreks } from "@/data/treks";
 import { readGalleryLocal } from "@/lib/galleryStore";
 
 export const metadata: Metadata = {
@@ -12,9 +12,9 @@ export const metadata: Metadata = {
     "Every view we came home with — peak, pass and prayer-flag from all eight Sherpa-guided treks across Nepal. Filter by trek and dive in.",
 };
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
   const content = readGalleryLocal();
-  const items = buildGallery(content);
+  const [items, treks] = await Promise.all([buildGallery(content), getTreks()]);
 
   return (
     <>

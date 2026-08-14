@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import MapExplorer from "@/components/map/MapExplorer";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { treks } from "@/data/treks";
+import { getTreks } from "@/data/treks";
 
 export const metadata: Metadata = {
   title: "Trek map",
@@ -10,7 +10,8 @@ export const metadata: Metadata = {
     "Every Sherpa Treks Nepal route on the map — Kanchenjunga in the east to the Limi Valley in the far west. Click a marker to explore the trek.",
 };
 
-export default function MapPage() {
+export default async function MapPage() {
+  const treks = await getTreks();
   return (
     <div className="mx-auto max-w-7xl px-5 pt-32 pb-24 md:px-8 md:pt-40 md:pb-32">
       <Reveal className="mb-12">

@@ -1,10 +1,11 @@
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { expeditionSchema } from "@/lib/expeditionSchema";
-import { readExpeditions, writeExpeditions } from "@/lib/expeditionStore";
+import { listExpeditions, insertExpedition, getExpeditionBySlug } from "@/lib/expeditionStore";
 
 export async function GET() {
-  const expeditions = await readExpeditions();
+  const expeditions = await listExpeditions();
   return Response.json({ ok: true, expeditions });
 }
 
@@ -20,11 +21,10 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   }
-  const expeditions = await readExpeditions();
-  if (expeditions.some((e) => e.slug === parsed.data.slug)) {
+  if (await getExpeditionBySlug(parsed.data.slug)) {
     return Response.json({ ok: false, error: "An expedition with that slug already exists" }, { status: 409 });
   }
-  expeditions.push(parsed.data);
-  await writeExpeditions(expeditions);
+  await insertExpedition(parsed.data);
+  revalidateTag("expeditions", { expire: 0 });
   return Response.json({ ok: true, expedition: parsed.data });
 }

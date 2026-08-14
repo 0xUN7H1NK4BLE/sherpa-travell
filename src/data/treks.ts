@@ -1,4 +1,5 @@
-import treksData from "./treks.json";
+import { unstable_cache } from "next/cache";
+import { listTreks } from "@/lib/trekStore";
 
 export type TrekTag = "remote" | "classic" | "lakes" | "restricted" | "cultural";
 export type Difficulty = "Moderate" | "Challenging" | "Strenuous";
@@ -50,28 +51,27 @@ export interface Trek {
   tags: TrekTag[];
 }
 
-export const treks: Trek[] = treksData as Trek[];
+const getTreksCached = unstable_cache(() => listTreks(), ["treks"], {
+  tags: ["treks"],
+});
 
-export const regions = [...new Set(treks.map((t) => t.region))];
-
-export const difficulties: Difficulty[] = ["Moderate", "Challenging", "Strenuous"];
-
-export const dayKindLabel: Record<DayKind, string> = {
-  trek: "Trek",
-  acclimatization: "Acclimatization",
-  travel: "Travel",
-  summit: "High point",
-};
-
-export function getTrek(slug: string) {
-  return treks.find((t) => t.slug === slug);
+export async function getTreks(): Promise<Trek[]> {
+  return getTreksCached();
 }
 
-export const featuredTreks = [
-  "upper-dolpo",
-  "kanchenjunga-base-camp",
-  "everest-base-camp",
-  "limi-valley",
-]
-  .map((slug) => getTrek(slug))
-  .filter((t): t is Trek => Boolean(t));
+export async function getTrek(slug: string): Promise<Trek | undefined> {
+  return (await getTreks()).find((t) => t.slug === slug);
+}
+
+export async function getRegions(): Promise<string[]> {
+  return [...new Set((await getTreks()).map((t) => t.region))];
+}
+
+const FEATURED_SLUGS = ["upper-dolpo", "kanchenjunga-base-camp", "everest-base-camp", "limi-valley"];
+
+export async function getFeaturedTreks(): Promise<Trek[]> {
+  const all = await getTreks();
+  return FEATURED_SLUGS.map((slug) => all.find((t) => t.slug === slug)).filter(
+    (t): t is Trek => Boolean(t),
+  );
+}

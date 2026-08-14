@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Reveal from "@/components/ui/Reveal";
 import ExpeditionFinder from "@/components/expedition/ExpeditionFinder";
 import Marquee from "@/components/ui/Marquee";
-import { expeditions } from "@/data/expeditions";
+import { getExpeditions } from "@/data/expeditions";
 import { formatAltitude } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -11,7 +11,8 @@ export const metadata: Metadata = {
     "Sherpa-guided peak expeditions across Nepal — from Island Peak's glacier walk to the technical ridges of Ama Dablam and remote Mt Himlung.",
 };
 
-export default function ExpeditionsPage() {
+export default async function ExpeditionsPage() {
+  const expeditions = await getExpeditions();
   const regions = new Set(
     expeditions.flatMap((e) => e.region.split(",").map((r) => r.trim())),
   );

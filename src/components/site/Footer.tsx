@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { site } from "@/data/site";
-import { treks } from "@/data/treks";
+import { getTreks } from "@/data/treks";
 import SiteLogo from "@/components/site/SiteLogo";
 
-export default function Footer() {
+export default async function Footer() {
+  const treks = await getTreks();
   return (
     <footer className="border-t border-line bg-night-raised">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-[1.4fr_1fr_1fr_1.2fr] md:px-8">

@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
 import TrekStage from "./TrekStage";
-import { difficulties, regions, type Difficulty, type Trek } from "@/data/treks";
+import { difficulties } from "@/data/trekConstants";
+import type { Difficulty, Trek } from "@/data/treks";
 import { waLink } from "@/data/site";
 import { cn } from "@/lib/utils";
 
@@ -64,6 +65,7 @@ function FilterGroup({
 }
 
 export default function TrekFinder({ treks }: { treks: Trek[] }) {
+  const regions = useMemo(() => [...new Set(treks.map((t) => t.region))], [treks]);
   const [activeRegions, setActiveRegions] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<Difficulty | null>(null);
   const [duration, setDuration] = useState("any");

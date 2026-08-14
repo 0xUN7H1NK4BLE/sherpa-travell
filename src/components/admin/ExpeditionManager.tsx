@@ -17,10 +17,12 @@ export default function ExpeditionManager({
   expeditions,
   onDelete,
   deleting,
+  onSaved,
 }: {
   expeditions: Expedition[] | null;
   onDelete: (expedition: Expedition) => void;
   deleting: string | null;
+  onSaved: () => void;
 }) {
   const [mode, setMode] = useState<Mode>({ kind: "list" });
   const [query, setQuery] = useState("");
@@ -37,7 +39,10 @@ export default function ExpeditionManager({
     return matchesQuery && matchesDifficulty;
   });
 
-  const saved = () => setMode({ kind: "list" });
+  const saved = () => {
+    setMode({ kind: "list" });
+    onSaved();
+  };
 
   if (mode.kind === "new" || mode.kind === "edit") {
     return (

@@ -9,9 +9,10 @@ import StageHero from "@/components/trek/StageHero";
 import StatsLedger from "@/components/trek/StatsLedger";
 import TrekNav from "@/components/trek/TrekNav";
 import TrekStory from "@/components/trek/TrekStory";
-import { getExpedition, expeditions } from "@/data/expeditions";
+import { getExpedition, getExpeditions } from "@/data/expeditions";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const expeditions = await getExpeditions();
   return expeditions.map((expedition) => ({ slug: expedition.slug }));
 }
 
@@ -21,7 +22,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const expedition = getExpedition(slug);
+  const expedition = await getExpedition(slug);
   if (!expedition) return {};
   return { title: expedition.name, description: expedition.summary };
 }
@@ -32,8 +33,9 @@ export default async function ExpeditionPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const expedition = getExpedition(slug);
+  const expedition = await getExpedition(slug);
   if (!expedition) notFound();
+  const expeditions = await getExpeditions();
 
   return (
     <>

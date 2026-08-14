@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Trek } from "@/data/treks";
-import { trailWaypoints, trekLabels } from "@/data/dayViews";
+import { trailWaypoints, getTrekLabels } from "@/data/dayViews";
 
 const AIR_KM = 45;
 const DARK = "#0a0e14";
@@ -112,7 +112,7 @@ export default function NepalMap({
 
   const placesGeo = useMemo(() => {
     const features = treks.flatMap((trek) =>
-      (trekLabels[trek.slug] ?? []).map((p) => ({
+      getTrekLabels(trek).map((p) => ({
         type: "Feature",
         properties: { name: p.name, kind: p.kind, slug: trek.slug },
         geometry: { type: "Point", coordinates: [p.lng, p.lat] },

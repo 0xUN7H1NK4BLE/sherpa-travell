@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import AccentedTitle from "@/components/ui/AccentedTitle";
-import { dayKindLabel } from "@/data/treks";
-import { dayPlaces } from "@/data/dayViews";
+import { dayKindLabel } from "@/data/trekConstants";
+import { getDayPlaces } from "@/data/dayViews";
 import type { ItineraryDay } from "@/data/treks";
 import type { RouteContent } from "@/lib/routeContent";
 import { cn, dayGain, formatAltitude, oxygenAt } from "@/lib/utils";
@@ -264,9 +264,9 @@ export default function TrekStory({ trek }: { trek: RouteContent }) {
               </p>
             </div>
             <p className="mt-1.5 truncate text-sm font-medium text-snow">
-              {dayPlaces[trek.slug]?.[active]?.from ?? "—"}{" "}
+              {getDayPlaces(trek)[active]?.from ?? "—"}{" "}
               <span className="text-saffron">→</span>{" "}
-              {dayPlaces[trek.slug]?.[active]?.to ?? "—"}
+              {getDayPlaces(trek)[active]?.to ?? "—"}
             </p>
             <p className="mt-0.5 text-[10px] uppercase tracking-[0.18em] text-mist">
               street view · watch the walk

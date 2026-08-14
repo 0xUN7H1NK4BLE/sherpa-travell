@@ -1,5 +1,5 @@
 import SectionHeading from "@/components/ui/SectionHeading";
-import { dayKindLabel } from "@/data/treks";
+import { dayKindLabel } from "@/data/trekConstants";
 import type { ItineraryDay } from "@/data/treks";
 import type { RouteContent } from "@/lib/routeContent";
 import { cn, formatAltitude, oxygenAt, totalAscent } from "@/lib/utils";

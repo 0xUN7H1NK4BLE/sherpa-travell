@@ -2,15 +2,17 @@
 
 import { useState } from "react";
 import { site, waLink } from "@/data/site";
-import { treks } from "@/data/treks";
+import type { Trek } from "@/data/treks";
 
 const inputStyles =
   "w-full rounded-lg border border-line bg-night px-4 py-3 text-sm text-snow placeholder:text-mist/60 transition-colors focus:border-saffron focus:outline-none";
 
 export default function InquiryForm({
   initialTrek,
+  treks,
 }: {
   initialTrek?: string;
+  treks: Trek[];
 }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

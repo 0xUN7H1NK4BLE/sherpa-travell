@@ -9,7 +9,7 @@ import {
   useReducedMotion,
   useTransform,
 } from "framer-motion";
-import { treks } from "@/data/treks";
+import type { Trek } from "@/data/treks";
 
 function Counter({
   to,
@@ -39,7 +39,7 @@ function Counter({
   );
 }
 
-export default function StatsBand() {
+export default function StatsBand({ treks }: { treks: Trek[] }) {
   const stats = [
     { value: 8, label: "Trekking regions" },
     { value: 5545, label: "Highest point · metres" },

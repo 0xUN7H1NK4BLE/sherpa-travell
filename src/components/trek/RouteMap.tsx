@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import type { ReactNode } from "react";
 import type { RouteContent } from "@/lib/routeContent";
-import { trailWaypoints, trekLabels } from "@/data/dayViews";
+import { trailWaypoints, getTrekLabels } from "@/data/dayViews";
 import { loadGoogleMaps } from "@/lib/googleMaps";
 
 const DARK = "#0a0e14";
@@ -219,7 +219,7 @@ export default function RouteMap({
           flyTokenRef.current++;
         });
 
-        (trekLabels[trek.slug] ?? []).forEach((p) => {
+        getTrekLabels(trek).forEach((p) => {
           const color = PLACE_COLORS[p.kind] ?? "#d3dae4";
           const marker = new gm.Marker({
             position: ll([p.lat, p.lng]),

@@ -3,7 +3,7 @@ import InquiryForm from "@/components/contact/InquiryForm";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { site } from "@/data/site";
-import { treks } from "@/data/treks";
+import { getTreks } from "@/data/treks";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -17,6 +17,7 @@ export default async function ContactPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { trek } = await searchParams;
+  const treks = await getTreks();
   const initialTrek =
     typeof trek === "string" && treks.some((t) => t.slug === trek)
       ? trek
@@ -92,7 +93,7 @@ export default async function ContactPage({
         </Reveal>
 
         <Reveal delay={0.12}>
-          <InquiryForm initialTrek={initialTrek} />
+          <InquiryForm initialTrek={initialTrek} treks={treks} />
         </Reveal>
       </div>
     </div>

@@ -5,12 +5,14 @@ import MapTeaser from "@/components/home/MapTeaser";
 import StatsBand from "@/components/home/StatsBand";
 import WhyUs from "@/components/home/WhyUs";
 import Marquee from "@/components/ui/Marquee";
+import { getTreks } from "@/data/treks";
 
-export default function Home() {
+export default async function Home() {
+  const treks = await getTreks();
   return (
     <>
       <Hero />
-      <StatsBand />
+      <StatsBand treks={treks} />
       <Marquee />
       <FeaturedTreks />
       <WhyUs />

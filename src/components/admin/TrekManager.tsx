@@ -17,10 +17,12 @@ export default function TrekManager({
   treks,
   onDelete,
   deleting,
+  onSaved,
 }: {
   treks: Trek[] | null;
   onDelete: (trek: Trek) => void;
   deleting: string | null;
+  onSaved: () => void;
 }) {
   const [mode, setMode] = useState<Mode>({ kind: "list" });
   const [query, setQuery] = useState("");
@@ -37,7 +39,10 @@ export default function TrekManager({
     return matchesQuery && matchesDifficulty;
   });
 
-  const saved = () => setMode({ kind: "list" });
+  const saved = () => {
+    setMode({ kind: "list" });
+    onSaved();
+  };
 
   if (mode.kind === "new" || mode.kind === "edit") {
     return (
