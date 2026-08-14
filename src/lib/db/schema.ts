@@ -65,3 +65,32 @@ export const expeditions = pgTable("expeditions", {
 
 export type ExpeditionRow = typeof expeditions.$inferSelect;
 export type NewExpeditionRow = typeof expeditions.$inferInsert;
+
+export const galleryScenes = pgTable("gallery_scenes", {
+  id: text("id").primaryKey(),
+  position: integer("position").notNull(),
+  src: text("src").notNull(),
+  title: text("title").notNull(),
+  subtitle: text("subtitle").notNull(),
+  alt: text("alt").notNull(),
+  credit: text("credit").notNull(),
+});
+
+export type GallerySceneRow = typeof galleryScenes.$inferSelect;
+export type NewGallerySceneRow = typeof galleryScenes.$inferInsert;
+
+export const galleryFilms = pgTable("gallery_films", {
+  id: text("id").primaryKey(),
+  position: integer("position").notNull(),
+  src: text("src").notNull(),
+  poster: text("poster"),
+  title: text("title").notNull(),
+  subtitle: text("subtitle"),
+  trekSlug: text("trek_slug"),
+  trekName: text("trek_name"),
+  alt: text("alt").notNull(),
+  credit: text("credit").notNull(),
+});
+
+export type GalleryFilmRow = typeof galleryFilms.$inferSelect;
+export type NewGalleryFilmRow = typeof galleryFilms.$inferInsert;

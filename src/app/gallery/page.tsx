@@ -4,7 +4,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import GalleryWall from "@/components/gallery/GalleryWall";
 import { buildGallery } from "@/data/gallery";
 import { getTreks } from "@/data/treks";
-import { readGalleryLocal } from "@/lib/galleryStore";
+import { getGalleryContent } from "@/data/galleryContent";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default async function GalleryPage() {
-  const content = readGalleryLocal();
-  const [items, treks] = await Promise.all([buildGallery(content), getTreks()]);
+  const [content, treks] = await Promise.all([getGalleryContent(), getTreks()]);
+  const items = buildGallery(content);
 
   return (
     <>

@@ -1,6 +1,8 @@
 // Managed gallery content: scenes (photos) and films (videos).
-// Stored in src/data/galleryContent.json, committed to Git like treks.
-// These are the parts of the gallery not auto-derived from trek data.
+// Stored in Neon Postgres, edited via the admin gallery panel.
+
+import { unstable_cache } from "next/cache";
+import { listGalleryContent } from "@/lib/galleryStore";
 
 export interface GalleryScene {
   id: string;
@@ -33,4 +35,10 @@ export const emptyGalleryContent: GalleryContent = {
   videos: [],
 };
 
-export const GALLERY_FILE_REPO_PATH = "src/data/galleryContent.json";
+const getGalleryCached = unstable_cache(() => listGalleryContent(), ["gallery"], {
+  tags: ["gallery"],
+});
+
+export async function getGalleryContent(): Promise<GalleryContent> {
+  return getGalleryCached();
+}

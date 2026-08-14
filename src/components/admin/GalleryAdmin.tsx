@@ -94,8 +94,8 @@ export default function GalleryAdmin({ treks }: { treks: Trek[] }) {
         <div>
           <h2 className="font-display text-3xl font-light">Gallery</h2>
           <p className="mt-2 text-sm text-mist">
-            Manage independent scenes and films. Trek heroes and day photos come
-            from the trek editor automatically.
+            Manage scenes and films shown on the public gallery. Only items
+            saved here appear on /gallery.
           </p>
         </div>
         <div className="flex gap-3">

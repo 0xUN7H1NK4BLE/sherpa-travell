@@ -1,7 +1,8 @@
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { galleryFilmSchema, gallerySceneSchema } from "@/lib/gallerySchema";
-import { readGallery, writeGallery } from "@/lib/galleryStore";
+import { listGalleryContent, updateScene, updateFilm, deleteScene, deleteFilm } from "@/lib/galleryStore";
 import { deleteBlobRefs } from "@/lib/blobCleanup";
 
 const kindSchema = z.enum(["scene", "video"]);
@@ -17,20 +18,21 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/gallery/[id]
     return Response.json({ ok: false, error: "kind must be 'scene' or 'video'" }, { status: 400 });
   }
 
-  const content = await readGallery();
+  const content = await listGalleryContent();
 
   if (kind.data === "scene") {
     const parsed = gallerySceneSchema.safeParse(body);
     if (!parsed.success) {
       return Response.json({ ok: false, error: "Invalid scene", issues: z.flattenError(parsed.error).fieldErrors }, { status: 400 });
     }
-    const idx = content.scenes.findIndex((s) => s.id === id);
-    if (idx === -1) return Response.json({ ok: false, error: "Scene not found" }, { status: 404 });
+    if (!content.scenes.some((s) => s.id === id)) {
+      return Response.json({ ok: false, error: "Scene not found" }, { status: 404 });
+    }
     if (parsed.data.id !== id && content.scenes.some((s) => s.id === parsed.data.id)) {
       return Response.json({ ok: false, error: "A scene with that id already exists" }, { status: 409 });
     }
-    content.scenes[idx] = parsed.data;
-    await writeGallery(content);
+    await updateScene(id, parsed.data);
+    revalidateTag("gallery", { expire: 0 });
     return Response.json({ ok: true, item: parsed.data });
   }
 
@@ -38,13 +40,14 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/gallery/[id]
   if (!parsed.success) {
     return Response.json({ ok: false, error: "Invalid video", issues: z.flattenError(parsed.error).fieldErrors }, { status: 400 });
   }
-  const idx = content.videos.findIndex((v) => v.id === id);
-  if (idx === -1) return Response.json({ ok: false, error: "Video not found" }, { status: 404 });
+  if (!content.videos.some((v) => v.id === id)) {
+    return Response.json({ ok: false, error: "Video not found" }, { status: 404 });
+  }
   if (parsed.data.id !== id && content.videos.some((v) => v.id === parsed.data.id)) {
     return Response.json({ ok: false, error: "A video with that id already exists" }, { status: 409 });
   }
-  content.videos[idx] = parsed.data;
-  await writeGallery(content);
+  await updateFilm(id, parsed.data);
+  revalidateTag("gallery", { expire: 0 });
   return Response.json({ ok: true, item: parsed.data });
 }
 
@@ -59,27 +62,21 @@ export async function DELETE(request: Request, ctx: RouteContext<"/api/gallery/[
     return Response.json({ ok: false, error: "kind must be 'scene' or 'video'" }, { status: 400 });
   }
 
-  const content = await readGallery();
-
   if (kind.data === "scene") {
-    const removed = content.scenes.find((s) => s.id === id);
-    const next = content.scenes.filter((s) => s.id !== id);
-    if (next.length === content.scenes.length) {
+    const removed = await deleteScene(id);
+    if (!removed) {
       return Response.json({ ok: false, error: "Scene not found" }, { status: 404 });
     }
-    content.scenes = next;
-    await writeGallery(content);
-    await deleteBlobRefs(removed?.src);
+    revalidateTag("gallery", { expire: 0 });
+    await deleteBlobRefs(removed.src);
     return Response.json({ ok: true });
   } else {
-    const removed = content.videos.find((v) => v.id === id);
-    const next = content.videos.filter((v) => v.id !== id);
-    if (next.length === content.videos.length) {
+    const removed = await deleteFilm(id);
+    if (!removed) {
       return Response.json({ ok: false, error: "Video not found" }, { status: 404 });
     }
-    content.videos = next;
-    await writeGallery(content);
-    await deleteBlobRefs([removed?.src, removed?.poster]);
+    revalidateTag("gallery", { expire: 0 });
+    await deleteBlobRefs([removed.src, removed.poster]);
     return Response.json({ ok: true });
   }
 }
