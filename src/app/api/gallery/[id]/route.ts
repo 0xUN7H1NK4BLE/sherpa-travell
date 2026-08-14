@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { galleryFilmSchema, gallerySceneSchema } from "@/lib/gallerySchema";
@@ -33,6 +33,7 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/gallery/[id]
     }
     await updateScene(id, parsed.data);
     revalidateTag("gallery", { expire: 0 });
+    revalidatePath("/gallery");
     return Response.json({ ok: true, item: parsed.data });
   }
 
@@ -48,6 +49,7 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/gallery/[id]
   }
   await updateFilm(id, parsed.data);
   revalidateTag("gallery", { expire: 0 });
+  revalidatePath("/gallery");
   return Response.json({ ok: true, item: parsed.data });
 }
 
@@ -68,6 +70,7 @@ export async function DELETE(request: Request, ctx: RouteContext<"/api/gallery/[
       return Response.json({ ok: false, error: "Scene not found" }, { status: 404 });
     }
     revalidateTag("gallery", { expire: 0 });
+    revalidatePath("/gallery");
     await deleteBlobRefs(removed.src);
     return Response.json({ ok: true });
   } else {
@@ -76,6 +79,7 @@ export async function DELETE(request: Request, ctx: RouteContext<"/api/gallery/[
       return Response.json({ ok: false, error: "Video not found" }, { status: 404 });
     }
     revalidateTag("gallery", { expire: 0 });
+    revalidatePath("/gallery");
     await deleteBlobRefs([removed.src, removed.poster]);
     return Response.json({ ok: true });
   }

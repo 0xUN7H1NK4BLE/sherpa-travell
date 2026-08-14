@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { z } from "zod";
 import { isAuthenticated } from "@/lib/adminAuth";
 import { galleryFilmSchema, gallerySceneSchema } from "@/lib/gallerySchema";
@@ -33,6 +33,7 @@ export async function POST(request: Request) {
     }
     await insertScene(parsed.data);
     revalidateTag("gallery", { expire: 0 });
+    revalidatePath("/gallery");
     return Response.json({ ok: true, item: parsed.data });
   }
 
@@ -45,5 +46,6 @@ export async function POST(request: Request) {
   }
   await insertFilm(parsed.data);
   revalidateTag("gallery", { expire: 0 });
+  revalidatePath("/gallery");
   return Response.json({ ok: true, item: parsed.data });
 }
