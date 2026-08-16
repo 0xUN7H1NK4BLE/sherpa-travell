@@ -29,6 +29,7 @@ export const itineraryDaySchema = z.object({
   kind: dayKindSchema,
   from: placeSchema,
   to: placeSchema,
+  image: z.string().optional(),
 });
 
 export const trekSchema = z.object({

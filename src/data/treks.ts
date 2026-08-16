@@ -30,6 +30,7 @@ export interface ItineraryDay {
   kind: DayKind;
   from: Place;
   to: Place;
+  image?: string;
 }
 
 export interface Trek {

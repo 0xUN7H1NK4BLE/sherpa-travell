@@ -33,6 +33,7 @@ const emptyTrek: FormState = {
       description: "",
       from: { name: "", lat: 0, lng: 0, kind: "village" },
       to: { name: "", lat: 0, lng: 0, kind: "village" },
+      image: "",
     },
   ],
   coordinates: [0, 0],
@@ -439,6 +440,36 @@ export default function TrekForm({
                   Remove
                 </button>
               </div>
+              <div className="md:col-span-12">
+                <label className={label}>Day image</label>
+                <div className="mt-1.5 flex flex-wrap items-center gap-3">
+                  <ImageUpload
+                    onUploaded={(url) => {
+                      const next = [...form.itinerary];
+                      next[i] = { ...day, image: url };
+                      set("itinerary", next);
+                    }}
+                    label="Upload day photo"
+                  />
+                  {day.image && (
+                    <img
+                      src={day.image}
+                      alt=""
+                      className="h-14 w-20 rounded-md border border-line object-cover"
+                    />
+                  )}
+                  <input
+                    className={field + " min-w-0 flex-1"}
+                    placeholder="Image URL"
+                    value={day.image ?? ""}
+                    onChange={(e) => {
+                      const next = [...form.itinerary];
+                      next[i] = { ...day, image: e.target.value };
+                      set("itinerary", next);
+                    }}
+                  />
+                </div>
+              </div>
               <div className="border-t border-line/60 pt-3 md:col-span-12">
                 <DayMap
                   from={day.from}
@@ -455,7 +486,7 @@ export default function TrekForm({
               onClick={() =>
                 set("itinerary", [
                   ...form.itinerary,
-                  { day: form.itinerary.length + 1, title: "", kind: "trek", altitudeM: 0, description: "", from: { name: "", lat: 0, lng: 0, kind: "village" }, to: { name: "", lat: 0, lng: 0, kind: "village" } },
+                  { day: form.itinerary.length + 1, title: "", kind: "trek", altitudeM: 0, description: "", from: { name: "", lat: 0, lng: 0, kind: "village" }, to: { name: "", lat: 0, lng: 0, kind: "village" }, image: "" },
                 ])
               }
               className="text-xs text-saffron underline underline-offset-4 hover:text-snow"

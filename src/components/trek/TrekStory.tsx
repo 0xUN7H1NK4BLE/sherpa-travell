@@ -70,7 +70,7 @@ function StageDay({
   const o2 = oxygenAt(day.altitudeM);
   const kind = dayKindLabel[day.kind];
   const toPeak = trek.maxAltitudeM - day.altitudeM;
-  const photo = photoForTrek(trek.slug, index);
+  const photo = day.image || photoForTrek(trek.slug, index);
 
   const stats = [
     gain !== null && {
