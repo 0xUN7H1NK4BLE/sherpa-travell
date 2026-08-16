@@ -14,7 +14,7 @@ export default async function MapTeaser() {
           <SectionHeading
             eyebrow="Where we go"
             title="From Everest to the edge of Tibet."
-            description="Eight regions across the length of Nepal — from the classic Khumbu to Dolpo's hidden valleys, where the trails see more snow leopards than tourists. Tap a marker to see what walks there."
+            description="Eight regions across the length of Nepal - from the classic Khumbu to Dolpo's hidden valleys, where the trails see more snow leopards than tourists. Tap a marker to see what walks there."
           />
           <div className="mt-8">
             <Button href="/map" variant="ghost">

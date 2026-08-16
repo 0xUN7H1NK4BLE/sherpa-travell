@@ -97,7 +97,7 @@ export default function TestimonialsRail({ cards }: { cards: CardData[] }) {
     <div
       ref={trackRef}
       className="testimonial-marquee"
-      aria-label="Traveler reviews — hover and scroll or drag to browse"
+      aria-label="Traveler reviews - hover and scroll or drag to browse"
       onMouseEnter={() => {
         pausedRef.current = true;
       }}

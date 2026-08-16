@@ -9,7 +9,7 @@ import { getGalleryContent } from "@/data/galleryContent";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Every view we came home with — peak, pass and prayer-flag from all eight Sherpa-guided treks across Nepal. Filter by trek and dive in.",
+    "Every view we came home with - peak, pass and prayer-flag from all eight Sherpa-guided treks across Nepal. Filter by trek and dive in.",
 };
 
 export default async function GalleryPage() {

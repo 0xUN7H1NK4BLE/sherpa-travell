@@ -66,7 +66,7 @@ export default function AdminOverview({
     { label: "Trip days", value: String(totalDays) },
     {
       label: "Highest trek",
-      value: `${highest?.maxAltitudeM?.toLocaleString() ?? "—"} m`,
+      value: `${highest?.maxAltitudeM?.toLocaleString() ?? "-"} m`,
       hint: highest?.name,
     },
   ];

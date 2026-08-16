@@ -22,7 +22,7 @@ export default async function Footer() {
           </div>
           <p className="max-w-xs text-sm leading-relaxed text-mist">
             Sherpa-guided treks and expeditions into Nepal&apos;s wildest
-            corners — from Everest to the hidden valleys of Dolpo and Limi.
+            corners - from Everest to the hidden valleys of Dolpo and Limi.
           </p>
         </div>
 

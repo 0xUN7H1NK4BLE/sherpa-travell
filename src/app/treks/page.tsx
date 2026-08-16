@@ -8,7 +8,7 @@ import { formatAltitude } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Treks",
   description:
-    "Eight Sherpa-guided treks across Nepal — from Everest Base Camp to Upper Dolpo and the Limi Valley. Filter by region, difficulty and duration.",
+    "Eight Sherpa-guided treks across Nepal - from Everest Base Camp to Upper Dolpo and the Limi Valley. Filter by region, difficulty and duration.",
 };
 
 export default async function TreksPage() {
@@ -48,7 +48,7 @@ export default async function TreksPage() {
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-snow/80 md:text-lg">
               Eight expeditions, told the way they feel on the trail. Scroll
-              through them — or filter by region, difficulty and time.
+              through them - or filter by region, difficulty and time.
             </p>
             <div className="mt-10 flex flex-wrap gap-x-12 gap-y-6">
               {stats.map((stat) => (

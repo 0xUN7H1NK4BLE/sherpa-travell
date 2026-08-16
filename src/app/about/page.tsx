@@ -44,7 +44,7 @@ export default async function AboutPage() {
         <Reveal className="space-y-6 text-lg leading-relaxed text-snow/80">
           <p>
             {site.name} was founded in Kathmandu by{" "}
-            <span className="text-saffron">{site.contact.name}</span> — a Sherpa
+            <span className="text-saffron">{site.contact.name}</span> - a Sherpa
             guide who grew up with the Himalaya as his backyard, and who spent
             years watching trekkers get funnelled onto the same two crowded
             trails while the real Nepal sat empty.
@@ -54,7 +54,7 @@ export default async function AboutPage() {
             where a day&apos;s walk passes more blue sheep than people. Upper
             and Lower Dolpo, behind the Dhaulagiri rain shadow, where Bon
             monasteries still run on butter-lamp light. The Limi Valley in
-            Humla, at the very edge of Tibet. And yes — Sagarmatha, Langtang,
+            Humla, at the very edge of Tibet. And yes - Sagarmatha, Langtang,
             Gosaikunda and Manaslu too, walked the way they deserve: slowly,
             safely, and with people who call them home.
           </p>

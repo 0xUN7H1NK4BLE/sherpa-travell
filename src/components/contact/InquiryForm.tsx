@@ -24,7 +24,7 @@ export default function InquiryForm({
 
   const trekName =
     trek === "not-sure"
-      ? "Not sure yet — help me choose"
+      ? "Not sure yet - help me choose"
       : (treks.find((t) => t.slug === trek)?.name ?? trek);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -109,7 +109,7 @@ export default function InquiryForm({
           onChange={(e) => setTrek(e.target.value)}
           className={inputStyles}
         >
-          <option value="not-sure">Not sure yet — help me choose</option>
+          <option value="not-sure">Not sure yet - help me choose</option>
           {treks.map((t) => (
             <option key={t.slug} value={t.slug}>
               {t.name} · {t.durationDays} days
@@ -163,7 +163,7 @@ export default function InquiryForm({
         Send Inquiry
       </button>
       <p className="text-center text-xs leading-relaxed text-mist">
-        Submitting opens WhatsApp with your message pre-filled — the fastest way
+        Submitting opens WhatsApp with your message pre-filled - the fastest way
         to reach {site.contact.name}.
       </p>
     </form>

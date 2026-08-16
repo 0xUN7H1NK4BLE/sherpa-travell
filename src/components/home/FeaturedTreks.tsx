@@ -16,7 +16,7 @@ export default async function FeaturedTreks() {
           <SectionHeading
             eyebrow="Featured expeditions"
             title="Treks most companies can't take you on."
-            description="Restricted-area permits, remote logistics, decades of local relationships — this is our home ground."
+            description="Restricted-area permits, remote logistics, decades of local relationships - this is our home ground."
           />
         </Reveal>
         <Reveal delay={0.15}>

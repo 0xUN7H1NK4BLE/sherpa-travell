@@ -49,7 +49,7 @@ export default async function ExpeditionPage({
             <SectionHeading
               eyebrow="Elevation"
               title="How the days climb."
-              description="Hover the profile to see each day — conservative ascent, acclimatization built in."
+              description="Hover the profile to see each day - conservative ascent, acclimatization built in."
             />
           </Reveal>
           <Reveal delay={0.1}>

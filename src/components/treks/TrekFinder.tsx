@@ -191,7 +191,7 @@ export default function TrekFinder({ treks }: { treks: Trek[] }) {
             </p>
             <p className="max-w-sm text-sm leading-relaxed text-mist">
               That usually means a custom route. Tell Abishek what you&apos;re
-              dreaming of — he&apos;s probably walked it.
+              dreaming of - he&apos;s probably walked it.
             </p>
             <Button
               href={waLink(

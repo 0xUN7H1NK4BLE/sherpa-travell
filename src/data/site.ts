@@ -2,7 +2,7 @@ export const site = {
   name: "Sherpa Treks Nepal",
   tagline: "Walk where the maps end.",
   description:
-    "Sherpa-guided treks and expeditions across Nepal's wildest regions — Kanchenjunga, Sagarmatha, Langtang, Gosaikunda, Manaslu, Upper and Lower Dolpo, Limi Valley and beyond.",
+    "Sherpa-guided treks and expeditions across Nepal's wildest regions - Kanchenjunga, Sagarmatha, Langtang, Gosaikunda, Manaslu, Upper and Lower Dolpo, Limi Valley and beyond.",
   contact: {
     name: "Abishek Sherpa",
     role: "Founder & Lead Guide",

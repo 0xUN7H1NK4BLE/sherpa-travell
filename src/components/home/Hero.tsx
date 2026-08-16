@@ -69,7 +69,7 @@ export default function Hero() {
           Sherpa-guided treks in Nepal
         </motion.p>
 
-        <h1 className="font-display text-[13vw] leading-[0.95] font-light tracking-tight text-balance sm:text-7xl md:text-8xl lg:text-9xl">
+        <h1 className="flex flex-wrap gap-x-[0.22em] font-display text-[13vw] leading-[0.95] font-light tracking-tight sm:text-7xl md:text-8xl lg:text-9xl">
           {words.map((word, i) => (
             <span key={word} className="inline-block overflow-hidden pb-1 align-bottom">
               <motion.span
@@ -86,7 +86,6 @@ export default function Hero() {
                 }}
               >
                 {word}
-                {i < words.length - 1 ? " " : ""}
               </motion.span>
             </span>
           ))}
@@ -100,7 +99,7 @@ export default function Hero() {
         >
           <p className="text-lg leading-relaxed text-snow/80">
             Treks and expeditions into Kanchenjunga, Dolpo, Limi Valley and the
-            Everest region — led by {site.contact.name}, a Sherpa guide born in
+            Everest region - led by {site.contact.name}, a Sherpa guide born in
             these mountains.
           </p>
           <div className="flex flex-wrap items-center gap-4">

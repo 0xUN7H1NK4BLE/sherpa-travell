@@ -155,7 +155,7 @@ function StageDay({
             <figure className="photo-dark relative aspect-[4/3] overflow-hidden rounded-2xl border border-line">
               <img
                 src={photo}
-                alt={`${day.title} — ${formatAltitude(day.altitudeM)}`}
+                alt={`${day.title} - ${formatAltitude(day.altitudeM)}`}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover"
               />
@@ -264,9 +264,9 @@ export default function TrekStory({ trek }: { trek: RouteContent }) {
               </p>
             </div>
             <p className="mt-1.5 truncate text-sm font-medium text-snow">
-              {getDayPlaces(trek)[active]?.from ?? "—"}{" "}
+              {getDayPlaces(trek)[active]?.from ?? "-"}{" "}
               <span className="text-saffron">→</span>{" "}
-              {getDayPlaces(trek)[active]?.to ?? "—"}
+              {getDayPlaces(trek)[active]?.to ?? "-"}
             </p>
             <p className="mt-0.5 text-[10px] uppercase tracking-[0.18em] text-mist">
               street view · watch the walk

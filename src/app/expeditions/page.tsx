@@ -8,7 +8,7 @@ import { formatAltitude } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Expeditions",
   description:
-    "Sherpa-guided peak expeditions across Nepal — from Island Peak's glacier walk to the technical ridges of Ama Dablam and remote Mt Himlung.",
+    "Sherpa-guided peak expeditions across Nepal - from Island Peak's glacier walk to the technical ridges of Ama Dablam and remote Mt Himlung.",
 };
 
 export default async function ExpeditionsPage() {

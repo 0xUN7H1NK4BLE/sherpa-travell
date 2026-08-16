@@ -14,7 +14,7 @@ export default function Gallery({
           <div className="overflow-hidden rounded-2xl border border-line">
             <img
               src={src}
-              alt={`${name} — photo ${i + 1}`}
+              alt={`${name} - photo ${i + 1}`}
               className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out hover:scale-105"
             />
           </div>

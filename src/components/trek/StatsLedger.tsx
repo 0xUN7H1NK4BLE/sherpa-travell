@@ -38,7 +38,7 @@ export default function StatsLedger({ trek }: { trek: RouteContent }) {
         <SectionHeading
           eyebrow="The ledger"
           title="The climb, in numbers."
-          description="Everything about this route, derived from the itinerary — from the metres you gain to the oxygen you'll be breathing at the top."
+          description="Everything about this route, derived from the itinerary - from the metres you gain to the oxygen you'll be breathing at the top."
           className="mb-14"
         />
 
@@ -67,7 +67,7 @@ export default function StatsLedger({ trek }: { trek: RouteContent }) {
               </span>{" "}
               and finish at{" "}
               <span className="text-ice">{summitO2.toFixed(0)}%</span> at the
-              high point — which is why every ascent profile here is
+              high point - which is why every ascent profile here is
               conservative, with rest days built in.
             </p>
             <ul className="space-y-2.5 text-sm text-mist">

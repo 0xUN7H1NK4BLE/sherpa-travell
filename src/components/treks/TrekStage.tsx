@@ -52,8 +52,8 @@ export default function TrekStage({
     [
       "Permits",
       trek.tags.includes("restricted")
-        ? "Restricted-area permit — arranged for you"
-        : "Park & conservation permits — arranged for you",
+        ? "Restricted-area permit - arranged for you"
+        : "Park & conservation permits - arranged for you",
     ],
     ["Coordinates", formatCoordinates(trek.coordinates)],
   ];

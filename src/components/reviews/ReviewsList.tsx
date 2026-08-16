@@ -14,7 +14,7 @@ export default function ReviewsList({
   if (reviews.length === 0) {
     return (
       <p className="text-sm leading-relaxed text-mist">
-        No reviews yet — be the first to share how it went.
+        No reviews yet - be the first to share how it went.
       </p>
     );
   }

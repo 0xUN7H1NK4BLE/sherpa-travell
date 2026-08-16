@@ -8,7 +8,7 @@ import { getTreks } from "@/data/treks";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Plan your Nepal trek directly with Abishek Sherpa — WhatsApp, phone, or the inquiry form. Based in Kathmandu, replying usually the same day.",
+    "Plan your Nepal trek directly with Abishek Sherpa - WhatsApp, phone, or the inquiry form. Based in Kathmandu, replying usually the same day.",
 };
 
 export default async function ContactPage({
@@ -28,7 +28,7 @@ export default async function ContactPage({
       label: "WhatsApp",
       value: site.contact.phoneDisplay,
       href: site.contact.whatsapp,
-      note: "Fastest — usually answered within the hour",
+      note: "Fastest - usually answered within the hour",
     },
     {
       label: "Phone",
@@ -55,7 +55,7 @@ export default async function ContactPage({
         <SectionHeading
           eyebrow="Contact"
           title="Talk to the person who'll walk with you."
-          description={`No call centers, no middlemen. You plan directly with ${site.contact.name} — the guide who'll actually be on the trail with you.`}
+          description={`No call centers, no middlemen. You plan directly with ${site.contact.name} - the guide who'll actually be on the trail with you.`}
         />
       </Reveal>
 

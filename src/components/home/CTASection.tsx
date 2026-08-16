@@ -25,7 +25,7 @@ export default function CTASection() {
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-mist">
             Tell us when you can come and how far you want to go. We&apos;ll
-            shape the trek around you — not the other way round.
+            shape the trek around you - not the other way round.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Button href="/treks" size="lg">

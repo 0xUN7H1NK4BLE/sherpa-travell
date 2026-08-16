@@ -6,17 +6,17 @@ const values = [
   {
     number: "01",
     title: "Sherpa-born, mountain-raised",
-    copy: "Abishek Sherpa grew up in these valleys. You get a guide who reads the weather, the trail and the mountains like family — because they are.",
+    copy: "Abishek Sherpa grew up in these valleys. You get a guide who reads the weather, the trail and the mountains like family - because they are.",
   },
   {
     number: "02",
     title: "Remote-region specialists",
-    copy: "Dolpo, Kanchenjunga, Limi Valley — restricted permits, camping logistics and flights are all handled for you, end to end.",
+    copy: "Dolpo, Kanchenjunga, Limi Valley - restricted permits, camping logistics and flights are all handled for you, end to end.",
   },
   {
     number: "03",
     title: "Small groups, real flexibility",
-    copy: "Groups of 2–10, never more. Itineraries flex around your pace, your acclimatization and your curiosity — not a bus schedule.",
+    copy: "Groups of 2–10, never more. Itineraries flex around your pace, your acclimatization and your curiosity - not a bus schedule.",
   },
   {
     number: "04",

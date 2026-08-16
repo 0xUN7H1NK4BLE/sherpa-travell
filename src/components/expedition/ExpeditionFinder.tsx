@@ -191,7 +191,7 @@ export default function ExpeditionFinder({ expeditions }: { expeditions: Expedit
             </p>
             <p className="max-w-sm text-sm leading-relaxed text-mist">
               That usually means a custom climb. Tell Abishek what peak
-              you&apos;re dreaming of — he&apos;s probably guided it.
+              you&apos;re dreaming of - he&apos;s probably guided it.
             </p>
             <Button
               href={waLink(

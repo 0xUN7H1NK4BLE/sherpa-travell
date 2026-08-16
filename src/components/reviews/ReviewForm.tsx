@@ -61,7 +61,7 @@ export default function ReviewForm({
       <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-saffron/30 bg-night-raised p-10 text-center">
         <p className="font-display text-2xl font-light">Thanks for sharing!</p>
         <p className="max-w-sm text-sm leading-relaxed text-mist">
-          Your review is in — it&apos;ll appear here once we&apos;ve given it a quick read.
+          Your review is in - it&apos;ll appear here once we&apos;ve given it a quick read.
         </p>
       </div>
     );

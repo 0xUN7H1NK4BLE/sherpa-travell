@@ -363,7 +363,7 @@ export default function DayMap({
 
       <p className="text-[10px] uppercase tracking-[0.18em] text-mist">
         {single
-          ? "Acclimatization day — one place only. Search to mark it."
+          ? "Acclimatization day - one place only. Search to mark it."
           : "1 = from, 2 = to. Search to place, drag markers, or click the map."}
       </p>
     </div>

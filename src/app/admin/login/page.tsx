@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
             Admin sign in
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-mist">
-            Manage the treks on the site — add, edit, delete and upload photos.
+            Manage the treks on the site - add, edit, delete and upload photos.
           </p>
         </Reveal>
 

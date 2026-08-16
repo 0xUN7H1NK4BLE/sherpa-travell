@@ -17,7 +17,7 @@ export default function InquiryCTA({ trek }: { trek: RouteContent }) {
               Walk this route
             </p>
             <h2 className="font-display text-3xl font-light tracking-tight md:text-4xl">
-              {trek.name}, {trek.durationDays} days — shaped around you.
+              {trek.name}, {trek.durationDays} days - shaped around you.
             </h2>
             <p className="text-sm leading-relaxed text-mist">
               Permits, flights, crew and every cup of tea along the way, handled
